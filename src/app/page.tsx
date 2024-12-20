@@ -1,3 +1,10 @@
+// import IC_RIGHT from "@/assets/svgs/right_pick.svg";
+
 export default function Home() {
-  return <div>Home</div>;
+  return (
+    <div>
+      <div>Home</div>
+      {/* <IC_RIGHT /> */}
+    </div>
+  );
 }
