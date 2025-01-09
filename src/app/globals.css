@@ -13,13 +13,6 @@
 }
 
 @font-face {
-  font-family: "NeoDunggeunmo";
-  src: url("/fonts/neodgm_code.woff2") format("woff2-variations");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
   font-family: "DungGeunMo";
   src: url("/fonts/DungGeunMo.woff2") format("woff2-variations");
   font-weight: 400;
@@ -49,7 +42,7 @@
 
   --font-navbar-inactive-size: 22px;
   --font-navbar-inactive-weight: 400;
-  --font-navbar-inactive-family: "NeoDunggeunmo", sans-serif;
+  --font-navbar-inactive-family: "DungGeunMo", sans-serif;
   --font-navbar-inactive-line-height: 26.4px;
 
   --font-navbar-pixel-size: 24px;
