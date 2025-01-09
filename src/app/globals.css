@@ -6,13 +6,6 @@
 }
 
 @font-face {
-  font-family: "Clash Display";
-  src: url("/fonts/ClashDisplay-Variable.woff2") format("woff2-variations");
-  font-weight: 400 700;
-  font-style: normal;
-}
-
-@font-face {
   font-family: "DungGeunMo";
   src: url("/fonts/DungGeunMo.woff2") format("woff2-variations");
   font-weight: 400;
@@ -21,104 +14,99 @@
 
 :root {
   --background: #222222;
-  --foreground: #f5f5f5;
 
   /* Color Tokens */
   --color-dark-primary: #5300ec;
   --color-primary: #7873ff;
-  --color-gray-lightest: #f5f5f5ff;
-  --color-gray-lighter: #e7e7e7ff;
-  --color-gray-light: #ccccccff;
-  --color-gray-medium: #919191ff;
-  --color-gray-dark: #545454ff;
-  --color-gray-darker: #222222ff;
-  --color-error: #ff7878ff;
+  --white: #fff;
+  --g1: #f5f5f5ff;
+  --g2: #e7e7e7ff;
+  --g3: #ccccccff;
+  --g4: #919191ff;
+  --g5: #545454ff;
+  --g6: #222222ff;
+  --warning: #ff7878ff;
 
   /* Font Tokens */
-  --font-navbar-active-size: 22px;
-  --font-navbar-active-weight: 700;
-  --font-navbar-active-family: "Clash Display", sans-serif;
-  --font-navbar-active-line-height: 26.4px;
+  /* nav */
+  --font-navbar-active-size: 2.4rem;
+  --font-navbar-active-weight: 400;
+  --font-navbar-active-family: "DungGeunMo", sans-serif;
 
-  --font-navbar-inactive-size: 22px;
+  --font-navbar-inactive-size: 2.2rem;
   --font-navbar-inactive-weight: 400;
   --font-navbar-inactive-family: "DungGeunMo", sans-serif;
-  --font-navbar-inactive-line-height: 26.4px;
 
-  --font-navbar-pixel-size: 24px;
-  --font-navbar-pixel-weight: 400;
-  --font-navbar-pixel-family: "DungGeunMo", sans-serif;
-  --font-navbar-pixel-line-height: 28.8px;
-
-  --font-event-title-large-size: 24px;
+  /*  */
+  --font-event-title-large-size: 2.4rem;
   --font-event-title-large-weight: 600;
   --font-event-title-large-family: "Pretendard", sans-serif;
-  --font-event-title-large-line-height: 28.8px;
+  --font-event-title-large-line-height: 2.88rem;
 
-  --font-body-regular-size: 18px;
+  --font-body-regular-size: 1.8rem;
   --font-body-regular-weight: 400;
   --font-body-regular-family: "Pretendard", sans-serif;
-  --font-body-regular-line-height: 21.6px;
+  --font-body-regular-line-height: 2.16rem;
 
-  --font-body-medium-size: 18px;
+  --font-body-medium-size: 1.8rem;
   --font-body-medium-weight: 500;
   --font-body-medium-family: "Pretendard", sans-serif;
-  --font-body-medium-line-height: 21.6px;
+  --font-body-medium-line-height: 2.16rem;
 
-  --font-body-bold-size: 18px;
+  --font-body-bold-size: 1.8rem;
   --font-body-bold-weight: 700;
   --font-body-bold-family: "Pretendard", sans-serif;
-  --font-body-bold-line-height: 100px;
+  --font-body-bold-line-height: 10rem;
 
-  --font-pixel-text-small-size: 20px;
+  --font-pixel-text-small-size: 2rem;
   --font-pixel-text-small-weight: 400;
   --font-pixel-text-small-family: "DungGeunMo", sans-serif;
-  --font-pixel-text-small-line-height: 24px;
+  --font-pixel-text-small-line-height: 2.4rem;
 
-  --font-button-size: 22px;
+  --font-button-size: 2.2rem;
   --font-button-weight: 800;
   --font-button-family: "Pretendard", sans-serif;
-  --font-button-line-height: 20px;
+  --font-button-line-height: 2rem;
 
-  --font-text-small-bold-size: 16px;
+  --font-text-small-bold-size: 1.6rem;
   --font-text-small-bold-weight: 700;
   --font-text-small-bold-family: "Pretendard", sans-serif;
-  --font-text-small-bold-line-height: 20px;
+  --font-text-small-bold-line-height: 2rem;
 
-  --font-text-small-regular-size: 16px;
+  --font-text-small-regular-size: 1.6rem;
   --font-text-small-regular-weight: 400;
   --font-text-small-regular-family: "Pretendard", sans-serif;
-  --font-text-small-regular-line-height: 20px;
+  --font-text-small-regular-line-height: 2rem;
 
-  --font-text-medium-bold-size: 20px;
+  --font-text-medium-bold-size: 2rem;
   --font-text-medium-bold-weight: 700;
   --font-text-medium-bold-family: "Pretendard", sans-serif;
-  --font-text-medium-bold-line-height: 24px;
+  --font-text-medium-bold-line-height: 2.4rem;
 
-  --font-text-large-bold-size: 24px;
+  --font-text-large-bold-size: 2.4rem;
   --font-text-large-bold-weight: 700;
   --font-text-large-bold-family: "Pretendard", sans-serif;
-  --font-text-large-bold-line-height: 28.8px;
+  --font-text-large-bold-line-height: 2.88rem;
 
-  --font-caption-size: 14px;
+  --font-caption-size: 1.4rem;
   --font-caption-weight: 400;
   --font-caption-family: "Pretendard", sans-serif;
-  --font-caption-line-height: 20px;
+  --font-caption-line-height: 2rem;
 
-  --font-pixel-text-large-size: 24px;
+  --font-pixel-text-large-size: 2.4rem;
   --font-pixel-text-large-weight: 400;
   --font-pixel-text-large-family: "DungGeunMo", sans-serif;
-  --font-pixel-text-large-line-height: 28.8px;
+  --font-pixel-text-large-line-height: 2.88rem;
 
-  --font-title-size: 56px;
+  --font-title-size: 5.6rem;
   --font-title-weight: 800;
   --font-title-family: "Pretendard", sans-serif;
-  --font-title-line-height: 100px;
+  --font-title-line-height: 10rem;
 
-  --font-event-title-small-size: 20px;
+  --font-event-title-small-size: 2rem;
   --font-event-title-small-weight: 600;
   --font-event-title-small-family: "Pretendard", sans-serif;
-  --font-event-title-small-line-height: 24px;
+  --font-event-title-small-line-height: 2.4rem;
 }
 
 html,
@@ -128,6 +116,10 @@ body {
   font-size: 62.5%;
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
+
 @media screen and (max-width: 370px) {
   html {
     font-size: 58%; /* 9.28px에 해당 */
@@ -135,7 +127,7 @@ body {
 }
 
 body {
-  color: var(--foreground);
+  color: var(--g1);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -161,16 +153,16 @@ a {
   color: var(--foreground);
 }
 
-.navbar-link {
-  font-family: var(--font-navbar-active-family);
-  font-size: var(--font-navbar-active-size);
-  font-weight: var(--font-navbar-active-weight);
-  color: var(--color-primary);
+.nav_pixel_text_22 {
+  font-family: var(--font-navbar-inactive-family);
+  font-size: var(--font-navbar-inactive-size);
+  font-weight: var(--font-navbar-inactive-weight);
+  color: var(--g3);
+  text-align: center;
 }
 
-.pixel-text {
-  font-family: var(--font-pixel-text-small-family);
-  font-size: var(--font-pixel-text-small-size);
-  font-weight: var(--font-pixel-text-small-weight);
-  color: var(--color-gray-darker);
+.nav_active {
+  font-size: var(--font-navbar-active-size);
+  color: var(--white);
+  stroke: #fff 0.3px;
 }
