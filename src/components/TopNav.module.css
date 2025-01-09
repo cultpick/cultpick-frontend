@@ -6,7 +6,8 @@
   z-index: 1000;
 
   display: flex;
-  width: 1352px;
+  width: 100%;
+  max-width: 1352px;
   height: 10rem;
   padding: 2.4rem 4.7rem;
   justify-content: space-between;
