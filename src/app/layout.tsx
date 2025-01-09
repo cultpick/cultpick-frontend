@@ -17,10 +17,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <RecoilRootProvider>
-          <TopNav />
-          {children}
-        </RecoilRootProvider>
+        <RecoilRootProvider>{children}</RecoilRootProvider>
       </body>
     </html>
   );
