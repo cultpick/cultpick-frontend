@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import style from "./not-found.module.css";
-import IC_RIGHT from "@/assets/svgs/right_pick.svg";
 useRouter;
 
 export default function NotFound() {
@@ -18,7 +17,6 @@ export default function NotFound() {
       </div>
       <div className={style.description}>지금 진행 중인 행사를 구경해봐요!</div>
       <div className={style.row}>
-        <IC_RIGHT fill={"red"} />
         <button className={style.btn} onClick={onClick}>
           HOME
         </button>
