@@ -21,9 +21,10 @@ export default function RootLayout({
         <RecoilRootProvider>
           <div
             style={{
-              height: "auto",
-              minHeight: "100%",
-              paddingBottom: "100px",
+              // height: "auto",
+              // minHeight: "100%",
+              // paddingBottom: "100px",
+              minHeight: "calc(100vh - 10rem)",
             }}
           >
             {children}
