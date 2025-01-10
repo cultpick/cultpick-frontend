@@ -181,6 +181,5 @@ a {
   font-family: var(--font-body-regular-family);
   font-size: var(--font-body-regular-size);
   font-weight: var(--font-body-regular-weight);
-  color: var(var(--g4));
   font-style: normal;
 }

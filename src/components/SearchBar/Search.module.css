@@ -17,3 +17,7 @@
 
   cursor: pointer;
 }
+
+.textColor {
+  color: var(--g4);
+}

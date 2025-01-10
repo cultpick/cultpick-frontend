@@ -1,5 +1,4 @@
 import SearchBar from "@/components/SearchBar/SearchBar";
-import TopNav from "@/components/TopNav";
 
 export default function Layout({
   children,

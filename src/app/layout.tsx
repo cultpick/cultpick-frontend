@@ -3,6 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import RecoilRootProvider from "../utils/recoilRootProvider";
 import TopNav from "@/components/TopNav";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "CultPick",
@@ -17,7 +18,18 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <RecoilRootProvider>{children}</RecoilRootProvider>
+        <RecoilRootProvider>
+          <div
+            style={{
+              height: "auto",
+              minHeight: "100%",
+              paddingBottom: "100px",
+            }}
+          >
+            {children}
+          </div>
+          <Footer />
+        </RecoilRootProvider>
       </body>
     </html>
   );
