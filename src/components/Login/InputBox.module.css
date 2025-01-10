@@ -1,0 +1,13 @@
+.input {
+  padding: 8px 22px;
+  border-radius: 12px;
+  border: 2px solid rgba(245, 245, 245, 0.3);
+  background: linear-gradient(
+    90deg,
+    rgba(204, 204, 204, 0.2) 0%,
+    rgba(204, 204, 204, 0.05) 50%,
+    rgba(204, 204, 204, 0.2) 100%
+  );
+
+  color: var(--white);
+}
