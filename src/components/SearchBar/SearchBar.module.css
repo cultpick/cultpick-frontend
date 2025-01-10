@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 2.3rem;
+  max-width: 1352px;
+  width: 100%;
+}
+
+.leftContainer {
+  display: flex;
+  align-items: center;
+  gap: 2.6rem;
+  flex-grow: 1;
+}

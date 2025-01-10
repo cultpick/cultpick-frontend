@@ -1,4 +1,4 @@
-import SearchBar from "@/components/SearchBar";
+import SearchBar from "@/components/SearchBar/SearchBar";
 import TopNav from "@/components/TopNav";
 
 export default function Layout({
@@ -8,7 +8,13 @@ export default function Layout({
 }>) {
   return (
     <>
-      <div style={{ marginTop: "15rem" }}>
+      <div
+        style={{
+          marginTop: "17.2rem",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
         <SearchBar />
       </div>
       {children}

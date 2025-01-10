@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  flex-grow: 1;
+  height: 5.2rem;
+  padding: 1px 18px;
+  justify-content: space-between;
+  align-items: center;
+
+  border-radius: 100px;
+  border: 2px solid var(--Dark_Gray1, #545454);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+
+  cursor: pointer;
+}

@@ -61,7 +61,6 @@
   --font-pixel-text-small-size: 2rem;
   --font-pixel-text-small-weight: 400;
   --font-pixel-text-small-family: "DungGeunMo", sans-serif;
-  --font-pixel-text-small-line-height: 2.4rem;
 
   --font-button-size: 2.2rem;
   --font-button-weight: 800;
@@ -153,6 +152,7 @@ a {
   color: var(--foreground);
 }
 
+/* nav */
 .nav_pixel_text_22 {
   font-family: var(--font-navbar-inactive-family);
   font-size: var(--font-navbar-inactive-size);
@@ -165,4 +165,22 @@ a {
   font-size: var(--font-navbar-active-size);
   color: var(--white);
   -webkit-text-stroke: 0.3px #fff;
+}
+
+/* pixel */
+.pixel_text_20 {
+  font-family: var(--font-pixel-text-small-family);
+  font-size: var(--font-pixel-text-small-size);
+  font-weight: var(--font-pixel-text-small-weight);
+  color: var(--color-primary);
+  font-style: normal;
+}
+
+/* body */
+.body_18_R {
+  font-family: var(--font-body-regular-family);
+  font-size: var(--font-body-regular-size);
+  font-weight: var(--font-body-regular-weight);
+  color: var(var(--g4));
+  font-style: normal;
 }
