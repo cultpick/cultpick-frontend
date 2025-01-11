@@ -18,6 +18,7 @@
   /* Color Tokens */
   --color-dark-primary: #5300ec;
   --color-primary: #7873ff;
+  --color-light-primary: #b1b2ff;
   --white: #fff;
   --g1: #f5f5f5ff;
   --g2: #e7e7e7ff;
@@ -182,4 +183,12 @@ a {
   font-size: var(--font-body-regular-size);
   font-weight: var(--font-body-regular-weight);
   font-style: normal;
+}
+
+/* button */
+.btn_text {
+  font-family: var(--font-button-family);
+  font-size: var(--font-button-size);
+  font-style: normal;
+  font-weight: var(--font-button-weight);
 }

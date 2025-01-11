@@ -1,0 +1,38 @@
+.button {
+  display: flex;
+  width: 44rem;
+  height: 6rem;
+  padding: 1.3rem 13.9rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  border: none;
+  border-radius: 12px;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  cursor: pointer;
+}
+
+.active {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.disabled {
+  border: 2px solid var(--color-primary);
+  opacity: 0.75;
+  color: var(--color-primary);
+  background-color: transparent;
+  cursor: not-allowed;
+}
+
+.sub {
+  background-color: var(--color-light-primary);
+  color: var(--color-dark-primary);
+}
+
+.completed {
+  background: rgba(83, 0, 236, 0.8);
+  color: var(--color-light-primary);
+}

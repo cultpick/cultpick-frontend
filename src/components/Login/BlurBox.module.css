@@ -1,0 +1,37 @@
+.boxContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4.6rem;
+  margin-bottom: 12.8rem;
+  width: 100%;
+  max-width: 560px;
+  border-radius: 24px;
+  background: rgba(84, 84, 84, 0.25);
+  box-shadow:
+    0px 0px 30px 0px #232323,
+    0px 0px 80px 0px rgba(255, 255, 255, 0.24) inset;
+  backdrop-filter: blur(10px);
+  padding: 4.8rem 6rem;
+}
+
+.loginTitle {
+  color: #fff;
+  text-align: center;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #fff;
+  font-family: DungGeunMo;
+  font-size: 4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.btnWrapper {
+  margin-top: 1.2rem;
+}
