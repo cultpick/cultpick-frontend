@@ -12,4 +12,5 @@
   );
 
   color: var(--white);
+  outline: none;
 }
