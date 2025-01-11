@@ -1,4 +1,6 @@
 .input {
+  min-width: 44rem;
+  min-height: 5.2rem;
   padding: 8px 22px;
   border-radius: 12px;
   border: 2px solid rgba(245, 245, 245, 0.3);

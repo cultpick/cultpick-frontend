@@ -11,11 +11,12 @@
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
+  cursor: pointer;
 }
 
 .active {
   background-color: var(--color-primary);
-  color: #ffffff; /* 흰색 */
+  color: #ffffff;
 }
 
 .disabled {
@@ -23,6 +24,7 @@
   opacity: 0.75;
   color: var(--color-primary);
   background-color: transparent;
+  cursor: not-allowed;
 }
 
 .sub {

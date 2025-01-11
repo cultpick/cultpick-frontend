@@ -16,27 +16,6 @@ export default function Login() {
       <div className={styles.boxWrapper}>
         <BlurBox />
       </div>
-      <div style={{display:"flex", flexDirection:"column", gap:"10px"}}>
-        <Button
-          text="Active BUTTON"
-          state="active"
-          width="440px"
-          height="60px"
-        />
-        <Button
-          text="Disabled BUTTON"
-          state="disabled"
-          width="440px"
-          height="60px"
-        />
-        <Button text="Sub BUTTON" state="sub" width="440px" height="60px" />
-        <Button
-          text="Completed BUTTON"
-          state="completed"
-          width="440px"
-          height="60px"
-        />
-      </div>
     </div>
   );
 }

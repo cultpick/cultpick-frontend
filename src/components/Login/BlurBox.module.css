@@ -31,3 +31,7 @@
   flex-direction: column;
   gap: 1.6rem;
 }
+
+.btnWrapper {
+  margin-top: 1.2rem;
+}

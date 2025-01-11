@@ -6,13 +6,15 @@ type ButtonProps = {
   state: "active" | "disabled" | "sub" | "completed";
   width?: string;
   height?: string;
+  onClick?: () => void;
 };
 
 const Button: React.FC<ButtonProps> = ({
   text,
   state,
-  width = "100px",
-  height = "40px",
+  width = "44rem",
+  height = "6rem",
+  onClick,
 }) => {
   const getClassName = (state: string) => {
     switch (state) {
@@ -33,6 +35,7 @@ const Button: React.FC<ButtonProps> = ({
     <button
       className={`${styles.button} ${getClassName(state)} btn_text`}
       style={{ width, height }}
+      onClick={onClick}
       disabled={state === "disabled"}
     >
       {text}

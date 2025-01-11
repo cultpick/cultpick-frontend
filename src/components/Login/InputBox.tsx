@@ -1,27 +1,21 @@
-import PropTypes from "prop-types";
+import React from "react";
 import styles from "./InputBox.module.css";
 
-InputBox.propTypes = {
-  label: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  placeholder: PropTypes.string,
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+type InputBoxProps = {
+  type: string;
+  name: string;
+  placeholder?: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-InputBox.defaultProps = {
-  placeholder: "",
-};
-
-export default function InputBox({
-  label,
+const InputBox: React.FC<InputBoxProps> = ({
   type,
   name,
-  placeholder,
+  placeholder = "",
   value,
   onChange,
-}) {
+}) => {
   return (
     <input
       id={name}
@@ -33,4 +27,6 @@ export default function InputBox({
       className={`${styles.input} body_18_R`}
     />
   );
-}
+};
+
+export default InputBox;
