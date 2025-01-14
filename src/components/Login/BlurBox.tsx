@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./BlurBox.module.css";
-import InputBox from "./InputBox";
+import InputBox from "../InputBox";
 import Button from "../Button";
 
 export default function BlurBox() {
