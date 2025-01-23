@@ -1,0 +1,85 @@
+.loginPage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4.5rem;
+  padding-top: 4rem;
+}
+
+.logoContainer {
+  display: flex;
+  gap: 2.8rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.registerTitle {
+  margin-top: 1.4rem;
+
+  color: #fff;
+  text-align: center;
+  font-family: DungGeunMo;
+  font-size: 2.8rem;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.boxWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+}
+
+.gradient {
+  z-index: -2;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: -10rem;
+  width: 100%;
+  height: 440px;
+  background: linear-gradient(
+    180deg,
+    rgba(83, 0, 236, 0) 0%,
+    rgba(83, 0, 236, 0.3) 100%
+  );
+}
+
+.bgImgWrapper {
+  z-index: -1;
+  position: absolute;
+  bottom: 20rem;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+}
+
+.bgImg {
+  display: flex;
+  width: calc(2683.86px * 2);
+  height: 100%;
+  animation: moveBg 30s linear infinite;
+}
+
+.bgImg img {
+  width: 2683.86px;
+  height: 100%;
+}
+
+@keyframes moveBg {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
