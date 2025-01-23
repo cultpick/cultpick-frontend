@@ -2,7 +2,6 @@ import "./reset.css";
 import "./globals.css";
 import type { Metadata } from "next";
 import RecoilRootProvider from "../utils/recoilRootProvider";
-import TopNav from "@/components/TopNav";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
@@ -21,9 +20,6 @@ export default function RootLayout({
         <RecoilRootProvider>
           <div
             style={{
-              // height: "auto",
-              // minHeight: "100%",
-              // paddingBottom: "100px",
               minHeight: "calc(100vh - 10rem)",
             }}
           >

@@ -1,18 +1,17 @@
-import { useState } from "react";
+"use client";
+
+import { useRecoilValue } from "recoil";
 import styles from "./AgreeBox.module.css";
 import Button from "../../Button";
 import CheckSection from "./CheckSection";
+import { isAllCheckedState } from "@/recoil/atom";
 
 export default function AgreeBox() {
-  const [isAllChecked, setIsAllChecked] = useState(false);
-
-  const handleAllCheckedChange = (isChecked: boolean) => {
-    setIsAllChecked(isChecked);
-  };
+  const isAllChecked = useRecoilValue(isAllCheckedState);
 
   return (
     <div className={styles.boxContainer}>
-      <CheckSection onAllCheckedChange={handleAllCheckedChange} />
+      <CheckSection />
       <div className={styles.btnWrapper}>
         <Button
           text="다음 단계"

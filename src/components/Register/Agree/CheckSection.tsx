@@ -1,26 +1,29 @@
-import { useState, useEffect } from "react";
+"use client";
+
+import { useRecoilState } from "recoil";
 import Check_IC from "@/../public/svgs/check_icon.svg";
 import styles from "./CheckSection.module.css";
 import TermsOfService from "@/constants/TermsOfService";
 import PrivacyPolicy from "@/constants/PrivacyPolicy";
+import {
+  isTermsCheckedState,
+  isPrivacyCheckedState,
+  isAllCheckedState,
+} from "@/recoil/atom";
 
-interface CheckSectionProps {
-  onAllCheckedChange: (isChecked: boolean) => void;
-}
-
-export default function CheckSection({
-  onAllCheckedChange,
-}: CheckSectionProps) {
-  const [isTermsChecked, setIsTermsChecked] = useState(false);
-  const [isPrivacyChecked, setIsPrivacyChecked] = useState(false);
-  const [isAllChecked, setIsAllChecked] = useState(false);
+export default function CheckSection() {
+  const [isTermsChecked, setIsTermsChecked] =
+    useRecoilState(isTermsCheckedState);
+  const [isPrivacyChecked, setIsPrivacyChecked] = useRecoilState(
+    isPrivacyCheckedState,
+  );
+  const [isAllChecked, setIsAllChecked] = useRecoilState(isAllCheckedState);
 
   const handleTermsCheck = () => {
     const newTermsChecked = !isTermsChecked;
     setIsTermsChecked(newTermsChecked);
     const newAllChecked = newTermsChecked && isPrivacyChecked;
     setIsAllChecked(newAllChecked);
-    onAllCheckedChange(newAllChecked);
   };
 
   const handlePrivacyCheck = () => {
@@ -28,7 +31,6 @@ export default function CheckSection({
     setIsPrivacyChecked(newPrivacyChecked);
     const newAllChecked = newPrivacyChecked && isTermsChecked;
     setIsAllChecked(newAllChecked);
-    onAllCheckedChange(newAllChecked);
   };
 
   const handleAllCheck = () => {
@@ -36,18 +38,7 @@ export default function CheckSection({
     setIsAllChecked(newCheckState);
     setIsTermsChecked(newCheckState);
     setIsPrivacyChecked(newCheckState);
-    onAllCheckedChange(newCheckState);
   };
-
-  useEffect(() => {
-    if (isTermsChecked && isPrivacyChecked) {
-      setIsAllChecked(true);
-      onAllCheckedChange(true);
-    } else {
-      setIsAllChecked(false);
-      onAllCheckedChange(false);
-    }
-  }, [isTermsChecked, isPrivacyChecked, onAllCheckedChange]);
 
   return (
     <div className={styles.boxContainer}>
