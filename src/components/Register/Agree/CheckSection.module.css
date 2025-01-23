@@ -1,0 +1,67 @@
+.boxContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 3.6rem;
+}
+
+.checkLabel {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.checkBtn {
+  display: none;
+}
+
+.checkboxIcon {
+  display: flex;
+  width: 2.2rem;
+  height: 2.2rem;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+
+  background-color: transparent;
+  border: 2px solid var(--g2);
+  border-radius: 4px;
+  margin-right: 1.2rem;
+
+  transition: background-color 0.3s ease;
+}
+
+.checkBtn:checked + .checkboxIcon {
+  background-color: #7873ff;
+  border: none;
+}
+
+.checkText {
+  font-size: 16px;
+  color: black;
+}
+
+.captionWrapper {
+  display: flex;
+  padding: 1.4rem 2rem;
+  margin-top: 1.6rem;
+  width: 60rem;
+  height: 11rem;
+
+  border-radius: 12px;
+  border: 2px solid rgba(245, 245, 245, 0.3);
+  background: linear-gradient(
+    90deg,
+    rgba(204, 204, 204, 0.2) 0%,
+    rgba(204, 204, 204, 0.05) 50%,
+    rgba(204, 204, 204, 0.2) 100%
+  );
+
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  max-height: 11rem;
+}
+
+.captionWrapper:-webkit-scrollbar {
+  display: none;
+}

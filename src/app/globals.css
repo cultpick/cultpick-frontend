@@ -12,6 +12,17 @@
   font-style: normal;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #fff;
+  -webkit-box-shadow:
+    0 0 0 40px rgba(204, 204, 204, 0.051) inset,
+    0 0 0 40px rgba(204, 204, 204, 0.01) inset,
+    0 0 0 40px rgba(204, 204, 204, 0.051) inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 :root {
   --background: #222222;
 
@@ -183,6 +194,32 @@ a {
   font-size: var(--font-body-regular-size);
   font-weight: var(--font-body-regular-weight);
   font-style: normal;
+}
+
+.body_20_B {
+  color: var(--white);
+
+  font-family: Pretendard;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+/* agree caption */
+.agree_caption {
+  color: var(--g2);
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+
+.bold-text {
+  display: block;
+  font-weight: 600;
+  margin: 0.8rem 0;
 }
 
 /* button */
