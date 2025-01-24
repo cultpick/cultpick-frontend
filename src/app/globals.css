@@ -229,3 +229,12 @@ a {
   font-style: normal;
   font-weight: var(--font-button-weight);
 }
+
+/* caption */
+.caption {
+  font-family: Pretendard;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}

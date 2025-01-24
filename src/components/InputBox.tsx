@@ -7,6 +7,7 @@ type InputBoxProps = {
   placeholder?: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  error?: boolean;
 };
 
 const InputBox: React.FC<InputBoxProps> = ({
@@ -15,7 +16,10 @@ const InputBox: React.FC<InputBoxProps> = ({
   placeholder = "",
   value,
   onChange,
+  error = false,
 }) => {
+  const inputClass = `${styles.input} body_18_R ${type === "password" ? styles.password : ""} ${error ? styles.errorBorder : ""}`;
+
   return (
     <input
       id={name}
@@ -24,7 +28,8 @@ const InputBox: React.FC<InputBoxProps> = ({
       placeholder={placeholder}
       value={value}
       onChange={onChange}
-      className={`${styles.input} body_18_R`}
+      className={inputClass}
+      autoComplete="off"
     />
   );
 };

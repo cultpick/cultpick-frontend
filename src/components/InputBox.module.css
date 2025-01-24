@@ -10,7 +10,19 @@
     rgba(204, 204, 204, 0.05) 50%,
     rgba(204, 204, 204, 0.2) 100%
   );
-
   color: var(--white);
   outline: none;
+}
+
+.input::placeholder {
+  color: var(--g3);
+  font-family: var(--font-body-regular-family);
+}
+
+.password {
+  font-family: var(--font-pixel-text-small-family);
+}
+
+.errorBorder {
+  border: 2px solid var(--warning);
 }

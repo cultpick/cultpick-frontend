@@ -29,9 +29,18 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
+  gap: 2.4rem;
 }
 
-.btnWrapper {
-  margin-top: 1.2rem;
+.inputLabel {
+  margin-bottom: 1.2rem;
+}
+
+.inputWrapper {
+  margin-bottom: 1.2rem;
+}
+
+.error {
+  color: var(--warning);
+  margin-top: -0.6rem;
 }
