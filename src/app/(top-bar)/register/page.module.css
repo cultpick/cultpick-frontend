@@ -32,8 +32,16 @@
   font-weight: 400;
 }
 
+.boxContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .boxWrapper {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
@@ -57,7 +65,7 @@
 .bgImgWrapper {
   z-index: -1;
   position: absolute;
-  bottom: 20rem;
+  bottom: 80rem;
   width: 100%;
   height: 180px;
   overflow: hidden;

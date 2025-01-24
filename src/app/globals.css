@@ -196,6 +196,20 @@ a {
   font-style: normal;
 }
 
+.body_18_M {
+  font-family: var(--font-body-medium-family);
+  font-size: var(--font-body-medium-size);
+  font-weight: var(--font-body-medium-weight);
+  font-style: normal;
+}
+
+.body_18_B {
+  font-family: var(--font-body-bold-family);
+  font-size: var(--font-body-bold-size);
+  font-weight: var(--font-body-bold-weight);
+  font-style: normal;
+}
+
 .body_20_B {
   color: var(--white);
 
@@ -228,4 +242,13 @@ a {
   font-size: var(--font-button-size);
   font-style: normal;
   font-weight: var(--font-button-weight);
+}
+
+/* caption */
+.caption {
+  font-family: Pretendard;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }

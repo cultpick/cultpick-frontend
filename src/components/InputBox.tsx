@@ -7,6 +7,8 @@ type InputBoxProps = {
   placeholder?: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  error?: boolean;
+  maxLength?: number;
 };
 
 const InputBox: React.FC<InputBoxProps> = ({
@@ -15,7 +17,11 @@ const InputBox: React.FC<InputBoxProps> = ({
   placeholder = "",
   value,
   onChange,
+  error = false,
+  maxLength,
 }) => {
+  const inputClass = `${styles.input} body_18_R ${error ? styles.errorBorder : ""}`;
+
   return (
     <input
       id={name}
@@ -24,7 +30,9 @@ const InputBox: React.FC<InputBoxProps> = ({
       placeholder={placeholder}
       value={value}
       onChange={onChange}
-      className={`${styles.input} body_18_R`}
+      className={inputClass}
+      autoComplete="off"
+      maxLength={maxLength}
     />
   );
 };

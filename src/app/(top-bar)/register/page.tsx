@@ -2,6 +2,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import TopBlurBox from "@/components/Register/TopBlurBox";
+import BottomBlurBox from "@/components/Register/BottomBlurBox";
 
 export default function Login() {
   return (
@@ -16,8 +17,13 @@ export default function Login() {
           />
           <div className={styles.registerTitle}>회원가입</div>
         </div>
-        <div className={styles.boxWrapper}>
-          <TopBlurBox />
+        <div className={styles.boxContainer}>
+          <div className={styles.boxWrapper}>
+            <TopBlurBox />
+          </div>
+          <div className={styles.boxWrapper}>
+            <BottomBlurBox />
+          </div>
         </div>
       </div>
       <div className={styles.bgImgWrapper}>
