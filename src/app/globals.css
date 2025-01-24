@@ -196,6 +196,13 @@ a {
   font-style: normal;
 }
 
+.body_18_M {
+  font-family: var(--font-body-medium-family);
+  font-size: var(--font-body-medium-size);
+  font-weight: var(--font-body-medium-weight);
+  font-style: normal;
+}
+
 .body_20_B {
   color: var(--white);
 

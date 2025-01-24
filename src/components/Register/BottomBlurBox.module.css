@@ -1,0 +1,86 @@
+.boxContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4.6rem;
+  margin-bottom: 12.8rem;
+  width: 100%;
+  max-width: 560px;
+  border-radius: 24px;
+  background: rgba(84, 84, 84, 0.25);
+  box-shadow:
+    0px 0px 30px 0px #232323,
+    0px 0px 80px 0px rgba(255, 255, 255, 0.24) inset;
+  backdrop-filter: blur(10px);
+  padding: 4.8rem 6rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.genderWrapper {
+  display: flex;
+  gap: 2rem;
+}
+
+.checkLabel {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.checkBtn {
+  display: none;
+}
+
+.checkboxIcon {
+  display: flex;
+  width: 2.2rem;
+  height: 2.2rem;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+
+  background-color: transparent;
+  border: 2px solid var(--g2);
+  border-radius: 4px;
+  margin-right: 1.2rem;
+
+  transition: background-color 0.3s ease;
+}
+
+/* 체크 시 보라색 적용 */
+.checkBtn:checked + .checkboxIcon {
+  background-color: #7873ff;
+  border: none;
+}
+
+.checkLabel span {
+  font-size: 1.6rem;
+  color: var(--white);
+}
+
+.inputLabel {
+  margin-bottom: 1.2rem;
+}
+
+.btnWrapper {
+  margin-top: 1.2rem;
+}
+
+.birthdateWrapper {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.birthdateWrapper input {
+  width: 7.4rem;
+  text-align: center;
+  padding: 0;
+}
+
+.birthdateWrapper input:first-child {
+  width: 9rem;
+}

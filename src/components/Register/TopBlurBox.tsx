@@ -38,7 +38,7 @@ export default function TopBlurBox() {
     if (!regex.test(password)) {
       setPasswordError(true);
       setPasswordErrorMessage(
-        "비밀번호는 영문, 숫자, 특수문자 중 2가지 이상 조합의 8~20자여야 합니다.",
+        "비밀번호를 영문, 숫자, 특수문자 중 2가지 이상 조합의 8~20자로 설정해주세요.",
       );
       setPasswordMatchError(false);
       setPasswordMatchErrorMessage("");
@@ -52,7 +52,7 @@ export default function TopBlurBox() {
   const validatePasswordMatch = (password: string, confirmPassword: string) => {
     if (password && confirmPassword && password !== confirmPassword) {
       setPasswordMatchError(true);
-      setPasswordMatchErrorMessage("비밀번호가 일치하지 않습니다.");
+      setPasswordMatchErrorMessage("재입력한 비밀번호를 확인해주세요.");
     } else {
       setPasswordMatchError(false);
       setPasswordMatchErrorMessage("");
