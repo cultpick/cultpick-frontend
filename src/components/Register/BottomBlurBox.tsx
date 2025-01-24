@@ -3,6 +3,7 @@ import styles from "./BottomBlurBox.module.css";
 import InputBox from "../InputBox";
 import Button from "../Button";
 import Check_IC from "@/../public/svgs/check_icon.svg";
+import AddressSelector from "./Agree/AddressSelector";
 
 export default function BottomBlurBox() {
   const [name, setName] = useState("");
@@ -134,15 +135,9 @@ export default function BottomBlurBox() {
           </div>
         </div>
 
-        <div className={styles.formSection}>
+        <div className={styles.regionSection}>
           <div className={`body_20_B ${styles.inputLabel}`}>주소</div>
-          <InputBox
-            type="text"
-            name="address"
-            placeholder="주소"
-            value={address}
-            onChange={handleAddressChange}
-          />
+          <AddressSelector />
         </div>
 
         <div className={styles.btnWrapper}>

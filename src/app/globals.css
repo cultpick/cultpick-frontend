@@ -203,6 +203,13 @@ a {
   font-style: normal;
 }
 
+.body_18_B {
+  font-family: var(--font-body-bold-family);
+  font-size: var(--font-body-bold-size);
+  font-weight: var(--font-body-bold-weight);
+  font-style: normal;
+}
+
 .body_20_B {
   color: var(--white);
 
