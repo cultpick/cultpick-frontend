@@ -36,9 +36,14 @@
   border: 2px solid #7873ff;
   border-radius: 12px;
   backdrop-filter: blur(10px);
-  overflow-y: hidden;
-  scrollbar-color: white;
+  overflow-y: scroll;
   z-index: 10;
+  -ms-overflow-style: none; /* 인터넷 익스플로러 */
+  scrollbar-width: none; /* 파이어폭스 */
+}
+
+.dropdown:-webkit-scrollbar {
+  display: none;
 }
 
 .dropdownItem {

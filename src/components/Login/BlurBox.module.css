@@ -35,3 +35,11 @@
 .btnWrapper {
   margin-top: 1.2rem;
 }
+
+.bottomBtnContainer {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 2.8rem;
+  margin-top: 1.5rem;
+}

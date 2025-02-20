@@ -4,6 +4,7 @@ import InputBox from "../InputBox";
 import Button from "../Button";
 import Check_IC from "@/../public/svgs/check_icon.svg";
 import AddressSelector from "./Agree/AddressSelector";
+import dayjs from "dayjs";
 
 export default function BottomBlurBox() {
   const [name, setName] = useState("");
@@ -53,6 +54,10 @@ export default function BottomBlurBox() {
     });
   };
 
+  console.log(
+    dayjs(`${birthYear}-${birthMonth}-${birthDay}`, "YYYY-MM-DD").isValid(),
+  );
+  console.log(`${birthYear}-${birthMonth}-${birthDay}`);
   return (
     <div className={styles.boxContainer}>
       <form onSubmit={handleFormSubmit} className={styles.form}>
