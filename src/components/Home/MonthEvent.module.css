@@ -1,0 +1,27 @@
+.Container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  margin-top: 7.4rem;
+}
+
+.rightTitle {
+  display: flex;
+  width: 320px;
+  height: 320px;
+  flex-direction: column;
+
+  font-family: Pretendard;
+  font-size: 8.4rem;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 100px;
+}
+
+.EventContainer {
+  display: flex;
+  justify-content: center;
+  gap: 2.4rem;
+}
