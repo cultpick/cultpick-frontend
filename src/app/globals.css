@@ -189,6 +189,22 @@ a {
 }
 
 /* body */
+.body_16_B {
+  font-family: Pretendard;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.body_16_R {
+  font-family: Pretendard;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
 .body_18_R {
   font-family: var(--font-body-regular-family);
   font-size: var(--font-body-regular-size);
@@ -242,6 +258,10 @@ a {
   font-size: var(--font-button-size);
   font-style: normal;
   font-weight: var(--font-button-weight);
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 /* caption */

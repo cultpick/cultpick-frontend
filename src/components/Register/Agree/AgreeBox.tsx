@@ -5,8 +5,14 @@ import styles from "./AgreeBox.module.css";
 import Button from "../../Button";
 import CheckSection from "./CheckSection";
 import { isAllCheckedState } from "@/recoil/atom";
+import { useRouter } from "next/navigation";
 
 export default function AgreeBox() {
+  const router = useRouter();
+
+  const onClickNext = () => {
+    router.push("/register");
+  };
   const isAllChecked = useRecoilValue(isAllCheckedState);
 
   return (
@@ -17,6 +23,7 @@ export default function AgreeBox() {
           text="다음 단계"
           state={isAllChecked ? "active" : "disabled"}
           width="60rem"
+          onClick={onClickNext}
         />
       </div>
     </div>

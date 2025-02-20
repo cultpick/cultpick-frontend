@@ -40,7 +40,6 @@ export const regionData: { [key: string]: string[] } = {
     "군포시",
     "의왕시",
     "하남시",
-    "용인시",
     "파주시",
     "이천시",
     "안성시",
