@@ -3,4 +3,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
+}
+
+.Bg {
+  position: relative;
+  z-index: -1;
+}
+
+.star1 {
+  position: absolute;
+  top: -100rem;
+  left: 100px;
 }
