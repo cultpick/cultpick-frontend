@@ -1,0 +1,76 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6.3rem;
+  margin-top: 8.3rem;
+  margin-bottom: 12.4rem;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2.4rem;
+}
+
+.title {
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 4rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+
+  background: radial-gradient(50% 50% at 50% 50%, #d2d3ff 0%, #fff 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.caption {
+  color: var(--g2);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.loginContainer {
+  display: flex;
+  gap: 3.2rem;
+}
+
+.loginBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.151rem;
+  width: 20.5385rem;
+  height: 6rem;
+  padding-left: 1.3rem;
+
+  border-radius: 100px;
+  background: linear-gradient(90deg, #7873ff 0%, #5300ec 100%);
+  border: none;
+
+  color: #fff;
+
+  font-family: Pretendard;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+
+  cursor: pointer;
+}
+
+.loginBtn svg {
+  width: 2.9rem;
+  height: 3rem;
+  fill: #fff;
+}

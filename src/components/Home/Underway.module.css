@@ -1,0 +1,101 @@
+.Container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.EventContainer {
+  display: flex;
+  justify-content: center;
+  gap: 2.4rem;
+}
+
+.EventItemContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.4rem;
+  position: relative;
+}
+
+.bottomContainer {
+  margin-top: 5.6rem;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 0 10vw; /* 양쪽 여백을 줘서 중앙 정렬 유지 */
+}
+
+.rectangle {
+  position: absolute;
+  left: -7rem;
+  width: 100%;
+  max-width: 32vw;
+  min-width: 15rem;
+  height: 0.8rem;
+  z-index: -1;
+}
+
+.rightContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  min-width: 30rem;
+  margin-left: auto;
+  padding-left: 3rem;
+}
+
+.bottomTitle {
+  margin-left: 3.8rem;
+  margin-right: 3rem;
+
+  background: radial-gradient(50% 50% at 50% 50%, #d2d3ff 0%, #fff 80%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  font-family: Pretendard;
+  font-size: 5.6rem;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+
+.nextBtn {
+  flex-grow: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.151rem;
+  width: 14.8rem;
+  height: 5.2rem;
+  padding-left: 1rem;
+
+  border: none;
+  border: 2px solid var(--color-light-primary);
+  border-radius: 100px;
+  background: transparent;
+
+  color: var(--color-light-primary);
+
+  font-family: Pretendard;
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+
+  cursor: pointer;
+}
+
+.nextBtn svg {
+  width: 2.2769rem;
+  height: 2.3733rem;
+  fill: var(--color-light-primary);
+}
