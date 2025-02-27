@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  margin-bottom: 11.2rem;
 }
 
 .EventContainer {
@@ -27,7 +28,7 @@
   align-items: center;
   position: relative;
   overflow: hidden;
-  padding: 0 10vw; /* 양쪽 여백을 줘서 중앙 정렬 유지 */
+  padding: 0 10vw;
 }
 
 .rectangle {

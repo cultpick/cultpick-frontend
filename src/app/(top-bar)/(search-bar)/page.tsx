@@ -19,6 +19,27 @@ export default function Home() {
           height={289}
           className={styles.star1}
         />
+        <Image
+          src={"/img/home/star2.png"}
+          alt=""
+          width={289}
+          height={289}
+          className={styles.star2}
+        />
+        <Image
+          src={"/img/home/star3.png"}
+          alt=""
+          width={289}
+          height={289}
+          className={styles.star3}
+        />
+        <Image
+          src={"/img/home/star4.png"}
+          alt=""
+          width={289}
+          height={289}
+          className={styles.star4}
+        />
       </div>
     </div>
   );

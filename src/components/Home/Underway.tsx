@@ -1,4 +1,3 @@
-import Image from "next/image";
 import EvetItem from "./EvetItem";
 import styles from "./Underway.module.css";
 import Next_IC from "@/../public/svgs/next_arrow.svg";
@@ -15,7 +14,6 @@ export default function UnderWay() {
         </div>
       </div>
       <div className={styles.bottomContainer}>
-        {/* Rectangle을 왼쪽 여백 내부에서만 존재하도록 */}
         <img
           src="/img/home/rectangle_gradient.png"
           className={styles.rectangle}

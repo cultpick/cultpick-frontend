@@ -13,6 +13,24 @@
 
 .star1 {
   position: absolute;
-  top: -100rem;
-  left: 100px;
+  top: -107.2rem;
+  left: -82rem;
+}
+
+.star2 {
+  position: absolute;
+  top: -99.2rem;
+  left: -55rem;
+}
+
+.star3 {
+  position: absolute;
+  top: -108.2rem;
+  left: -15rem;
+}
+
+.star4 {
+  position: absolute;
+  top: -106.2rem;
+  left: 32rem;
 }
