@@ -1,4 +1,11 @@
+"use client";
+
 import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Virtual } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import styles from "./MonthEvent.module.css";
 import EvetItem from "./EvetItem";
 
@@ -6,11 +13,34 @@ export default function MonthEvent() {
   return (
     <div className={styles.Container}>
       <div className={styles.EventContainer}>
-        <div className={styles.EventItemContainer}>
-          <EvetItem />
-          <EvetItem />
-          <EvetItem />
-        </div>
+        <Swiper
+          modules={[Navigation, Pagination, Virtual]}
+          spaceBetween={24}
+          slidesPerView={3.5}
+          loop
+          centeredSlides={false}
+          navigation={false}
+          pagination={false}
+          className={styles.SwiperContainer}
+          breakpoints={{
+            1024: { slidesPerView: 3.5 },
+            768: { slidesPerView: 2 },
+            480: { slidesPerView: 1 },
+          }}
+        >
+          <SwiperSlide className={styles.Slide}>
+            <EvetItem />
+          </SwiperSlide>
+          <SwiperSlide className={styles.Slide}>
+            <EvetItem />
+          </SwiperSlide>
+          <SwiperSlide className={styles.Slide}>
+            <EvetItem />
+          </SwiperSlide>
+          <SwiperSlide className={styles.Slide}>
+            <EvetItem />
+          </SwiperSlide>
+        </Swiper>
       </div>
       <div className={styles.rightTitle}>
         <div>이달의</div>

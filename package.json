@@ -22,7 +22,8 @@
     "prettier": "^3.4.2",
     "react": "18",
     "react-dom": "18",
-    "recoil": "^0.7.7"
+    "recoil": "^0.7.7",
+    "swiper": "^11.2.4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

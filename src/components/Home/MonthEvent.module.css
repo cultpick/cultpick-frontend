@@ -20,12 +20,6 @@
   line-height: 100px;
 }
 
-.EventContainer {
-  display: flex;
-  justify-content: center;
-  gap: 2.4rem;
-}
-
 .EventItemContainer {
   display: flex;
   justify-content: center;
@@ -36,6 +30,43 @@
 
 .titleBgWrapper {
   position: absolute;
-
   z-index: -999;
+}
+
+/* Swiper 좌우 그라데이션 효과 */
+.EventContainer {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  height: 41.7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.EventContainer::before,
+.EventContainer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 10rem;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.EventContainer::before {
+  left: 0;
+  background: linear-gradient(90deg, #232323 0%, rgba(35, 35, 35, 0) 100%);
+}
+
+.EventContainer::after {
+  right: 0;
+  background: linear-gradient(270deg, #232323 0%, rgba(35, 35, 35, 0) 100%);
+}
+
+.SwiperContainer {
+  width: 100%;
+  height: 100%; 
+  overflow: hidden;
 }
