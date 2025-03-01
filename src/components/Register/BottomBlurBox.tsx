@@ -25,17 +25,41 @@ export default function BottomBlurBox() {
 
   const handleBirthYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/\D/g, "");
-    if (value.length <= 4) setBirthYear(value);
+    if (value.length <= 4) {
+      setBirthYear(value);
+    }
   };
 
   const handleBirthMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/\D/g, "");
-    if (value.length <= 2) setBirthMonth(value);
+    if (value.length <= 2) {
+      setBirthMonth(value);
+    }
   };
 
   const handleBirthDayChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/\D/g, "");
-    if (value.length <= 2) setBirthDay(value);
+    if (value.length <= 2) {
+      setBirthDay(value);
+    }
+  };
+
+  const isValidDate = () => {
+    if (!birthYear || !birthMonth || !birthDay) return false;
+    if (birthYear.length !== 4) return false;
+
+    const month = parseInt(birthMonth);
+    const day = parseInt(birthDay);
+
+    if (month < 1 || month > 12) return false;
+    if (day < 1 || day > 31) return false;
+
+    // 각 월의 마지막 날짜 체크
+    const lastDayOfMonth = new Date(parseInt(birthYear), month, 0).getDate();
+    if (day > lastDayOfMonth) return false;
+
+    const date = dayjs(`${birthYear}-${birthMonth}-${birthDay}`, "YYYY-MM-DD");
+    return date.isValid() && date.isBefore(dayjs());
   };
 
   const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,6 +68,10 @@ export default function BottomBlurBox() {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!isValidDate()) {
+      alert("올바른 생년월일을 입력해주세요.");
+      return;
+    }
     console.log("Form submitted with:", {
       name,
       gender,
@@ -146,7 +174,10 @@ export default function BottomBlurBox() {
         </div>
 
         <div className={styles.btnWrapper}>
-          <Button text="가입하기" state="active" />
+          <Button
+            text="가입하기"
+            state={isValidDate() ? "active" : "disabled"}
+          />
         </div>
       </form>
     </div>
