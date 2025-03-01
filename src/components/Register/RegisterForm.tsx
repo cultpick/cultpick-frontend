@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { z } from "zod";
 import {
   registerSchema,
   type RegisterFormData,
