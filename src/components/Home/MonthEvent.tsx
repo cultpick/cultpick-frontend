@@ -7,7 +7,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import styles from "./MonthEvent.module.css";
-import EvetItem from "./EvetItem";
+import EvetItem from "./EventItem";
 
 export default function MonthEvent() {
   return (

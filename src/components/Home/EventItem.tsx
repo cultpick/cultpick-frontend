@@ -1,7 +1,7 @@
 import Image from "next/image";
-import styles from "./EvenItem.module.css";
+import styles from "./EventItem.module.css";
 
-export default function EvetItem() {
+export default function EventItem() {
   return (
     <div className={styles.Container}>
       <Image

@@ -1,43 +1,52 @@
-import { SwiperSlide, Swiper } from "swiper/react";
-import EvetItem from "./EvetItem";
+"use client";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Virtual } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import EvetItem from "./EventItem";
 import styles from "./Underway.module.css";
 import Next_IC from "@/../public/svgs/next_arrow.svg";
-import { Navigation, Pagination, Virtual } from "swiper/modules";
 
 export default function UnderWay() {
   return (
     <div className={styles.Container}>
       <div className={styles.EventContainer}>
-        <div className={styles.EventItemContainer}>
-          <Swiper
-            modules={[Navigation, Pagination, Virtual]}
-            spaceBetween={24}
-            slidesPerView={3.5}
-            loop
-            centeredSlides={false}
-            navigation={false}
-            pagination={false}
-            className={styles.SwiperContainer}
-            breakpoints={{
-              1024: { slidesPerView: 3.5 },
-              768: { slidesPerView: 2 },
-              480: { slidesPerView: 1 },
-            }}
-          >
-            <SwiperSlide className={styles.Slide}>
-              <EvetItem />
-            </SwiperSlide>
-            <SwiperSlide className={styles.Slide}>
-              <EvetItem />
-            </SwiperSlide>
-            <SwiperSlide className={styles.Slide}>
-              <EvetItem />
-            </SwiperSlide>
-            <SwiperSlide className={styles.Slide}>
-              <EvetItem />
-            </SwiperSlide>
-          </Swiper>
-        </div>
+        <Swiper
+          modules={[Navigation, Pagination, Virtual]}
+          spaceBetween={300}
+          slidesPerView={5}
+          loop
+          centeredSlides={false}
+          navigation={false}
+          pagination={false}
+          className={styles.SwiperContainer}
+          breakpoints={{
+            1024: { slidesPerView: 5 },
+            768: { slidesPerView: 3 },
+            480: { slidesPerView: 2 },
+          }}
+        >
+          <SwiperSlide className={styles.Slide}>
+            <EvetItem />
+          </SwiperSlide>
+          <SwiperSlide className={styles.Slide}>
+            <EvetItem />
+          </SwiperSlide>
+          <SwiperSlide className={styles.Slide}>
+            <EvetItem />
+          </SwiperSlide>
+          <SwiperSlide className={styles.Slide}>
+            <EvetItem />
+          </SwiperSlide>
+          <SwiperSlide className={styles.Slide}>
+            <EvetItem />
+          </SwiperSlide>
+          <SwiperSlide className={styles.Slide}>
+            <EvetItem />
+          </SwiperSlide>
+        </Swiper>
       </div>
       <div className={styles.bottomContainer}>
         <img
