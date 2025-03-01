@@ -1,8 +1,16 @@
+"use client";
+
 import styles from "./NonLogin.module.css";
 import Pick_IC from "@/../public/svgs/home/pick_primary.svg";
 import Next_IC from "@/../public/svgs/next_arrow.svg";
+import { useRouter } from "next/navigation";
 
 export default function NonLogin() {
+  const router = useRouter();
+  const onClick = () => {
+    router.push("/login");
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.textContainer}>
@@ -15,7 +23,7 @@ export default function NonLogin() {
       </div>
       <div className={styles.loginContainer}>
         <Pick_IC />
-        <button className={styles.loginBtn}>
+        <button className={styles.loginBtn} onClick={onClick}>
           로그인하러 가기
           <Next_IC />
         </button>
