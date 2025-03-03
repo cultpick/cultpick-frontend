@@ -16,30 +16,32 @@ export default function MonthEvent() {
         <Swiper
           modules={[Navigation, Pagination, Virtual]}
           spaceBetween={24}
-          slidesPerView={3.5}
-          loop
+          slidesPerView={1}
+          loop={false}
           centeredSlides={false}
           navigation={false}
           pagination={false}
           className={styles.SwiperContainer}
           breakpoints={{
-            1024: { slidesPerView: 3.5 },
-            768: { slidesPerView: 2 },
-            480: { slidesPerView: 1 },
+            1024: {
+              slidesPerView: 3.5,
+              loop: false,
+            },
+            768: {
+              slidesPerView: 2,
+              loop: false,
+            },
+            480: {
+              slidesPerView: 1,
+              loop: false,
+            },
           }}
         >
-          <SwiperSlide className={styles.Slide}>
-            <EvetItem />
-          </SwiperSlide>
-          <SwiperSlide className={styles.Slide}>
-            <EvetItem />
-          </SwiperSlide>
-          <SwiperSlide className={styles.Slide}>
-            <EvetItem />
-          </SwiperSlide>
-          <SwiperSlide className={styles.Slide}>
-            <EvetItem />
-          </SwiperSlide>
+          {[1, 2, 3, 4, 5, 6].map((index) => (
+            <SwiperSlide key={index} className={styles.Slide}>
+              <EvetItem />
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
       <div className={styles.rightTitle}>

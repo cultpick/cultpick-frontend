@@ -16,36 +16,32 @@ export default function UnderWay() {
         <Swiper
           modules={[Navigation, Pagination, Virtual]}
           spaceBetween={300}
-          slidesPerView={5}
-          loop
+          slidesPerView={1}
+          loop={false}
           centeredSlides={false}
           navigation={false}
           pagination={false}
           className={styles.SwiperContainer}
           breakpoints={{
-            1024: { slidesPerView: 5 },
-            768: { slidesPerView: 3 },
-            480: { slidesPerView: 2 },
+            1024: {
+              slidesPerView: 5,
+              loop: false,
+            },
+            768: {
+              slidesPerView: 3,
+              loop: false,
+            },
+            480: {
+              slidesPerView: 2,
+              loop: false,
+            },
           }}
         >
-          <SwiperSlide className={styles.Slide}>
-            <EvetItem />
-          </SwiperSlide>
-          <SwiperSlide className={styles.Slide}>
-            <EvetItem />
-          </SwiperSlide>
-          <SwiperSlide className={styles.Slide}>
-            <EvetItem />
-          </SwiperSlide>
-          <SwiperSlide className={styles.Slide}>
-            <EvetItem />
-          </SwiperSlide>
-          <SwiperSlide className={styles.Slide}>
-            <EvetItem />
-          </SwiperSlide>
-          <SwiperSlide className={styles.Slide}>
-            <EvetItem />
-          </SwiperSlide>
+          {[1, 2, 3, 4, 5, 6, 7, 8].map((index) => (
+            <SwiperSlide key={index} className={styles.Slide}>
+              <EvetItem />
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
       <div className={styles.bottomContainer}>
@@ -54,7 +50,6 @@ export default function UnderWay() {
           className={styles.rectangle}
           alt="진행 중인 행사"
         />
-
         <div className={styles.rightContainer}>
           <div className={styles.bottomTitle}>진행 중인 행사</div>
           <button className={styles.nextBtn}>
