@@ -34,10 +34,12 @@
 
 .boxWrapper {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-
+  gap: 3.5rem;
   width: 100%;
+  height: 100vh;
 }
 
 .gradient {
@@ -57,7 +59,7 @@
 .bgImgWrapper {
   z-index: -1;
   position: fixed;
-  bottom: 14rem;
+  bottom: 20rem;
   width: 100%;
   height: 180px;
   overflow: hidden;

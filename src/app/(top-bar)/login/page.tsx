@@ -7,13 +7,13 @@ export default function Login() {
   return (
     <div className={styles.loginPage}>
       <div className={styles.loginContainer}>
+        <div className={styles.boxWrapper}>
         <Image
           src={"/img/typography_logo.png"}
           alt="cultpick logo"
           width={318}
           height={77}
         />
-        <div className={styles.boxWrapper}>
           <BlurBox />
         </div>
       </div>

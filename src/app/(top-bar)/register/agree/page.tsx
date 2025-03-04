@@ -7,6 +7,7 @@ export default function Agree() {
   return (
     <div className={styles.loginPage}>
       <div className={styles.loginContainer}>
+        <div className={styles.boxWrapper}>
         <div className={styles.logoContainer}>
           <Image
             src={"/img/typography_logo.png"}
@@ -16,7 +17,6 @@ export default function Agree() {
           />
           <div className={styles.registerTitle}>약관 동의</div>
         </div>
-        <div className={styles.boxWrapper}>
           <AgreeBox />
         </div>
       </div>

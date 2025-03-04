@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 100%;
 }
 
 .loginContainer {
@@ -19,6 +20,7 @@
   gap: 2.8rem;
   justify-content: center;
   align-items: center;
+  margin-bottom: 3.5rem;
 }
 
 .registerTitle {
@@ -46,6 +48,7 @@
   align-items: center;
 
   width: 100%;
+  height: 100%;
 }
 
 .gradient {
@@ -65,7 +68,7 @@
 .bgImgWrapper {
   z-index: -1;
   position: fixed;
-  bottom: 14rem;
+  bottom: 20rem;
   width: 100%;
   height: 180px;
   overflow: hidden;

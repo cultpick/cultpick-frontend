@@ -8,22 +8,18 @@ export default function Login() {
   return (
     <div className={styles.loginPage}>
       <div className={styles.loginContainer}>
-        <div className={styles.logoContainer}>
-          <Image
-            src={"/img/typography_logo.png"}
-            alt="cultpick logo"
-            width={200}
-            height={48.369}
-          />
-          <div className={styles.registerTitle}>회원가입</div>
-        </div>
-        <div className={styles.boxContainer}>
-          <div className={styles.boxWrapper}>
-            <TopBlurBox />
+        <div className={styles.boxWrapper}>
+          <div className={styles.logoContainer}>
+            <Image
+              src={"/img/typography_logo.png"}
+              alt="cultpick logo"
+              width={200}
+              height={48.369}
+            />
+            <div className={styles.registerTitle}>회원가입</div>
           </div>
-          <div className={styles.boxWrapper}>
-            <BottomBlurBox />
-          </div>
+          <TopBlurBox />
+          <BottomBlurBox />
         </div>
       </div>
       <div className={styles.bgImgWrapper}>
