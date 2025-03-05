@@ -29,7 +29,7 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 2.4rem;
+  gap: 1.2rem;
 }
 
 .inputLabel {
@@ -42,5 +42,12 @@
 
 .error {
   color: var(--warning);
-  margin-top: -0.6rem;
+  margin-top: 0.6rem;
+}
+
+.errorSection {
+  margin-top: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
 }

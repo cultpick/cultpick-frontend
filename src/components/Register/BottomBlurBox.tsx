@@ -1,102 +1,27 @@
-import { useState } from "react";
+"use client";
+
 import styles from "./BottomBlurBox.module.css";
 import InputBox from "../InputBox";
 import Button from "../Button";
 import Check_IC from "@/../public/svgs/check_icon.svg";
 import AddressSelector from "./Agree/AddressSelector";
-import dayjs from "dayjs";
+import { useRegisterForm } from "@/hooks/useRegisterForm";
 
 export default function BottomBlurBox() {
-  const [name, setName] = useState("");
-  const [gender, setGender] = useState("");
+  const { formData, isValid, handleInputChange, handleGenderChange } =
+    useRegisterForm();
 
-  const [birthYear, setBirthYear] = useState("");
-  const [birthMonth, setBirthMonth] = useState("");
-  const [birthDay, setBirthDay] = useState("");
-  const [address, setAddress] = useState("");
-
-  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-  };
-
-  const handleGenderChange = (value: string) => {
-    setGender(value);
-  };
-
-  const handleBirthYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/\D/g, "");
-    if (value.length <= 4) {
-      setBirthYear(value);
-    }
-  };
-
-  const handleBirthMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/\D/g, "");
-    if (value.length <= 2) {
-      setBirthMonth(value);
-    }
-  };
-
-  const handleBirthDayChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/\D/g, "");
-    if (value.length <= 2) {
-      setBirthDay(value);
-    }
-  };
-
-  const isValidDate = () => {
-    if (!birthYear || !birthMonth || !birthDay) return false;
-    if (birthYear.length !== 4) return false;
-
-    const month = parseInt(birthMonth);
-    const day = parseInt(birthDay);
-
-    if (month < 1 || month > 12) return false;
-    if (day < 1 || day > 31) return false;
-
-    // 각 월의 마지막 날짜 체크
-    const lastDayOfMonth = new Date(parseInt(birthYear), month, 0).getDate();
-    if (day > lastDayOfMonth) return false;
-
-    const date = dayjs(`${birthYear}-${birthMonth}-${birthDay}`, "YYYY-MM-DD");
-    return date.isValid() && date.isBefore(dayjs());
-  };
-
-  const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAddress(e.target.value);
-  };
-
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!isValidDate()) {
-      alert("올바른 생년월일을 입력해주세요.");
-      return;
-    }
-    console.log("Form submitted with:", {
-      name,
-      gender,
-      birthYear,
-      birthMonth,
-      birthDay,
-      address,
-    });
-  };
-
-  console.log(
-    dayjs(`${birthYear}-${birthMonth}-${birthDay}`, "YYYY-MM-DD").isValid(),
-  );
-  console.log(`${birthYear}-${birthMonth}-${birthDay}`);
   return (
     <div className={styles.boxContainer}>
-      <form onSubmit={handleFormSubmit} className={styles.form}>
+      <form className={styles.form}>
         <div className={styles.formSection}>
           <div className={`body_20_B ${styles.inputLabel}`}>이름</div>
           <InputBox
             type="text"
             name="name"
             placeholder="이름"
-            value={name}
-            onChange={handleNameChange}
+            value={formData.name}
+            onChange={handleInputChange("name")}
           />
         </div>
 
@@ -107,13 +32,13 @@ export default function BottomBlurBox() {
               <input
                 type="checkbox"
                 className={styles.checkBtn}
-                checked={gender === "남성"}
+                checked={formData.gender === "남성"}
                 onChange={() => handleGenderChange("남성")}
               />
               <span className={styles.checkboxIcon}>
                 <Check_IC
                   style={{
-                    color: gender === "남성" ? "#5300EC" : "#919191",
+                    color: formData.gender === "남성" ? "#5300EC" : "#919191",
                   }}
                 />
               </span>
@@ -123,13 +48,13 @@ export default function BottomBlurBox() {
               <input
                 type="checkbox"
                 className={styles.checkBtn}
-                checked={gender === "여성"}
+                checked={formData.gender === "여성"}
                 onChange={() => handleGenderChange("여성")}
               />
               <span className={styles.checkboxIcon}>
                 <Check_IC
                   style={{
-                    color: gender === "여성" ? "#5300EC" : "#919191",
+                    color: formData.gender === "여성" ? "#5300EC" : "#919191",
                   }}
                 />
               </span>
@@ -145,24 +70,24 @@ export default function BottomBlurBox() {
               type="text"
               name="birthYear"
               placeholder="YYYY"
-              value={birthYear}
-              onChange={handleBirthYearChange}
+              value={formData.birthYear}
+              onChange={handleInputChange("birthYear")}
               maxLength={4}
             />
             <InputBox
               type="text"
               name="birthMonth"
               placeholder="MM"
-              value={birthMonth}
-              onChange={handleBirthMonthChange}
+              value={formData.birthMonth}
+              onChange={handleInputChange("birthMonth")}
               maxLength={2}
             />
             <InputBox
               type="text"
               name="birthDay"
               placeholder="DD"
-              value={birthDay}
-              onChange={handleBirthDayChange}
+              value={formData.birthDay}
+              onChange={handleInputChange("birthDay")}
               maxLength={2}
             />
           </div>
@@ -171,13 +96,6 @@ export default function BottomBlurBox() {
         <div className={styles.regionSection}>
           <div className={`body_20_B ${styles.inputLabel}`}>주소</div>
           <AddressSelector />
-        </div>
-
-        <div className={styles.btnWrapper}>
-          <Button
-            text="가입하기"
-            state={isValidDate() ? "active" : "disabled"}
-          />
         </div>
       </form>
     </div>

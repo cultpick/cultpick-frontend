@@ -94,3 +94,8 @@
     transform: translateX(-50%);
   }
 }
+
+.btnWrapper {
+  margin-top: -14rem;
+  margin-bottom: 10.8rem;
+}

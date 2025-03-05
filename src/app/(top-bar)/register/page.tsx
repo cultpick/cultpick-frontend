@@ -3,8 +3,13 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import TopBlurBox from "@/components/Register/TopBlurBox";
 import BottomBlurBox from "@/components/Register/BottomBlurBox";
+import Button from "@/components/Button";
+import { useRecoilValue } from "recoil";
+import { registerFormIsValidState } from "@/store/registerState";
 
-export default function Login() {
+export default function Register() {
+  const isValid = useRecoilValue(registerFormIsValidState);
+
   return (
     <div className={styles.loginPage}>
       <div className={styles.loginContainer}>
@@ -20,6 +25,13 @@ export default function Login() {
           </div>
           <TopBlurBox />
           <BottomBlurBox />
+        </div>
+        <div className={styles.btnWrapper}>
+          <Button
+            text="가입하기"
+            state={isValid ? "active" : "disabled"}
+            width="56rem"
+          />
         </div>
       </div>
       <div className={styles.bgImgWrapper}>
