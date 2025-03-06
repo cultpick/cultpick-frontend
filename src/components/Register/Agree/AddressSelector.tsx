@@ -2,7 +2,11 @@ import { useState, useRef, useEffect } from "react";
 import styles from "./AddressSelector.module.css";
 import { regionData } from "@/constants/regionData";
 import DownArrow_IC from "@/../public/svgs/bottom_arrow.svg";
+import { useRecoilState } from "recoil";
+import { registerFormState } from "@/store/registerState";
+
 export default function AddressSelector() {
+  const [formData, setFormData] = useRecoilState(registerFormState);
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
   const [selectedSubRegion, setSelectedSubRegion] = useState<string | null>(
     null,
@@ -11,6 +15,15 @@ export default function AddressSelector() {
     "region" | "subRegion" | null
   >(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // 주소가 이미 선택되어 있는 경우 초기값 설정
+  useEffect(() => {
+    if (formData.address) {
+      const [region, subRegion] = formData.address.split(" ");
+      setSelectedRegion(region);
+      setSelectedSubRegion(subRegion || null);
+    }
+  }, []);
 
   // 외부 클릭 시 드롭다운 닫기
   useEffect(() => {
@@ -32,13 +45,20 @@ export default function AddressSelector() {
   const handleRegionSelect = (region: string) => {
     setSelectedRegion(region);
     setSelectedSubRegion(null);
-    setActiveDropdown("subRegion"); // 상위 선택 후 자동으로 하위 드롭다운 활성화
+    setActiveDropdown("subRegion");
+    setFormData((prev) => ({ ...prev, address: region }));
   };
 
   // 하위 카테고리 선택
   const handleSubRegionSelect = (subRegion: string) => {
     setSelectedSubRegion(subRegion);
-    setActiveDropdown(null); // 선택 후 드롭다운 닫기
+    setActiveDropdown(null);
+    if (selectedRegion) {
+      setFormData((prev) => ({
+        ...prev,
+        address: `${selectedRegion} ${subRegion}`,
+      }));
+    }
   };
 
   return (

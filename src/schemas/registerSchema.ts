@@ -46,7 +46,7 @@ export const registerSchema = z
       return day >= 1 && day <= 31;
     }, "올바른 일을 입력해주세요."),
 
-    address: z.string().min(1, "주소를 입력해주세요."),
+    address: z.string().nullish(),
   })
   .refine(
     (data) => {

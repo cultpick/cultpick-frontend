@@ -7,6 +7,7 @@ type ButtonProps = {
   width?: string;
   height?: string;
   onClick?: () => void;
+  type?: "button" | "submit" | "reset";
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -15,6 +16,7 @@ const Button: React.FC<ButtonProps> = ({
   width = "44rem",
   height = "6rem",
   onClick,
+  type = "button",
 }) => {
   const getClassName = (state: string) => {
     switch (state) {
@@ -33,6 +35,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
+      type={type}
       className={`${styles.button} ${getClassName(state)} btn_text`}
       style={{ width, height }}
       onClick={onClick}

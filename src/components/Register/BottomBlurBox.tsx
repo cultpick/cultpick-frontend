@@ -8,12 +8,11 @@ import AddressSelector from "./Agree/AddressSelector";
 import { useRegisterForm } from "@/hooks/useRegisterForm";
 
 export default function BottomBlurBox() {
-  const { formData, isValid, handleInputChange, handleGenderChange } =
-    useRegisterForm();
+  const { formData, handleInputChange, handleGenderChange } = useRegisterForm();
 
   return (
     <div className={styles.boxContainer}>
-      <form className={styles.form}>
+      <div className={styles.form}>
         <div className={styles.formSection}>
           <div className={`body_20_B ${styles.inputLabel}`}>이름</div>
           <InputBox
@@ -97,7 +96,7 @@ export default function BottomBlurBox() {
           <div className={`body_20_B ${styles.inputLabel}`}>주소</div>
           <AddressSelector />
         </div>
-      </form>
+      </div>
     </div>
   );
 }

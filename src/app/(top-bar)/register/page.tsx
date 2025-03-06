@@ -5,10 +5,22 @@ import TopBlurBox from "@/components/Register/TopBlurBox";
 import BottomBlurBox from "@/components/Register/BottomBlurBox";
 import Button from "@/components/Button";
 import { useRecoilValue } from "recoil";
-import { registerFormIsValidState } from "@/store/registerState";
+import {
+  registerFormState,
+  registerFormIsValidState,
+} from "@/store/registerState";
+import { useRouter } from "next/navigation";
 
 export default function Register() {
+  const router = useRouter();
+  const formData = useRecoilValue(registerFormState);
   const isValid = useRecoilValue(registerFormIsValidState);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("회원가입 폼 데이터:", formData);
+    router.push("/category");
+  };
 
   return (
     <div className={styles.loginPage}>
@@ -23,15 +35,18 @@ export default function Register() {
             />
             <div className={styles.registerTitle}>회원가입</div>
           </div>
-          <TopBlurBox />
-          <BottomBlurBox />
-        </div>
-        <div className={styles.btnWrapper}>
-          <Button
-            text="가입하기"
-            state={isValid ? "active" : "disabled"}
-            width="56rem"
-          />
+          <form onSubmit={handleSubmit}>
+            <TopBlurBox />
+            <BottomBlurBox />
+            <div className={styles.btnWrapper}>
+              <Button
+                text="가입하기"
+                state={isValid ? "active" : "disabled"}
+                width="56rem"
+                type="submit"
+              />
+            </div>
+          </form>
         </div>
       </div>
       <div className={styles.bgImgWrapper}>

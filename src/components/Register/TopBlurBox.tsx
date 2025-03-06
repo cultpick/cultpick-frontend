@@ -7,17 +7,17 @@ import Button from "../Button";
 import { useRegisterForm } from "@/hooks/useRegisterForm";
 
 export default function TopBlurBox() {
-  const { formData, handleInputChange, errors, emailError } = useRegisterForm();
+  const { formData, handleInputChange, errors } = useRegisterForm();
 
   return (
     <div className={styles.boxContainer}>
-      <form className={styles.form}>
-        <div className={styles.formSection}>
+      <div className={styles.form}>
+        <div className={`${styles.emailTitle} ${styles.formSection}`}>
           <div className={`body_20_B ${styles.inputLabel}`}>이메일</div>
           <InputBox
             type="email"
             name="email"
-            placeholder="이메일"
+            placeholder="이메일 입력"
             value={formData.email}
             onChange={handleInputChange("email")}
             error={!!errors.email}
@@ -32,7 +32,7 @@ export default function TopBlurBox() {
           <InputBox
             type="password"
             name="password"
-            placeholder="비밀번호"
+            placeholder="영문, 숫자, 특수문자 중 2가지 이상 조합의 8~20자 입력"
             value={formData.password}
             onChange={handleInputChange("password")}
             error={!!errors.password}
@@ -54,7 +54,7 @@ export default function TopBlurBox() {
             </div>
           )}
         </div>
-      </form>
+      </div>
     </div>
   );
 }
