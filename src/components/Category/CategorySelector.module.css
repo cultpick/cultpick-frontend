@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.categoryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.categoryButton {
+  padding: 2rem;
+  border-radius: 1.2rem;
+  border: 2px solid var(--color-primary);
+  background: transparent;
+  color: var(--white);
+  font-size: 1.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.categoryButton:hover:not(:disabled) {
+  background: rgba(120, 115, 255, 0.1);
+}
+
+.categoryButton.selected {
+  background: var(--color-primary);
+  color: var(--white);
+}
+
+.categoryButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: var(--g4);
+}
+
+.selectedCount {
+  text-align: center;
+  color: var(--g2);
+  font-size: 1.6rem;
+  margin-top: 1rem;
+}

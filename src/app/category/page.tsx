@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useRecoilValue } from "recoil";
 import { registerFormState } from "@/store/registerState";
+import CategorySelector from "@/components/Category/CategorySelector";
+import styles from "./page.module.css";
 
 export default function CategoryPage() {
   const router = useRouter();
@@ -17,10 +19,14 @@ export default function CategoryPage() {
   }, [formData, router]);
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-6">관심 카테고리 선택</h1>
-      <p className="mb-4">선호하는 카테고리를 선택해주세요.</p>
-      {/* 카테고리 선택 UI는 추후 구현 */}
+    <div className={styles.container}>
+      <div className={styles.content}>
+        <h1 className={styles.title}>관심 카테고리 선택</h1>
+        <p className={styles.description}>
+          선호하는 카테고리를 최대 3개까지 선택해주세요.
+        </p>
+        <CategorySelector />
+      </div>
     </div>
   );
 }
