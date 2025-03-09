@@ -1,10 +1,8 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 3.2rem;
   width: 100%;
-  max-width: 72rem;
-  margin: 0 auto;
 }
 
 .categoryGrid {
@@ -14,9 +12,14 @@
 }
 
 .categoryButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
   padding: 2rem;
-  border-radius: 1.2rem;
-  border: 2px solid var(--color-primary);
+  height: 12rem;
+  border-radius: 12px;
+  border: 2px solid var(--color-light-primary);
   background: transparent;
   color: var(--white);
   font-size: 1.8rem;
@@ -26,11 +29,12 @@
 }
 
 .categoryButton:hover:not(:disabled) {
-  background: rgba(120, 115, 255, 0.1);
+  background: rgba(93, 46, 250, 0.1);
 }
 
 .categoryButton.selected {
-  background: var(--color-primary);
+  background: #5d2efa;
+  border-color: #5d2efa;
   color: var(--white);
 }
 
@@ -45,4 +49,10 @@
   color: var(--g2);
   font-size: 1.6rem;
   margin-top: 1rem;
+}
+
+.categoryIcon {
+  width: 2.4rem;
+  height: 2.4rem;
+  fill: currentColor;
 }

@@ -6,6 +6,7 @@ import { useRecoilValue } from "recoil";
 import { registerFormState } from "@/store/registerState";
 import CategorySelector from "@/components/Category/CategorySelector";
 import styles from "./page.module.css";
+import Image from "next/image";
 
 export default function CategoryPage() {
   const router = useRouter();
@@ -19,14 +20,44 @@ export default function CategoryPage() {
   }, [formData, router]);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.content}>
-        <h1 className={styles.title}>관심 카테고리 선택</h1>
-        <p className={styles.description}>
-          선호하는 카테고리를 최대 3개까지 선택해주세요.
-        </p>
-        <CategorySelector />
+    <div className={styles.loginPage}>
+      <div className={styles.loginContainer}>
+        <div className={styles.boxWrapper}>
+          <div className={styles.logoContainer}>
+            <Image
+              src={"/img/typography_logo.png"}
+              alt="cultpick logo"
+              width={200}
+              height={48.369}
+            />
+            <div className={styles.registerTitle}>관심 카테고리 선택</div>
+          </div>
+          <div className={styles.blurBox}>
+            <h1 className={styles.title}>관심 카테고리 선택</h1>
+            <p className={styles.description}>
+              관심 장르를 최대 3개 선택해주세요.
+            </p>
+            <CategorySelector />
+          </div>
+        </div>
       </div>
+      <div className={styles.bgImgWrapper}>
+        <div className={styles.bgImg}>
+          <Image
+            src={"/img/background-object.png"}
+            alt={"background 이미지"}
+            width={2683.86}
+            height={180}
+          />
+          <Image
+            src={"/img/background-object.png"}
+            alt={"background 이미지"}
+            width={2683.86}
+            height={180}
+          />
+        </div>
+      </div>
+      <div className={styles.gradient} />
     </div>
   );
 }
