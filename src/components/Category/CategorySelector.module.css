@@ -17,7 +17,8 @@
   justify-content: center;
   gap: 1rem;
   padding: 2rem;
-  height: 12rem;
+  width: 18rem;
+  height: 8rem;
   border-radius: 12px;
   border: 2px solid var(--color-light-primary);
   background: transparent;

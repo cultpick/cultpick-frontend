@@ -26,9 +26,6 @@ export default function CategorySelector() {
           </button>
         ))}
       </div>
-      <div className={styles.selectedCount}>
-        {selectedCategories.length} / {3} 선택됨
-      </div>
     </div>
   );
 }

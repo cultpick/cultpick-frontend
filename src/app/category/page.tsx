@@ -33,9 +33,8 @@ export default function CategoryPage() {
             <div className={styles.registerTitle}>관심 카테고리 선택</div>
           </div>
           <div className={styles.blurBox}>
-            <h1 className={styles.title}>관심 카테고리 선택</h1>
             <p className={styles.description}>
-              관심 장르를 최대 3개 선택해주세요.
+              마지막 단계입니다. 관심 장르를 최대 3개 선택해주세요.
             </p>
             <CategorySelector />
           </div>
