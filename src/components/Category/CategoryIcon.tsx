@@ -1,5 +1,6 @@
+import { useState, useEffect } from "react";
+import NextImage from "next/image";
 import { Category } from "@/store/categoryState";
-import Image from "next/image";
 import styles from "./CategoryIcon.module.css";
 
 interface CategoryIconProps {
@@ -21,14 +22,28 @@ const CATEGORY_ICONS = {
 
 export function CategoryIcon({ category, className }: CategoryIconProps) {
   const iconPath = CATEGORY_ICONS[category];
+  const [size, setSize] = useState<{ width: number; height: number } | null>(
+    null,
+  );
+
+  useEffect(() => {
+    const img = document.createElement("img"); // 네이티브 이미지 요소 생성
+    img.src = iconPath;
+    img.onload = () => {
+      setSize({ width: img.naturalWidth, height: img.naturalHeight });
+    };
+  }, [iconPath]);
+
+  if (!size) return null; // 이미지 로딩 전에는 렌더링 안 함.
+
   return (
-    <div className={styles.iconWrapper}>
-      <Image
+    <div className={className}>
+      <NextImage
         src={iconPath}
         alt={`${category} 아이콘`}
-        fill
-        style={{ objectFit: "contain" }}
-        className={className}
+        width={size.width} // 원본 크기 유지
+        height={size.height} // 원본 크기 유지
+        unoptimized
       />
     </div>
   );

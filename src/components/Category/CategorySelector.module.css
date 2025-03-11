@@ -7,42 +7,44 @@
 
 .categoryGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  grid-template-columns: repeat(3, 18rem);
+  gap: 1.8rem;
+  justify-content: center;
 }
 
 .categoryButton {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  padding: 2rem;
+
   width: 18rem;
   height: 8rem;
   border-radius: 12px;
-  border: 2px solid var(--color-light-primary);
   background: transparent;
-  color: var(--white);
-  font-size: 1.8rem;
-  font-weight: 500;
+  border: 2px solid rgba(177, 178, 255, 1);
+
   cursor: pointer;
   transition: all 0.3s ease;
-}
 
-.categoryButton:hover:not(:disabled) {
-  background: rgba(93, 46, 250, 0.1);
+  color: #b1b2ff;
+  font-family: Pretendard;
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  white-space: nowrap;
 }
 
 .categoryButton.selected {
   background: #5d2efa;
   border-color: #5d2efa;
-  color: var(--white);
+  color: #DFE0FF;
 }
 
 .categoryButton:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   border-color: var(--g4);
+  color: var(--g4);
 }
 
 .selectedCount {
@@ -53,7 +55,16 @@
 }
 
 .categoryIcon {
-  width: 2.4rem;
-  height: 2.4rem;
-  fill: currentColor;
+  flex: 0 0 7rem;
+  height: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.categoryText {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 0.8rem;
 }

@@ -22,7 +22,7 @@ export default function CategorySelector() {
             disabled={!isSelected(category) && !canSelectMore}
           >
             <CategoryIcon category={category} className={styles.categoryIcon} />
-            {category}
+            <div className={styles.categoryText}>{category}</div>
           </button>
         ))}
       </div>
