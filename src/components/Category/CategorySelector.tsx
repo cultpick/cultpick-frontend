@@ -13,11 +13,11 @@ export default function CategorySelector() {
 
   const handleComplete = () => {
     // TODO: 선택된 카테고리 저장 로직
-    router.push("/");
+    router.push("/register/success");
   };
 
   const handleSkip = () => {
-    router.push("/");
+    router.push("/register/success");
   };
 
   return (

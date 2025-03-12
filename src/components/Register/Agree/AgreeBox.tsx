@@ -11,7 +11,7 @@ export default function AgreeBox() {
   const router = useRouter();
 
   const onClickNext = () => {
-    router.push("/register");
+    router.push("/register/form");
   };
   const isAllChecked = useRecoilValue(isAllCheckedState);
 

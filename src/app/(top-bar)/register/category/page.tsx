@@ -15,7 +15,7 @@ export default function CategoryPage() {
   useEffect(() => {
     // 회원가입 데이터가 없으면 회원가입 페이지로 리다이렉트
     if (!formData.email) {
-      router.replace("/register");
+      router.replace("/register/form");
     }
   }, [formData, router]);
 

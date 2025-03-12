@@ -19,7 +19,7 @@ export default function Register() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("회원가입 폼 데이터:", formData);
-    router.push("/category");
+    router.push("/register/category");
   };
 
   return (
