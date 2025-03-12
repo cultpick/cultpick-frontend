@@ -37,7 +37,7 @@
 .categoryButton.selected {
   background: #5d2efa;
   border-color: #5d2efa;
-  color: #DFE0FF;
+  color: var(--white);
 }
 
 .categoryButton:disabled {
@@ -55,7 +55,7 @@
 }
 
 .categoryIcon {
-  flex: 0 0 7rem;
+  flex: 0 0 8rem;
   height: 8rem;
   display: flex;
   align-items: center;
@@ -63,8 +63,54 @@
 }
 
 .categoryText {
+  flex: 0 0 6rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-left: 0.8rem;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+  margin-top: 2rem;
+}
+
+.completeButton {
+  width: 58rem;
+  height: 6rem;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #7873ff 0%, #5d2efa 50%, #7873ff 100%);
+  border: none;
+  color: white;
+  font-family: Pretendard;
+  font-size: 2rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.completeButton:disabled {
+  border-radius: 12px;
+  border: 2px solid #6762cf;
+  background: #342d40;
+  color: #6762cf;
+  cursor: not-allowed;
+}
+
+.skipButton {
+  background: none;
+  border: none;
+  color: var(--g1);
+  opacity: 80%;
+  font-family: Pretendard;
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.skipButton:hover {
+  color: var(--g1);
+  opacity: 100%;
 }
