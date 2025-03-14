@@ -100,6 +100,9 @@
 }
 
 .skipButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: none;
   border: none;
   color: var(--g1);
@@ -113,4 +116,10 @@
 .skipButton:hover {
   color: var(--g1);
   opacity: 100%;
+}
+
+.skipButton svg {
+  width: 2.9rem;
+  height: 3rem;
+  fill: var(--g1);
 }
