@@ -5,6 +5,7 @@ import { useCategorySelection } from "@/hooks/useCategorySelection";
 import styles from "./CategorySelector.module.css";
 import { CategoryIcon } from "./CategoryIcon";
 import { useRouter } from "next/navigation";
+import Next_IC from "@/../public/svgs/next_arrow.svg";
 
 export default function CategorySelector() {
   const router = useRouter();
@@ -47,6 +48,7 @@ export default function CategorySelector() {
         </button>
         <button className={styles.skipButton} onClick={handleSkip}>
           건너뛰기
+          <Next_IC />
         </button>
       </div>
     </div>
