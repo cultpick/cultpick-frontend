@@ -1,19 +1,39 @@
+import { Performance } from "@/types/performance";
 import Image from "next/image";
 import styles from "./EventItem.module.css";
 
-export default function EventItem() {
+interface EventItemProps {
+  performance: Performance;
+}
+
+export default function EventItem({ performance }: EventItemProps) {
+  if (!performance) {
+    return null;
+  }
+
+  const isSameDate = performance.startDate === performance.endDate;
+
   return (
     <div className={styles.Container}>
-      <Image
-        src={"/img/home-mock.png"}
-        alt="event image"
-        width={320}
-        height={320}
-      />
+      <div className={styles.imgWrapper}>
+        <Image
+          src={performance.imageUrl}
+          alt={performance.title}
+          width={320}
+          height={320}
+          style={{
+            objectFit: "cover",
+          }}
+        />
+      </div>
       <div className={styles.EventText}>
-        <div className={styles.EventTitle}>행사 이름 Text 기입</div>
+        <div className={styles.EventTitle}>{performance.title}</div>
         <div className={styles.EventCaption}>
-          00월 00일 ~ 00월 00일 / 서울 종로구 전석 30000원
+          {performance.startDate}
+          {!isSameDate && ` ~ ${performance.endDate}`}
+          {` / ${performance.area}`}
+          <br />
+          {performance.price}
         </div>
       </div>
     </div>

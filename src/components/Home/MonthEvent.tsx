@@ -1,26 +1,73 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Virtual } from "swiper/modules";
+import { Virtual } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 import styles from "./MonthEvent.module.css";
-import EvetItem from "./EventItem";
+import EventItem from "./EventItem";
+import { getRecommendedPerformances } from "@/api/performance";
+import { Performance } from "@/types/performance";
 
 export default function MonthEvent() {
+  const [performances, setPerformances] = useState<Performance[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 10;
+
+  const fetchPerformances = async (page: number) => {
+    try {
+      setLoading(true);
+      const data = await getRecommendedPerformances(page, pageSize);
+      if (data?.performanceList) {
+        setPerformances(data.performanceList);
+      } else {
+        setError("공연 정보가 없습니다.");
+        setPerformances([]);
+      }
+    } catch (err) {
+      setError("공연 정보를 불러오는데 실패했습니다.");
+      setPerformances([]);
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPerformances(currentPage);
+  }, [currentPage]);
+
+  const handleSlideChange = (swiper: any) => {
+    const newPage = Math.floor(swiper.activeIndex / pageSize) + 1;
+    if (newPage !== currentPage) {
+      setCurrentPage(newPage);
+    }
+  };
+
+  if (loading && performances.length === 0) {
+    return <div className={styles.loading}>로딩 중...</div>;
+  }
+
+  if (error) {
+    return <div className={styles.error}>{error}</div>;
+  }
+
+  if (!performances || performances.length === 0) {
+    return <div className={styles.error}>표시할 공연이 없습니다.</div>;
+  }
+
   return (
     <div className={styles.Container}>
       <div className={styles.EventContainer}>
         <Swiper
-          modules={[Navigation, Pagination, Virtual]}
+          modules={[Virtual]}
           spaceBetween={24}
           slidesPerView={1}
           loop={false}
           centeredSlides={false}
-          navigation={false}
-          pagination={false}
           className={styles.SwiperContainer}
           breakpoints={{
             1024: {
@@ -36,10 +83,11 @@ export default function MonthEvent() {
               loop: false,
             },
           }}
+          onSlideChange={handleSlideChange}
         >
-          {[1, 2, 3, 4, 5, 6].map((index) => (
-            <SwiperSlide key={index} className={styles.Slide}>
-              <EvetItem />
+          {performances.map((performance) => (
+            <SwiperSlide key={performance.id} className={styles.Slide}>
+              <EventItem performance={performance} />
             </SwiperSlide>
           ))}
         </Swiper>
