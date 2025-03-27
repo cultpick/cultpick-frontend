@@ -16,18 +16,16 @@ export default function EventItem({ performance }: EventItemProps) {
   return (
     <div className={styles.Container}>
       <div className={styles.imgWrapper}>
+        {" "}
         <Image
-          src={performance.imageUrl}
-          alt={performance.title}
+          src={performance.posterUrl}
+          alt={`${performance.name} 포스터`}
           width={320}
           height={320}
-          style={{
-            objectFit: "cover",
-          }}
         />
       </div>
       <div className={styles.EventText}>
-        <div className={styles.EventTitle}>{performance.title}</div>
+        <div className={styles.EventTitle}>{performance.name}</div>
         <div className={styles.EventCaption}>
           {performance.startDate}
           {!isSameDate && ` ~ ${performance.endDate}`}
