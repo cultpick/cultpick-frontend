@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Virtual } from "swiper/modules";
@@ -9,36 +9,16 @@ import styles from "./MonthEvent.module.css";
 import EventItem from "./EventItem";
 import { getRecommendedPerformances } from "@/api/performance";
 import { Performance } from "@/types/performance";
+import { useQuery } from "@tanstack/react-query";
 
 export default function MonthEvent() {
-  const [performances, setPerformances] = useState<Performance[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
 
-  const fetchPerformances = async (page: number) => {
-    try {
-      setLoading(true);
-      const data = await getRecommendedPerformances(page, pageSize);
-      if (data?.performanceList) {
-        setPerformances(data.performanceList);
-      } else {
-        setError("공연 정보가 없습니다.");
-        setPerformances([]);
-      }
-    } catch (err) {
-      setError("공연 정보를 불러오는데 실패했습니다.");
-      setPerformances([]);
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchPerformances(currentPage);
-  }, [currentPage]);
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["recommendedPerformances", currentPage],
+    queryFn: () => getRecommendedPerformances(currentPage, pageSize),
+  });
 
   const handleSlideChange = (swiper: any) => {
     const newPage = Math.floor(swiper.activeIndex / pageSize) + 1;
@@ -47,15 +27,17 @@ export default function MonthEvent() {
     }
   };
 
-  if (loading && performances.length === 0) {
+  if (isLoading && !data?.performanceList) {
     return <div className={styles.loading}>로딩 중...</div>;
   }
 
   if (error) {
-    return <div className={styles.error}>{error}</div>;
+    return (
+      <div className={styles.error}>공연 정보를 불러오는데 실패했습니다.</div>
+    );
   }
 
-  if (!performances || performances.length === 0) {
+  if (!data?.performanceList || data.performanceList.length === 0) {
     return <div className={styles.error}>표시할 공연이 없습니다.</div>;
   }
 
@@ -85,7 +67,7 @@ export default function MonthEvent() {
           }}
           onSlideChange={handleSlideChange}
         >
-          {performances.map((performance) => (
+          {data.performanceList.map((performance) => (
             <SwiperSlide key={performance.id} className={styles.Slide}>
               <EventItem performance={performance} />
             </SwiperSlide>

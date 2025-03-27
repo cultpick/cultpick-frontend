@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Performance } from "@/types/performance";
+import { transformPerformanceDates } from "@/utils/dateUtils";
 
 interface PerformanceResponse {
   performanceList: Performance[];
@@ -9,40 +10,44 @@ export const getRecommendedPerformances = async (
   page: number,
   size: number,
 ): Promise<PerformanceResponse> => {
-  try {
-    const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/performance/recommended`,
-      {
-        params: {
-          page,
-          size,
-        },
+  const response = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}/performance/recommended`,
+    {
+      params: {
+        page,
+        size,
       },
-    );
+    },
+  );
 
-    // 날짜 형식 변환
-    const transformedData = {
-      performanceList: response.data.performanceList.map((item: any) => {
-        const startDate = new Date(item.startDate);
-        const endDate = new Date(item.endDate);
+  const transformedData = {
+    performanceList: response.data.performanceList.map(
+      transformPerformanceDates,
+    ),
+  };
 
-        const formatDate = (date: Date) => {
-          const month = String(date.getMonth() + 1).padStart(2, "0");
-          const day = String(date.getDate()).padStart(2, "0");
-          return `${month}월 ${day}일`;
-        };
+  return transformedData;
+};
 
-        return {
-          ...item,
-          startDate: formatDate(startDate),
-          endDate: formatDate(endDate),
-        };
-      }),
-    };
+export const getOngoingPerformances = async (
+  page: number,
+  size: number,
+): Promise<PerformanceResponse> => {
+  const response = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}/performance/ongoing`,
+    {
+      params: {
+        page,
+        size,
+      },
+    },
+  );
 
-    return transformedData;
-  } catch (error) {
-    console.error("Error fetching recommended performances:", error);
-    throw error;
-  }
+  const transformedData = {
+    performanceList: response.data.performanceList.map(
+      transformPerformanceDates,
+    ),
+  };
+
+  return transformedData;
 };

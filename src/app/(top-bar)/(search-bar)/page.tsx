@@ -1,46 +1,40 @@
-import MonthEvent from "@/components/Home/MonthEvent";
-import Image from "next/image";
-
-import styles from "./page.module.css";
 import NonLogin from "@/components/Home/NonLogin";
-import UnderWay from "@/components/Home/Underway";
+import {
+  HydrationBoundary,
+  QueryClient,
+  dehydrate,
+} from "@tanstack/react-query";
+import MonthEvent from "@/components/Home/MonthEvent";
+import Underway from "@/components/Home/Underway";
+import {
+  getRecommendedPerformances,
+  getOngoingPerformances,
+} from "@/api/performance";
 
-export default function Home() {
+export default async function Home() {
+  const queryClient = new QueryClient();
+
+  // 데이터 prefetch
+  await Promise.all([
+    queryClient.prefetchQuery({
+      queryKey: ["recommendedPerformances", 1],
+      queryFn: () => getRecommendedPerformances(1, 10),
+    }),
+    queryClient.prefetchQuery({
+      queryKey: ["ongoingPerformances", 1],
+      queryFn: () => getOngoingPerformances(1, 10),
+    }),
+  ]);
+
   return (
-    <div className={styles.Container}>
-      <MonthEvent />
+    <main>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <MonthEvent />
+      </HydrationBoundary>
       <NonLogin />
-      <UnderWay />
-      <div className={styles.Bg}>
-        <Image
-          src={"/img/home/star1.png"}
-          alt=""
-          width={289}
-          height={289}
-          className={styles.star1}
-        />
-        <Image
-          src={"/img/home/star2.png"}
-          alt=""
-          width={289}
-          height={289}
-          className={styles.star2}
-        />
-        <Image
-          src={"/img/home/star3.png"}
-          alt=""
-          width={289}
-          height={289}
-          className={styles.star3}
-        />
-        <Image
-          src={"/img/home/star4.png"}
-          alt=""
-          width={289}
-          height={289}
-          className={styles.star4}
-        />
-      </div>
-    </div>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <Underway />
+      </HydrationBoundary>
+    </main>
   );
 }
