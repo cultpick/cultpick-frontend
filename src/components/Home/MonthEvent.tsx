@@ -11,11 +11,15 @@ import { getRecommendedPerformances } from "@/api/performance";
 import { Performance } from "@/types/performance";
 import { useQuery } from "@tanstack/react-query";
 
+interface PerformanceResponse {
+  performanceList: Performance[];
+}
+
 export default function MonthEvent() {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error } = useQuery<PerformanceResponse>({
     queryKey: ["recommendedPerformances", currentPage],
     queryFn: () => getRecommendedPerformances(currentPage, pageSize),
   });
@@ -26,20 +30,6 @@ export default function MonthEvent() {
       setCurrentPage(newPage);
     }
   };
-
-  if (isLoading && !data?.performanceList) {
-    return <div className={styles.loading}>로딩 중...</div>;
-  }
-
-  if (error) {
-    return (
-      <div className={styles.error}>공연 정보를 불러오는데 실패했습니다.</div>
-    );
-  }
-
-  if (!data?.performanceList || data.performanceList.length === 0) {
-    return <div className={styles.error}>표시할 공연이 없습니다.</div>;
-  }
 
   return (
     <div className={styles.Container}>
@@ -67,11 +57,21 @@ export default function MonthEvent() {
           }}
           onSlideChange={handleSlideChange}
         >
-          {data.performanceList.map((performance) => (
-            <SwiperSlide key={performance.id} className={styles.Slide}>
-              <EventItem performance={performance} />
-            </SwiperSlide>
-          ))}
+          {isLoading ? (
+            <div className={styles.loading}>로딩 중...</div>
+          ) : error ? (
+            <div className={styles.error}>
+              공연 정보를 불러오는데 실패했습니다.
+            </div>
+          ) : !data?.performanceList || data.performanceList.length === 0 ? (
+            <div className={styles.error}>표시할 공연이 없습니다.</div>
+          ) : (
+            data.performanceList.map((performance) => (
+              <SwiperSlide key={performance.id} className={styles.Slide}>
+                <EventItem performance={performance} />
+              </SwiperSlide>
+            ))
+          )}
         </Swiper>
       </div>
       <div className={styles.rightTitle}>

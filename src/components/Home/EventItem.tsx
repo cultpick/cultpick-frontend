@@ -16,7 +16,6 @@ export default function EventItem({ performance }: EventItemProps) {
   return (
     <div className={styles.Container}>
       <div className={styles.imgWrapper}>
-        {" "}
         <Image
           src={performance.posterUrl}
           alt={`${performance.name} 포스터`}
