@@ -8,7 +8,6 @@ export const queryClient = new QueryClient({
     queries: {
       staleTime: 60 * 1000, // 1분
       refetchOnWindowFocus: false,
-      suspense: true,
       retry: false,
     },
   },
