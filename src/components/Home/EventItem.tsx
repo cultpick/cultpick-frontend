@@ -10,14 +10,13 @@ export default function EventItem({ performance }: EventItemProps) {
   if (!performance) {
     return null;
   }
-
   const isSameDate = performance.startDate === performance.endDate;
 
   return (
     <div className={styles.Container}>
       <div className={styles.imgWrapper}>
         <Image
-          src={performance.posterUrl}
+          src={performance.posterImageUrl}
           alt={`${performance.name} 포스터`}
           width={320}
           height={320}

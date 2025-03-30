@@ -5,5 +5,5 @@ export interface Performance {
   endDate: string;
   area: string;
   price: string;
-  posterUrl: string;
+  posterImageUrl: string;
 }
