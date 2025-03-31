@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Virtual } from "swiper/modules";
+import { Virtual, Mousewheel } from "swiper/modules";
 import "swiper/css";
 import styles from "./Underway.module.css";
 import Next_IC from "@/../public/svgs/next_arrow.svg";
@@ -36,11 +36,12 @@ export default function Underway() {
     <div className={styles.Container}>
       <div className={styles.EventContainer}>
         <Swiper
-          modules={[Virtual]}
+          modules={[Virtual, Mousewheel]}
           spaceBetween={24}
           slidesPerView={4.5}
           loop={false}
           centeredSlides={false}
+          mousewheel={true}
           className={styles.SwiperContainer}
           breakpoints={{
             1024: {

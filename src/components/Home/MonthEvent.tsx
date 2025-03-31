@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Virtual } from "swiper/modules";
+import { Virtual, Mousewheel } from "swiper/modules";
 import "swiper/css";
 import styles from "./MonthEvent.module.css";
 import EventItem from "./EventItem";
@@ -35,11 +35,12 @@ export default function MonthEvent() {
     <div className={styles.Container}>
       <div className={styles.EventContainer}>
         <Swiper
-          modules={[Virtual]}
+          modules={[Virtual, Mousewheel]}
           spaceBetween={24}
           slidesPerView={1}
           loop={false}
           centeredSlides={false}
+          mousewheel={true}
           className={styles.SwiperContainer}
           breakpoints={{
             1024: {
