@@ -12,8 +12,7 @@ const compat = new FlatCompat({
 const eslintConfig = [
   ...compat.extends(
     "next/core-web-vitals",
-    "airbnb",
-    "airbnb-typescript",
+
     "prettier",
   ),
   {
