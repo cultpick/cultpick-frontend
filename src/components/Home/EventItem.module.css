@@ -38,8 +38,14 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  width: 27.8rem;
 }
 
 .imgWrapper img {
   border-radius: 24px;
+  object-fit: cover;
 }
