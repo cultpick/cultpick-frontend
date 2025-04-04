@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import NextImage from "next/image";
-import { Category } from "@/store/categoryState";
 import styles from "./CategoryIcon.module.css";
 
 interface CategoryIconProps {
-  category: Category;
+  category: string;
   className?: string;
 }
 
@@ -21,28 +20,28 @@ const CATEGORY_ICONS = {
 } as const;
 
 export function CategoryIcon({ category, className }: CategoryIconProps) {
-  const iconPath = CATEGORY_ICONS[category];
+  const iconPath = CATEGORY_ICONS[category as keyof typeof CATEGORY_ICONS];
   const [size, setSize] = useState<{ width: number; height: number } | null>(
     null,
   );
 
   useEffect(() => {
-    const img = document.createElement("img"); // 네이티브 이미지 요소 생성
+    const img = document.createElement("img");
     img.src = iconPath;
     img.onload = () => {
       setSize({ width: img.naturalWidth, height: img.naturalHeight });
     };
   }, [iconPath]);
 
-  if (!size) return null; // 이미지 로딩 전에는 렌더링 안 함.
+  if (!size) return null;
 
   return (
     <div className={className}>
       <NextImage
         src={iconPath}
         alt={`${category} 아이콘`}
-        width={size.width} // 원본 크기 유지
-        height={size.height} // 원본 크기 유지
+        width={size.width}
+        height={size.height}
         unoptimized
       />
     </div>

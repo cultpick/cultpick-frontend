@@ -66,7 +66,7 @@
 }
 
 .bgImgWrapper {
-  z-index: -1;
+  z-index: -2;
   position: fixed;
   bottom: 20rem;
   width: 100%;
@@ -98,4 +98,6 @@
 .btnWrapper {
   margin-top: -10rem;
   margin-bottom: 10.8rem;
+  z-index: -1;
+  position: relative;
 }

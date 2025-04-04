@@ -12,17 +12,31 @@ import {
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import { useAddress, findAddressCode } from "@/hooks/useAddress";
+import { RegisterFormData } from "@/schemas/registerSchema";
 
 export default function Register() {
   const router = useRouter();
+  const { data: addressData } = useAddress();
   const formData = useRecoilValue(registerFormState);
   const isValid = useRecoilValue(registerFormIsValidState);
 
   const signUpMutation = useMutation({
-    mutationFn: async (data: any) => {
+    mutationFn: async (data: RegisterFormData) => {
+      const addressCode = findAddressCode(addressData, data.address);
+      const requestData = {
+        email: data.email,
+        password: data.password,
+        name: data.name,
+        gender: data.gender === "남성" ? "MALE" : "FEMALE",
+        birth: data.birth,
+        ...(addressCode && { addressCode }),
+        favoriteCategoryCodes: [],
+      };
+
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/auth/sign-up`,
-        data,
+        requestData,
       );
       return response.data;
     },
@@ -47,7 +61,7 @@ export default function Register() {
       name: formData.name,
       gender: formData.gender === "남성" ? "MALE" : "FEMALE",
       birth: birthDate,
-      addressCode: formData.address,
+      address: formData.address,
       favoriteCategoryCodes: [], // 카테고리 선택 페이지에서 설정
     };
 
