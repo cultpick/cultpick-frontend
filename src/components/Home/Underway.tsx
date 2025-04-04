@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Virtual, Mousewheel } from "swiper/modules";
@@ -10,38 +10,84 @@ import Next_IC from "@/../public/svgs/next_arrow.svg";
 import EventItem from "./EventItem";
 import { Performance } from "@/types/performance";
 import { getOngoingPerformances } from "@/api/performance";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 interface PerformanceResponse {
+  count: number;
   performanceList: Performance[];
 }
 
 export default function Underway() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
   const pageSize = 10;
+  const queryClient = useQueryClient();
+  const swiperRef = useRef<any>(null);
 
   const { data, isLoading, error } = useQuery<PerformanceResponse>({
     queryKey: ["ongoingPerformances", currentPage],
     queryFn: () => getOngoingPerformances(currentPage, pageSize),
   });
 
-  const handleSlideChange = (swiper: any) => {
-    const newPage = Math.floor(swiper.activeIndex / pageSize) + 1;
-    if (newPage !== currentPage) {
-      setCurrentPage(newPage);
+  // 모든 페이지의 데이터를 누적
+  const allPerformances = useMemo(() => {
+    if (!data) return [];
+    return Array.from({ length: currentPage }, (_, i) => i + 1)
+      .map((page) => {
+        const cachedData = queryClient.getQueryData<PerformanceResponse>([
+          "ongoingPerformances",
+          page,
+        ]);
+        return cachedData?.performanceList || [];
+      })
+      .flat();
+  }, [data, currentPage, queryClient]);
+
+  const handleReachEnd = async () => {
+    if (!hasMore || isLoadingMore) return;
+
+    setIsLoadingMore(true);
+    try {
+      const nextPage = currentPage + 1;
+      const nextPageData = await getOngoingPerformances(nextPage, pageSize);
+
+      // 다음 페이지의 데이터가 없으면 hasMore를 false로 설정
+      if (nextPageData.performanceList.length === 0) {
+        setHasMore(false);
+        return;
+      }
+
+      // 다음 페이지의 데이터가 10개 미만이면 마지막 페이지로 간주
+      if (nextPageData.performanceList.length < pageSize) {
+        setHasMore(false);
+      }
+
+      queryClient.setQueryData(["ongoingPerformances", nextPage], nextPageData);
+      setCurrentPage(nextPage);
+    } finally {
+      setIsLoadingMore(false);
     }
+  };
+
+  const handleSlideChange = (swiper: any) => {
+    setCurrentSlideIndex(swiper.activeIndex);
   };
 
   return (
     <div className={styles.Container}>
       <div className={styles.EventContainer}>
         <Swiper
+          ref={swiperRef}
           modules={[Virtual, Mousewheel]}
           spaceBetween={24}
           slidesPerView={4.5}
           loop={false}
           centeredSlides={false}
           mousewheel={true}
+          virtual
+          initialSlide={currentSlideIndex}
           className={styles.SwiperContainer}
           breakpoints={{
             1024: {
@@ -57,6 +103,7 @@ export default function Underway() {
               loop: false,
             },
           }}
+          onReachEnd={handleReachEnd}
           onSlideChange={handleSlideChange}
         >
           {isLoading ? (
@@ -65,11 +112,15 @@ export default function Underway() {
             <div className={styles.error}>
               공연 정보를 불러오는데 실패했습니다.
             </div>
-          ) : !data?.performanceList || data.performanceList.length === 0 ? (
+          ) : allPerformances.length === 0 ? (
             <div className={styles.error}>표시할 공연이 없습니다.</div>
           ) : (
-            data.performanceList.map((performance) => (
-              <SwiperSlide key={performance.id} className={styles.Slide}>
+            allPerformances.map((performance, index) => (
+              <SwiperSlide
+                key={performance.id}
+                virtualIndex={index}
+                className={styles.Slide}
+              >
                 <EventItem performance={performance} />
               </SwiperSlide>
             ))

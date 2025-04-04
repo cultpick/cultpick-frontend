@@ -3,6 +3,7 @@ import { Performance } from "@/types/performance";
 import { transformPerformanceDates } from "@/utils/dateUtils";
 
 interface PerformanceResponse {
+  count: number;
   performanceList: Performance[];
 }
 
@@ -21,6 +22,7 @@ export const getRecommendedPerformances = async (
   );
 
   const transformedData = {
+    count: response.data.count,
     performanceList: response.data.performanceList.map(
       transformPerformanceDates,
     ),
@@ -44,6 +46,7 @@ export const getOngoingPerformances = async (
   );
 
   const transformedData = {
+    count: response.data.count,
     performanceList: response.data.performanceList.map(
       transformPerformanceDates,
     ),
