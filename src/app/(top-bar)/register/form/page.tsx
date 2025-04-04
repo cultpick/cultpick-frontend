@@ -10,16 +10,48 @@ import {
   registerFormIsValidState,
 } from "@/store/registerState";
 import { useRouter } from "next/navigation";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 
 export default function Register() {
   const router = useRouter();
   const formData = useRecoilValue(registerFormState);
   const isValid = useRecoilValue(registerFormIsValidState);
 
+  const signUpMutation = useMutation({
+    mutationFn: async (data: any) => {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/sign-up`,
+        data,
+      );
+      return response.data;
+    },
+    onSuccess: () => {
+      router.push("/register/category");
+    },
+    onError: (error) => {
+      console.error("회원가입 실패:", error);
+      alert("회원가입에 실패했습니다. 다시 시도해주세요.");
+    },
+  });
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("회원가입 폼 데이터:", formData);
-    router.push("/register/category");
+    if (!isValid) return;
+
+    const birthDate = `${formData.birthYear}-${formData.birthMonth.padStart(2, "0")}-${formData.birthDay.padStart(2, "0")}T00:00:00.000Z`;
+
+    const requestData = {
+      email: formData.email,
+      password: formData.password,
+      name: formData.name,
+      gender: formData.gender === "남성" ? "MALE" : "FEMALE",
+      birth: birthDate,
+      addressCode: formData.address,
+      favoriteCategoryCodes: [], // 카테고리 선택 페이지에서 설정
+    };
+
+    signUpMutation.mutate(requestData);
   };
 
   return (

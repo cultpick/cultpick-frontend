@@ -1,19 +1,34 @@
 "use client";
 
-import { CATEGORIES } from "@/store/categoryState";
 import { useCategorySelection } from "@/hooks/useCategorySelection";
 import styles from "./CategorySelector.module.css";
 import { CategoryIcon } from "./CategoryIcon";
 import { useRouter } from "next/navigation";
 import Next_IC from "@/../public/svgs/next_arrow.svg";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+
+interface Category {
+  code: string;
+  name: string;
+}
 
 export default function CategorySelector() {
   const router = useRouter();
   const { selectedCategories, toggleCategory, isSelected, canSelectMore } =
     useCategorySelection();
 
+  const { data: categories = [], isLoading } = useQuery<Category[]>({
+    queryKey: ["categories"],
+    queryFn: async () => {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/category`,
+      );
+      return response.data;
+    },
+  });
+
   const handleComplete = () => {
-    // TODO: 선택된 카테고리 저장 로직
     router.push("/register/success");
   };
 
@@ -21,20 +36,27 @@ export default function CategorySelector() {
     router.push("/register/success");
   };
 
+  if (isLoading) {
+    return <div>로딩중...</div>;
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.categoryGrid}>
-        {CATEGORIES.map((category) => (
+        {categories.map((category) => (
           <button
-            key={category}
+            key={category.code}
             onClick={() => toggleCategory(category)}
             className={`${styles.categoryButton} ${
               isSelected(category) ? styles.selected : ""
             }`}
             disabled={!isSelected(category) && !canSelectMore}
           >
-            <CategoryIcon category={category} className={styles.categoryIcon} />
-            <div className={styles.categoryText}>{category}</div>
+            <CategoryIcon
+              category={category.name}
+              className={styles.categoryIcon}
+            />
+            <div className={styles.categoryText}>{category.name}</div>
           </button>
         ))}
       </div>
