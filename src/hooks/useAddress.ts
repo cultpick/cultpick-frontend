@@ -26,7 +26,7 @@ export const useAddress = () => {
 
 export const findAddressCode = (
   addressData: Region[] | undefined,
-  address: string | null,
+  address: string | null | undefined,
 ): string | null => {
   if (!addressData || !address) return null;
 
