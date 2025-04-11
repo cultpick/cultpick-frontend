@@ -6,10 +6,10 @@ import styles from "./CheckSection.module.css";
 import TermsOfService from "@/constants/TermsOfService";
 import PrivacyPolicy from "@/constants/PrivacyPolicy";
 import {
+  isAllCheckedState,
   isTermsCheckedState,
   isPrivacyCheckedState,
-  isAllCheckedState,
-} from "@/recoil/atom";
+} from "@/recoil/registerAtoms";
 
 export default function CheckSection() {
   const [isTermsChecked, setIsTermsChecked] =

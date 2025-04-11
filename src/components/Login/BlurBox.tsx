@@ -1,16 +1,16 @@
 "use client";
 
-import { useState } from "react";
 import styles from "./BlurBox.module.css";
 import InputBox from "../InputBox";
 import Button from "../Button";
 import { useRouter } from "next/navigation";
+import { useRecoilState } from "recoil";
+import { loginState } from "@/recoil/atoms";
+import axios from "axios";
 
 export default function BlurBox() {
   const router = useRouter();
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [loginData, setLoginData] = useRecoilState(loginState);
 
   const onClickRegister = () => {
     router.push("/register/agree");
@@ -20,38 +20,53 @@ export default function BlurBox() {
     alert("개발 중이에요 🍔");
   };
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setLoginData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/sign-in`,
+        loginData,
+      );
+
+      // 토큰 저장
+      localStorage.setItem("accessToken", response.data.accessToken);
+
+      // 로그인 성공 후 리다이렉션
+      router.push("/");
+    } catch (error) {
+      console.error("로그인 실패:", error);
+      // 에러 처리 로직 추가
+    }
   };
 
   return (
     <div className={styles.boxContainer}>
       <div className={styles.loginTitle}>LOGIN</div>
-      <form onSubmit={handleFormSubmit} className={styles.form}>
+      <form onSubmit={handleLogin} className={styles.form}>
         <InputBox
           type="email"
           name="email"
           placeholder="이메일 입력"
-          value={email}
-          onChange={handleEmailChange}
+          value={loginData.email}
+          onChange={handleChange}
         />
         <InputBox
           type="password"
           name="password"
           placeholder="비밀번호 입력"
-          value={password}
-          onChange={handlePasswordChange}
+          value={loginData.password}
+          onChange={handleChange}
         />
         <div className={styles.btnWrapper}>
-          <Button text="로그인" state="active" />
+          <Button text="로그인" state="active" type="submit" />
         </div>
         <div className={styles.bottomBtnContainer}>
           <div className="body_16_B pointer" onClick={onClickRegister}>
