@@ -13,7 +13,13 @@ interface Category {
   name: string;
 }
 
-export default function CategorySelector() {
+interface CategorySelectorProps {
+  onComplete?: (selectedCategoryCodes: string[]) => void;
+}
+
+export default function CategorySelector({
+  onComplete,
+}: CategorySelectorProps) {
   const router = useRouter();
   const { selectedCategories, toggleCategory, isSelected, canSelectMore } =
     useCategorySelection();
@@ -29,11 +35,22 @@ export default function CategorySelector() {
   });
 
   const handleComplete = () => {
-    router.push("/register/success");
+    const selectedCategoryCodes = selectedCategories.map(
+      (category) => category.code,
+    );
+    if (onComplete) {
+      onComplete(selectedCategoryCodes);
+    } else {
+      router.push("/register/success");
+    }
   };
 
   const handleSkip = () => {
-    router.push("/register/success");
+    if (onComplete) {
+      onComplete([]);
+    } else {
+      router.push("/register/success");
+    }
   };
 
   if (isLoading) {

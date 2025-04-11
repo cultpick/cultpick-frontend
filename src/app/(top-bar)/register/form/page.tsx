@@ -21,51 +21,10 @@ export default function Register() {
   const formData = useRecoilValue(registerFormState);
   const isValid = useRecoilValue(registerFormIsValidState);
 
-  const signUpMutation = useMutation({
-    mutationFn: async (data: RegisterFormData) => {
-      const addressCode = findAddressCode(addressData, data.address);
-      const requestData = {
-        email: data.email,
-        password: data.password,
-        name: data.name,
-        gender: data.gender === "남성" ? "MALE" : "FEMALE",
-        birth: data.birth,
-        ...(addressCode && { addressCode }),
-        favoriteCategoryCodes: [],
-      };
-
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/sign-up`,
-        requestData,
-      );
-      return response.data;
-    },
-    onSuccess: () => {
-      router.push("/register/category");
-    },
-    onError: (error) => {
-      console.error("회원가입 실패:", error);
-      alert("회원가입에 실패했습니다. 다시 시도해주세요.");
-    },
-  });
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!isValid) return;
-
-    const birthDate = `${formData.birthYear}-${formData.birthMonth.padStart(2, "0")}-${formData.birthDay.padStart(2, "0")}T00:00:00.000Z`;
-
-    const requestData = {
-      email: formData.email,
-      password: formData.password,
-      name: formData.name,
-      gender: formData.gender === "남성" ? "MALE" : "FEMALE",
-      birth: birthDate,
-      address: formData.address,
-      favoriteCategoryCodes: [], // 카테고리 선택 페이지에서 설정
-    };
-
-    signUpMutation.mutate(requestData);
+    router.push("/register/category");
   };
 
   return (
@@ -81,7 +40,8 @@ export default function Register() {
             />
             <div className={styles.registerTitle}>회원가입</div>
           </div>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}
+          className={styles.formContainer}>
             <TopBlurBox />
             <BottomBlurBox />
             <div className={styles.btnWrapper}>

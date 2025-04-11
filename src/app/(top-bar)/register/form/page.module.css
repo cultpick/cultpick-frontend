@@ -51,6 +51,13 @@
   height: 100%;
 }
 
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .gradient {
   z-index: -2;
   position: absolute;
@@ -96,8 +103,6 @@
 }
 
 .btnWrapper {
-  margin-top: -10rem;
+  margin-top: 4rem;
   margin-bottom: 10.8rem;
-  z-index: -1;
-  position: relative;
 }
