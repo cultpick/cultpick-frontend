@@ -1,5 +1,6 @@
 import { Performance } from "@/types/performance";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./EventItem.module.css";
 
 interface EventItemProps {
@@ -13,7 +14,7 @@ export default function EventItem({ performance }: EventItemProps) {
   const isSameDate = performance.startDate === performance.endDate;
 
   return (
-    <div className={styles.Container}>
+    <Link href={`/event/${performance.id}`} className={styles.Container}>
       <div className={styles.imgWrapper}>
         <Image
           src={performance.posterImageUrl}
@@ -32,6 +33,6 @@ export default function EventItem({ performance }: EventItemProps) {
           {performance.price}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
