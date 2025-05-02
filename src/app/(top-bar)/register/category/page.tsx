@@ -30,7 +30,7 @@ export default function CategoryPage() {
         password: data.password,
         name: data.name,
         gender: data.gender === "남성" ? "MALE" : "FEMALE",
-        birth: birthDate,
+        birthDate: birthDate,
         ...(addressCode && { addressCode }),
         favoriteCategoryCodes: selectedCategoryCodes,
       };
