@@ -20,14 +20,11 @@
 }
 
 .imgWrapper {
-  max-width: 89.3rem;
-  max-height: 50.2rem;
+  position: relative;
+  width: 89.3rem;
+  height: 50.2rem;
   border-radius: 16px;
   overflow: hidden;
-}
-
-.poster {
-  object-fit: cover;
 }
 
 .infoCard {
@@ -170,6 +167,12 @@
   gap: 2.2rem;
 }
 
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .infoRow {
   display: flex;
   align-items: center;
@@ -219,20 +222,90 @@
   object-fit: cover;
 }
 
-.moreBtn {
-  background: #7b61ff;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 0;
-  font-size: 1rem;
-  font-weight: 600;
-  width: 180px;
-  cursor: pointer;
-  margin-top: 8px;
-  transition: background 0.2s;
+.introImageWrapper {
+  position: relative;
+  width: 893px;
+  height: 600px;
+  border-radius: 24px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
 }
 
-.moreBtn:hover {
-  background: #a48bff;
+.introImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 24px;
+  z-index: 1;
+}
+
+.introImageOverlay {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(34, 34, 34, 0) 0%, #222 100%);
+  box-shadow: 0px -160px 160px -160px rgba(93, 46, 250, 0.5) inset;
+  z-index: 2;
+  padding-bottom: 1.8rem;
+}
+
+.introImageExpanded {
+  margin-top: 16px;
+  border-radius: 24px;
+  width: 1352px;
+  height: 600px;
+  object-fit: cover;
+}
+
+.hideOverlay {
+  width: 100%;
+  height: 30rem;
+  border-radius: 24px;
+  padding-bottom: 4rem;
+  background: linear-gradient(180deg, rgba(34, 34, 34, 0) 0%, #222 100%);
+  box-shadow: 0px -160px 160px -160px rgba(93, 46, 250, 0.5) inset;
+  z-index: 2;
+}
+
+.btnWrapper {
+  /* position: absolute; */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 3;
+  pointer-events: auto;
+}
+
+.moreBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.4rem;
+
+  padding: 1.3rem 2.8rem;
+
+  border-radius: 100px;
+  background: linear-gradient(90deg, #7873ff 0%, #5300ec 100%);
+  border: none;
+
+  color: #fff;
+
+  font-family: Pretendard;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+
+  cursor: pointer;
 }

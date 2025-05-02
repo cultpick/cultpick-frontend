@@ -6,6 +6,7 @@ import styles from "./page.module.css";
 import IC_GO from "@/../public/svgs/detail/pick_white.svg";
 import IC_SHARE from "@/../public/svgs/detail/share.svg";
 import IC_STAR from "@/../public/svgs/detail/star.svg";
+import IC_ARROW from "@/../public/svgs/bottom_arrow.svg";
 
 import axios from "axios";
 
@@ -36,6 +37,7 @@ export default function EventDetailPage() {
   const [performanceData, setPerformanceData] =
     useState<PerformanceData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [showAllIntroImages, setShowAllIntroImages] = useState(false);
 
   useEffect(() => {
     const fetchPerformanceData = async () => {
@@ -75,9 +77,15 @@ export default function EventDetailPage() {
             <Image
               src={performanceData.posterImageUrl}
               alt={`${performanceData.name} 포스터`}
-              width={893}
-              height={502}
-              className={styles.poster}
+              fill
+              sizes="100vw"
+              style={{
+                objectFit: "cover",
+              }}
+              quality={100}
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mM0+g8AAWkBM2y7Yk0AAAAASUVORK5CYII="
+              unoptimized={true}
             />
           </div>
           <div className={styles.section}>
@@ -110,20 +118,61 @@ export default function EventDetailPage() {
               </div>
             </div>
           </div>
-          <div className={styles.section}>
-            <div className={styles.sectionTitle}>공연 소개 이미지</div>
-            {performanceData.introImageUrlList.map((url, index) => (
-              <Image
-                key={index}
-                src={url}
-                alt="공연 소개 이미지"
-                width={893}
-                height={1157}
-                className={styles.introImg}
-              />
-            ))}
-            <button className={styles.moreBtn}>공연 소개 더보기</button>
-          </div>
+          {performanceData.introImageUrlList.length > 0 && (
+            <div className={styles.info}>
+              <div className={styles.infoLabel}>공연 소개 이미지</div>
+              <div
+                className={`${styles.introImageWrapper} ${
+                  showAllIntroImages ? styles.expanded : ""
+                }`}
+                style={
+                  showAllIntroImages
+                    ? { height: "auto" }
+                    : { height: "600px", maxHeight: "600px" }
+                }
+              >
+                <Image
+                  src={performanceData.introImageUrlList[0]}
+                  alt="공연 소개 이미지"
+                  width={893}
+                  height={1157}
+                  quality={100}
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mM0+g8AAWkBM2y7Yk0AAAAASUVORK5CYII="
+                  className={styles.introImg}
+                  style={
+                    showAllIntroImages
+                      ? { height: "auto", maxHeight: "none" }
+                      : { height: "600px", maxHeight: "600px" }
+                  }
+                />
+                <div
+                  className={
+                    showAllIntroImages
+                      ? styles.hideOverlay
+                      : styles.introImageOverlay
+                  }
+                >
+                  <div className={styles.btnWrapper}>
+                    <button
+                      className={styles.moreBtn}
+                      onClick={() => setShowAllIntroImages((prev) => !prev)}
+                    >
+                      {showAllIntroImages ? (
+                        <>
+                          공연 소개 접기 <IC_ARROW transform="rotate(180)" />
+                        </>
+                      ) : (
+                        <>
+                          공연 소개 더보기 <IC_ARROW />
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         <div className={styles.infoCard}>

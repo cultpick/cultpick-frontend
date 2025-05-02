@@ -21,6 +21,8 @@ export default function EventItem({ performance }: EventItemProps) {
           alt={`${performance.name} 포스터`}
           width={320}
           height={320}
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mM0+g8AAWkBM2y7Yk0AAAAASUVORK5CYII="
         />
       </div>
       <div className={styles.EventText}>
