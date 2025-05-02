@@ -70,15 +70,62 @@ export default function EventDetailPage() {
   return (
     <div className={styles.detailContainer}>
       <div className={styles.topSection}>
-        <div className={styles.imgWrapper}>
-          <Image
-            src={performanceData.posterImageUrl}
-            alt={`${performanceData.name} 포스터`}
-            width={893}
-            height={502}
-            className={styles.poster}
-          />
+        <div className={styles.leftSection}>
+          <div className={styles.imgWrapper}>
+            <Image
+              src={performanceData.posterImageUrl}
+              alt={`${performanceData.name} 포스터`}
+              width={893}
+              height={502}
+              className={styles.poster}
+            />
+          </div>
+          <div className={styles.section}>
+            <div className={styles.sectionTitle}>공연 소개</div>
+            <div className={styles.sectionDivider} />
+            <div className={styles.sectionContent}>
+              <div className={styles.infoRow}>
+                <span className={styles.infoLabel}>일시</span>
+                <span className={styles.infoValue}>
+                  {formatDate(performanceData.startDate)} -{" "}
+                  {formatDate(performanceData.endDate)}
+                </span>
+                <div className={styles.badge}>{performanceData.state}</div>
+              </div>
+              <div className={styles.infoRow}>
+                <span className={styles.infoLabel}>비용</span>
+                <span className={styles.infoValue}>
+                  {performanceData.price}
+                </span>
+              </div>
+              <div className={styles.infoRow}>
+                <span className={styles.infoLabel}>장소</span>
+                <span className={styles.infoValue}>
+                  {performanceData.address}
+                </span>
+              </div>
+              <div className={styles.infoRow}>
+                <span className={styles.infoLabel}>개최자</span>
+                <span className={styles.infoValue}>{performanceData.host}</span>
+              </div>
+            </div>
+          </div>
+          <div className={styles.section}>
+            <div className={styles.sectionTitle}>공연 소개 이미지</div>
+            {performanceData.introImageUrlList.map((url, index) => (
+              <Image
+                key={index}
+                src={url}
+                alt="공연 소개 이미지"
+                width={893}
+                height={1157}
+                className={styles.introImg}
+              />
+            ))}
+            <button className={styles.moreBtn}>공연 소개 더보기</button>
+          </div>
         </div>
+
         <div className={styles.infoCard}>
           <div className={styles.title}>{performanceData.name}</div>
           <div className={styles.sub}>
@@ -99,32 +146,6 @@ export default function EventDetailPage() {
             </button>
           </div>
         </div>
-      </div>
-      <div className={styles.section}>
-        <div className={styles.sectionTitle}>공연 소개</div>
-        <div className={styles.sectionContent}>
-          <div>
-            일시: {formatDate(performanceData.startDate)} ~{" "}
-            {formatDate(performanceData.endDate)}
-          </div>
-          <div>비용: {performanceData.price}</div>
-          <div>장소: {performanceData.address}</div>
-          <div>주최자: {performanceData.host}</div>
-        </div>
-      </div>
-      <div className={styles.section}>
-        <div className={styles.sectionTitle}>공연 소개 이미지</div>
-        {performanceData.introImageUrlList.map((url, index) => (
-          <Image
-            key={index}
-            src={url}
-            alt="공연 소개 이미지"
-            width={600}
-            height={300}
-            className={styles.introImg}
-          />
-        ))}
-        <button className={styles.moreBtn}>공연 소개 더보기</button>
       </div>
     </div>
   );

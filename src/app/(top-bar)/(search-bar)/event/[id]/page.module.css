@@ -12,6 +12,13 @@
   gap: 2.4rem;
 }
 
+.leftSection {
+  max-width: 89.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
 .imgWrapper {
   max-width: 89.3rem;
   max-height: 50.2rem;
@@ -20,7 +27,6 @@
 }
 
 .poster {
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
   object-fit: cover;
 }
 
@@ -136,33 +142,83 @@
 
 .section {
   width: 89.3rem;
-  height: 35.2rem;
   border-radius: 24px;
   background: rgba(34, 34, 34, 0.8);
   box-shadow: 0px 0px 80px 0px rgba(255, 255, 255, 0.1) inset;
+  padding: 3.2rem 3.2rem 2.4rem 3.2rem;
 }
 
 .sectionTitle {
   color: #b1b2ff;
-
   font-family: Pretendard;
   font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 2.8rem;
+}
+
+.sectionDivider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, #7873ff 0%, #7873ff00 100%);
+
+  margin-bottom: 3.2rem;
+}
+
+.sectionContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+}
+
+.infoRow {
+  display: flex;
+  align-items: center;
+}
+
+.infoLabel {
+  min-width: 7.2rem;
+  color: #dfe0ff;
+  font-family: Pretendard;
+  font-size: 1.8rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
 }
 
-.sectionContent {
+.infoValue {
   color: #fff;
-  font-size: 1rem;
-  line-height: 1.7;
+  font-family: Pretendard;
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
+
+.badge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.4rem 1.2rem;
+  margin-left: 1.6rem;
+
+  border-radius: 100px;
+  background: #5300ec;
+  color: #b1b2ff;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
 .introImg {
   margin: 24px 0 8px 0;
-  border-radius: 12px;
+  border-radius: 24px;
   width: 100%;
   object-fit: cover;
 }
+
 .moreBtn {
   background: #7b61ff;
   color: #fff;
@@ -176,6 +232,7 @@
   margin-top: 8px;
   transition: background 0.2s;
 }
+
 .moreBtn:hover {
   background: #a48bff;
 }
