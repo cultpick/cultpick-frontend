@@ -7,9 +7,9 @@ import {
 import MonthEvent from "@/components/Home/MonthEvent";
 import Underway from "@/components/Home/Underway";
 import {
-  getRecommendedPerformances,
-  getOngoingPerformances,
-} from "@/api/performance";
+  getOngoingPerformanceList,
+  getRecommendedPerformanceList,
+} from "@/api/performance/api";
 
 export default async function Home() {
   const queryClient = new QueryClient();
@@ -18,11 +18,11 @@ export default async function Home() {
   await Promise.all([
     queryClient.prefetchQuery({
       queryKey: ["recommendedPerformances", 1],
-      queryFn: () => getRecommendedPerformances(1, 10),
+      queryFn: () => getRecommendedPerformanceList(1, 10),
     }),
     queryClient.prefetchQuery({
       queryKey: ["ongoingPerformances", 1],
-      queryFn: () => getOngoingPerformances(1, 10),
+      queryFn: () => getOngoingPerformanceList(1, 10),
     }),
   ]);
 

@@ -7,7 +7,7 @@ export default function Layout({
 }>) {
   return (
     <>
-      <div style={{ marginTop: "15rem"}}>
+      <div style={{ marginTop: "15rem" }}>
         <TopNav />
       </div>
       {children}

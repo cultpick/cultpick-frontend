@@ -29,7 +29,7 @@ interface PerformanceData {
   address: string;
   host: string;
   posterImageUrl: string;
-  introImageUrlList: string[];
+  introImageUrlList: string[] | string[][];
 }
 
 export default function EventDetailPage() {
@@ -132,7 +132,11 @@ export default function EventDetailPage() {
                 }
               >
                 <Image
-                  src={performanceData.introImageUrlList[0]}
+                  src={
+                    Array.isArray(performanceData.introImageUrlList[0])
+                      ? (performanceData.introImageUrlList[0] as string[])[0]
+                      : (performanceData.introImageUrlList[0] as string)
+                  }
                   alt="공연 소개 이미지"
                   width={893}
                   height={1157}

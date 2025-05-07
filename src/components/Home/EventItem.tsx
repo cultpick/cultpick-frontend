@@ -1,10 +1,10 @@
-import { Performance } from "@/types/performance";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./EventItem.module.css";
+import { PerformanceResponse } from "@/api/performance/schema";
 
 interface EventItemProps {
-  performance: Performance;
+  performance: PerformanceResponse;
 }
 
 export default function EventItem({ performance }: EventItemProps) {
@@ -28,7 +28,7 @@ export default function EventItem({ performance }: EventItemProps) {
       <div className={styles.EventText}>
         <div className={styles.EventTitle}>{performance.name}</div>
         <div className={styles.EventCaption}>
-          {performance.startDate}
+          {performance.startDate.toLocaleDateString()}
           {!isSameDate && ` ~ ${performance.endDate}`}
           {` / ${performance.area}`}
           <br />
