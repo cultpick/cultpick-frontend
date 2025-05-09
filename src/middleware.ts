@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 // 보호된 페이지 목록
-const protectedPages = ["/mypage", "/picklist"];
+const protectedPages = ["/my", "/picklist"];
 
 // 공개 페이지 목록
 const publicPages = ["/login", "/register", "/"];
