@@ -1,25 +1,26 @@
 import React from "react";
 import styles from "./InputBox.module.css";
 
-type InputBoxProps = {
+interface InputBoxProps {
   type: string;
   name: string;
-  placeholder?: string;
+  placeholder: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   error?: boolean;
+  disabled?: boolean;
   maxLength?: number;
-};
+}
 
-const InputBox: React.FC<InputBoxProps> = ({
+export default function InputBox({
   type,
   name,
-  placeholder = "",
+  placeholder,
   value,
   onChange,
-  error = false,
-  maxLength,
-}) => {
+  error,
+  disabled,
+}: InputBoxProps) {
   const inputClass = `${styles.input} body_18_R ${error ? styles.errorBorder : ""}`;
 
   return (
@@ -32,9 +33,7 @@ const InputBox: React.FC<InputBoxProps> = ({
       onChange={onChange}
       className={inputClass}
       autoComplete="off"
-      maxLength={maxLength}
+      disabled={disabled}
     />
   );
-};
-
-export default InputBox;
+}

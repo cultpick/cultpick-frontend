@@ -3,17 +3,67 @@
 import { useState } from "react";
 import styles from "./TopBlurBox.module.css";
 import InputBox from "../InputBox";
-import Button from "../Button";
+import Check_IC from "@/../public/svgs/check circle.svg";
 import { useRegisterForm } from "@/hooks/useRegisterForm";
+import {
+  sendVerificationEmail,
+  validateVerificationCode,
+} from "@/api/auth/api";
+import { useSetRecoilState } from "recoil";
+import { verificationTokenState } from "@/store/registerState";
 
-export default function TopBlurBox() {
+interface TopBlurBoxProps {
+  onVerificationComplete?: (token: string) => void;
+}
+
+export default function TopBlurBox({
+  onVerificationComplete,
+}: TopBlurBoxProps) {
   const { formData, handleInputChange, errors } = useRegisterForm();
   const [verificationCode, setVerificationCode] = useState("");
   const [isResend, setIsResend] = useState(false);
+  const [isVerifying, setIsVerifying] = useState(false);
+  const [isVerified, setIsVerified] = useState(false);
+  const setVerificationToken = useSetRecoilState(verificationTokenState);
 
-  const handleSendCode = () => {
-    alert("인증번호가 발송되었습니다.");
-    setIsResend(true);
+  const handleSendCode = async () => {
+    try {
+      const response = await sendVerificationEmail({
+        email: formData.email,
+      });
+      if (response.success) {
+        alert("인증번호가 발송되었습니다.");
+        setIsResend(true);
+        setIsVerified(false);
+      }
+    } catch (error) {
+      alert("인증번호 발송에 실패했습니다.");
+      console.error(error);
+    }
+  };
+
+  const handleVerifyCode = async () => {
+    if (verificationCode.length !== 4) {
+      alert("인증번호 4자리를 입력해주세요.");
+      return;
+    }
+
+    try {
+      setIsVerifying(true);
+      const response = await validateVerificationCode({
+        email: formData.email,
+        code: verificationCode,
+      });
+
+      alert("인증이 완료되었습니다.");
+      setIsVerified(true);
+      setVerificationToken(response.verificationToken);
+    } catch (error) {
+      alert("인증번호가 일치하지 않습니다.");
+      console.error(error);
+    } finally {
+      setIsVerifying(false);
+    }
   };
 
   const isEmailValid = !errors.email && formData.email;
@@ -23,7 +73,7 @@ export default function TopBlurBox() {
     !errors.confirmPassword &&
     formData.confirmPassword;
 
-  const canSendEmail = isEmailValid && isPasswordValid;
+  const canSendEmail = isEmailValid && isPasswordValid && !isVerified;
 
   return (
     <div className={styles.boxContainer}>
@@ -37,6 +87,7 @@ export default function TopBlurBox() {
             value={formData.email}
             onChange={handleInputChange("email")}
             error={!!errors.email}
+            disabled={isVerified}
           />
           {errors.email && (
             <div className={`caption ${styles.error}`}>{errors.email}</div>
@@ -52,6 +103,7 @@ export default function TopBlurBox() {
             value={formData.password}
             onChange={handleInputChange("password")}
             error={!!errors.password}
+            disabled={isVerified}
           />
         </div>
 
@@ -63,6 +115,7 @@ export default function TopBlurBox() {
             value={formData.confirmPassword}
             onChange={handleInputChange("confirmPassword")}
             error={!!errors.confirmPassword}
+            disabled={isVerified}
           />
           {(errors.password || errors.confirmPassword) && (
             <div className={`caption ${styles.error}`}>
@@ -73,30 +126,55 @@ export default function TopBlurBox() {
 
         <div className={styles.verificationSection}>
           <div className={styles.verificationSectionLabel}>인증번호</div>
-          <input
-            className={styles.verificationInput}
-            type="text"
-            placeholder="인증번호 4자리 입력"
-            maxLength={4}
-            value={verificationCode}
-            onChange={(e) => setVerificationCode(e.target.value)}
-          />
+          <div className={styles.verificationInputWrapper}>
+            <input
+              className={
+                isVerified ? styles.verifiedInput : styles.verificationInput
+              }
+              type="text"
+              placeholder="인증번호 4자리 입력"
+              maxLength={4}
+              value={verificationCode}
+              onChange={(e) => setVerificationCode(e.target.value)}
+              disabled={!isResend || isVerified}
+            />
+            {isVerified && (
+              <div className={styles.icWrapper}>
+                <Check_IC />
+              </div>
+            )}
+          </div>
+
+          {!isVerified && (
+            <button
+              className={styles.confirmBtn}
+              onClick={handleVerifyCode}
+              disabled={
+                !isResend || isVerifying || verificationCode.length !== 4
+              }
+            >
+              {isVerifying ? "확인 중" : "확인"}
+            </button>
+          )}
         </div>
         <button
           className={
             `${styles.verificationButton} ` +
             (canSendEmail ? styles.active : "") +
-            (isResend ? " " + styles.resend : "")
+            (isResend ? " " + styles.resend : "") +
+            (isVerified ? " " + styles.verifiedButton : "")
           }
           type="button"
           onClick={handleSendCode}
-          disabled={!canSendEmail}
+          disabled={!canSendEmail || isVerified}
         >
-          {isResend
-            ? "인증번호 이메일 재발송"
-            : canSendEmail
-              ? "인증번호 이메일 발송"
-              : "인증번호 발송"}
+          {isVerified
+            ? "이메일 인증 완료"
+            : isResend
+              ? "인증번호 이메일 재발송"
+              : canSendEmail
+                ? "인증번호 이메일 발송"
+                : "인증번호 발송"}
         </button>
       </div>
     </div>

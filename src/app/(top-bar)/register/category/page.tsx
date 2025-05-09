@@ -3,7 +3,10 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useRecoilValue } from "recoil";
-import { registerFormState } from "@/store/registerState";
+import {
+  registerFormState,
+  verificationTokenState,
+} from "@/store/registerState";
 import CategorySelector from "@/components/Category/CategorySelector";
 import styles from "./page.module.css";
 import Image from "next/image";
@@ -14,6 +17,7 @@ import { useSignUpMutation } from "@/api/auth/query";
 export default function CategoryPage() {
   const router = useRouter();
   const formData = useRecoilValue(registerFormState);
+  const verificationToken = useRecoilValue(verificationTokenState);
   const { data: addressData } = useAddress();
   const [selectedCategoryCodes, setSelectedCategoryCodes] = useState<string[]>(
     [],
@@ -26,7 +30,7 @@ export default function CategoryPage() {
     (error) => {
       console.error("회원가입 실패:", error);
       alert("회원가입에 실패했습니다. 다시 시도해주세요.");
-    }
+    },
   );
 
   useEffect(() => {
@@ -53,7 +57,8 @@ export default function CategoryPage() {
     signUpMutation.mutate({
       formData: requestData,
       selectedCategoryCodes: categoryCodes,
-      addressData
+      addressData,
+      verificationToken,
     });
   };
 

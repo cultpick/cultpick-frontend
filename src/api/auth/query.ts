@@ -28,7 +28,7 @@ export const useSignUpMutation = (
         favoriteCategoryCodes: data.selectedCategoryCodes,
       };
 
-      return signUp(requestData);
+      return signUp(requestData, data.verificationToken);
     },
     onSuccess,
     onError,

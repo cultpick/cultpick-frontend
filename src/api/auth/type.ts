@@ -35,4 +35,22 @@ export interface FormattedSignUpData {
   formData: RegisterFormData;
   selectedCategoryCodes: string[];
   addressData: any;
+  verificationToken: string;
+}
+
+export interface EmailVerificationRequest {
+  email: string;
+}
+
+export interface EmailVerificationResponse {
+  success: boolean;
+}
+
+export interface EmailVerificationValidateRequest {
+  email: string;
+  code: string;
+}
+
+export interface EmailVerificationValidateResponse {
+  verificationToken: string;
 }

@@ -60,11 +60,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 3.1rem;
-  margin-bottom: 3.2rem;
+  gap: 1.6rem;
 }
 
 .verificationSectionLabel {
+  width: 33rem;
   color: #b1b2ff;
 
   font-family: Pretendard;
@@ -75,7 +75,6 @@
 }
 
 .verificationInput {
-  width: 32.6005rem;
   height: 5.2rem;
   padding: 0.7rem 1.4rem 0.7rem 2.2rem;
   border-radius: 12px;
@@ -117,6 +116,7 @@
 
   cursor: pointer;
   transition: background 0.2s;
+  opacity: 1;
 }
 
 .verificationButton.active {
@@ -134,4 +134,65 @@
   background: #b1b2ff;
   color: #5300ec;
   border: none;
+}
+
+.confirmBtn {
+  width: 20rem;
+  height: 52px;
+  border-radius: 12px;
+  background: rgba(83, 0, 236, 0.8);
+  border: none;
+
+  color: #b1b2ff;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+
+  cursor: pointer;
+}
+
+.verifiedInput {
+  width: 100%;
+  border: none;
+  height: 5.2rem;
+  padding-left: 2.2rem;
+  color: #b1b2ff;
+  border-radius: 12px;
+  background: rgba(83, 0, 236, 0.8);
+
+  font-family: Pretendard;
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.verifiedButton {
+  background: #3d1dce !important;
+  color: #b6afff !important;
+  border: none;
+  opacity: 1 !important;
+}
+
+.verifiedCheck {
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #b6afff;
+  font-size: 2rem;
+}
+
+.verificationInputWrapper {
+  width: 100%;
+  position: relative;
+}
+
+.icWrapper {
+  position: absolute;
+  right: 1.4rem;
+  top: 1.4rem;
 }

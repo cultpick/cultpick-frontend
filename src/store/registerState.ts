@@ -33,3 +33,8 @@ export const registerFormIsValidState = atom<boolean>({
   key: "registerFormIsValidState",
   default: false,
 });
+
+export const verificationTokenState = atom<string>({
+  key: "verificationTokenState",
+  default: "",
+});
