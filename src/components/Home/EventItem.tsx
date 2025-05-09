@@ -1,10 +1,10 @@
-import { Performance } from "@/types/performance";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./EventItem.module.css";
+import { PerformanceResponse } from "@/api/performance/type";
 
 interface EventItemProps {
-  performance: Performance;
+  performance: PerformanceResponse;
 }
 
 export default function EventItem({ performance }: EventItemProps) {

@@ -6,11 +6,22 @@ import Button from "../Button";
 import { useRouter } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { loginState } from "@/recoil/atoms";
-import axios from "axios";
+import { useSignInMutation } from "@/api/auth/query";
 
 export default function BlurBox() {
   const router = useRouter();
   const [loginData, setLoginData] = useRecoilState(loginState);
+
+  const signInMutation = useSignInMutation(
+    (data) => {
+      // 토큰은 미들웨어에서 자동으로 쿠키에 저장됨
+      router.push("/");
+    },
+    (error) => {
+      console.error("로그인 실패:", error);
+      // 에러 처리 로직 추가
+    },
+  );
 
   const onClickRegister = () => {
     router.push("/register/agree");
@@ -30,21 +41,7 @@ export default function BlurBox() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/sign-in`,
-        loginData,
-      );
-
-      // 토큰 저장
-      localStorage.setItem("accessToken", response.data.accessToken);
-
-      // 로그인 성공 후 리다이렉션
-      router.push("/");
-    } catch (error) {
-      console.error("로그인 실패:", error);
-      // 에러 처리 로직 추가
-    }
+    signInMutation.mutate(loginData);
   };
 
   return (
@@ -66,7 +63,11 @@ export default function BlurBox() {
           onChange={handleChange}
         />
         <div className={styles.btnWrapper}>
-          <Button text="로그인" state="active" type="submit" />
+          <Button
+            text="로그인"
+            state={signInMutation.isPending ? "disabled" : "active"}
+            type="submit"
+          />
         </div>
         <div className={styles.bottomBtnContainer}>
           <div className="body_16_B pointer" onClick={onClickRegister}>

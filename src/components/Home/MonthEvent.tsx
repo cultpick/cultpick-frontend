@@ -7,14 +7,9 @@ import { Virtual, Mousewheel } from "swiper/modules";
 import "swiper/css";
 import styles from "./MonthEvent.module.css";
 import EventItem from "./EventItem";
-import { getRecommendedPerformances } from "@/api/performance";
-import { Performance } from "@/types/performance";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-
-interface PerformanceResponse {
-  count: number;
-  performanceList: Performance[];
-}
+import { getRecommendedPerformanceList } from "@/api/performance/api";
+import { PerformanceListResponse } from "@/api/performance/type";
 
 export default function MonthEvent() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -25,9 +20,9 @@ export default function MonthEvent() {
   const queryClient = useQueryClient();
   const swiperRef = useRef<any>(null);
 
-  const { data, isLoading, error } = useQuery<PerformanceResponse>({
+  const { data, isLoading, error } = useQuery<PerformanceListResponse>({
     queryKey: ["recommendedPerformances", currentPage],
-    queryFn: () => getRecommendedPerformances(currentPage, pageSize),
+    queryFn: () => getRecommendedPerformanceList(currentPage, pageSize),
   });
 
   // 모든 페이지의 데이터를 누적
@@ -35,7 +30,7 @@ export default function MonthEvent() {
     if (!data) return [];
     return Array.from({ length: currentPage }, (_, i) => i + 1)
       .map((page) => {
-        const cachedData = queryClient.getQueryData<PerformanceResponse>([
+        const cachedData = queryClient.getQueryData<PerformanceListResponse>([
           "recommendedPerformances",
           page,
         ]);
@@ -50,7 +45,10 @@ export default function MonthEvent() {
     setIsLoadingMore(true);
     try {
       const nextPage = currentPage + 1;
-      const nextPageData = await getRecommendedPerformances(nextPage, pageSize);
+      const nextPageData = await getRecommendedPerformanceList(
+        nextPage,
+        pageSize,
+      );
 
       // 다음 페이지의 데이터가 없으면 hasMore를 false로 설정
       if (nextPageData.performanceList.length === 0) {

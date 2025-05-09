@@ -1,31 +1,16 @@
+import { getAddressList } from "@/api/address/api";
+import { AddressResponse } from "@/api/address/type";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-
-interface Subregion {
-  code: string;
-  name: string;
-}
-
-interface Region {
-  code: string;
-  name: string;
-  subregions: Subregion[];
-}
 
 export const useAddress = () => {
-  return useQuery<Region[]>({
+  return useQuery<AddressResponse[]>({
     queryKey: ["address"],
-    queryFn: async () => {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/address`,
-      );
-      return response.data;
-    },
+    queryFn: () => getAddressList(),
   });
 };
 
 export const findAddressCode = (
-  addressData: Region[] | undefined,
+  addressData: AddressResponse[] | undefined,
   address: string | null | undefined,
 ): string | null => {
   if (!addressData || !address) return null;

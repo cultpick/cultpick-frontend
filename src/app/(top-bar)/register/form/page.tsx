@@ -5,26 +5,27 @@ import TopBlurBox from "@/components/Register/TopBlurBox";
 import BottomBlurBox from "@/components/Register/BottomBlurBox";
 import Button from "@/components/Button";
 import { useRecoilValue } from "recoil";
-import {
-  registerFormState,
-  registerFormIsValidState,
-} from "@/store/registerState";
+import { registerFormIsValidState } from "@/store/registerState";
 import { useRouter } from "next/navigation";
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
-import { useAddress, findAddressCode } from "@/hooks/useAddress";
-import { RegisterFormData } from "@/schemas/registerSchema";
+import { useState } from "react";
+
+interface TopBlurBoxProps {
+  onVerificationComplete?: (token: string) => void;
+}
 
 export default function Register() {
   const router = useRouter();
-  const { data: addressData } = useAddress();
-  const formData = useRecoilValue(registerFormState);
   const isValid = useRecoilValue(registerFormIsValidState);
+  const [verificationToken, setVerificationToken] = useState<string>("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!isValid) return;
     router.push("/register/category");
+  };
+
+  const handleVerificationComplete = (token: string) => {
+    setVerificationToken(token);
   };
 
   return (
@@ -40,9 +41,8 @@ export default function Register() {
             />
             <div className={styles.registerTitle}>회원가입</div>
           </div>
-          <form onSubmit={handleSubmit}
-          className={styles.formContainer}>
-            <TopBlurBox />
+          <form onSubmit={handleSubmit} className={styles.formContainer}>
+            <TopBlurBox onVerificationComplete={handleVerificationComplete} />
             <BottomBlurBox />
             <div className={styles.btnWrapper}>
               <Button

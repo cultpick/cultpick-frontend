@@ -5,13 +5,7 @@ import styles from "./CategorySelector.module.css";
 import { CategoryIcon } from "./CategoryIcon";
 import { useRouter } from "next/navigation";
 import Next_IC from "@/../public/svgs/next_arrow.svg";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-
-interface Category {
-  code: string;
-  name: string;
-}
+import { useCategories } from "@/api/category/query";
 
 interface CategorySelectorProps {
   onComplete?: (selectedCategoryCodes: string[]) => void;
@@ -24,15 +18,7 @@ export default function CategorySelector({
   const { selectedCategories, toggleCategory, isSelected, canSelectMore } =
     useCategorySelection();
 
-  const { data: categories = [], isLoading } = useQuery<Category[]>({
-    queryKey: ["categories"],
-    queryFn: async () => {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/category`,
-      );
-      return response.data;
-    },
-  });
+  const { data: categories = [], isLoading } = useCategories();
 
   const handleComplete = () => {
     const selectedCategoryCodes = selectedCategories.map(
