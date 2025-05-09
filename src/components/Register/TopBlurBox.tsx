@@ -8,6 +8,22 @@ import { useRegisterForm } from "@/hooks/useRegisterForm";
 
 export default function TopBlurBox() {
   const { formData, handleInputChange, errors } = useRegisterForm();
+  const [verificationCode, setVerificationCode] = useState("");
+  const [isResend, setIsResend] = useState(false);
+
+  const handleSendCode = () => {
+    alert("인증번호가 발송되었습니다.");
+    setIsResend(true);
+  };
+
+  const isEmailValid = !errors.email && formData.email;
+  const isPasswordValid =
+    !errors.password &&
+    formData.password &&
+    !errors.confirmPassword &&
+    formData.confirmPassword;
+
+  const canSendEmail = isEmailValid && isPasswordValid;
 
   return (
     <div className={styles.boxContainer}>
@@ -54,6 +70,34 @@ export default function TopBlurBox() {
             </div>
           )}
         </div>
+
+        <div className={styles.verificationSection}>
+          <div className={styles.verificationSectionLabel}>인증번호</div>
+          <input
+            className={styles.verificationInput}
+            type="text"
+            placeholder="인증번호 4자리 입력"
+            maxLength={4}
+            value={verificationCode}
+            onChange={(e) => setVerificationCode(e.target.value)}
+          />
+        </div>
+        <button
+          className={
+            `${styles.verificationButton} ` +
+            (canSendEmail ? styles.active : "") +
+            (isResend ? " " + styles.resend : "")
+          }
+          type="button"
+          onClick={handleSendCode}
+          disabled={!canSendEmail}
+        >
+          {isResend
+            ? "인증번호 이메일 재발송"
+            : canSendEmail
+              ? "인증번호 이메일 발송"
+              : "인증번호 발송"}
+        </button>
       </div>
     </div>
   );

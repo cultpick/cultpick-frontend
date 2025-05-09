@@ -55,3 +55,83 @@
   flex-direction: column;
   gap: 0.6rem;
 }
+
+.verificationSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3.1rem;
+  margin-bottom: 3.2rem;
+}
+
+.verificationSectionLabel {
+  color: #b1b2ff;
+
+  font-family: Pretendard;
+  font-size: 2.4rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.verificationInput {
+  width: 32.6005rem;
+  height: 5.2rem;
+  padding: 0.7rem 1.4rem 0.7rem 2.2rem;
+  border-radius: 12px;
+  border: 2px solid rgba(245, 245, 245, 0.3);
+  background: linear-gradient(
+    90deg,
+    rgba(204, 204, 204, 0.2) 0%,
+    rgba(204, 204, 204, 0.05) 50%,
+    rgba(204, 204, 204, 0.2) 100%
+  );
+
+  color: #fff;
+  font-family: Pretendard;
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  outline: none;
+}
+
+.verificationButton {
+  display: flex;
+  width: 100%;
+  height: 6rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  border: 2px solid #7873ff;
+  background: none;
+
+  color: #7873ff;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 2.2rem;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.verificationButton.active {
+  background: #7873ff;
+  color: #fff;
+  border: none;
+}
+
+.verificationButton:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+.verificationButton.resend {
+  background: #b1b2ff;
+  color: #5300ec;
+  border: none;
+}
