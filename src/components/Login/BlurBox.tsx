@@ -14,9 +14,7 @@ export default function BlurBox() {
 
   const signInMutation = useSignInMutation(
     (data) => {
-      // 토큰 저장
-      localStorage.setItem("accessToken", data.accessToken);
-      // 로그인 성공 후 리다이렉션
+      // 토큰은 미들웨어에서 자동으로 쿠키에 저장됨
       router.push("/");
     },
     (error) => {

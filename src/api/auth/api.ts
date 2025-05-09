@@ -31,10 +31,7 @@ export const signUp = async (
 export const signIn = async (
   requestData: SignInRequest,
 ): Promise<SignInResponse> => {
-  const { data } = await axios.post(
-    `${process.env.NEXT_PUBLIC_API_URL}/auth/sign-in`,
-    requestData,
-  );
+  const { data } = await axios.post("/api/auth/sign-in", requestData);
 
   return data;
 };
