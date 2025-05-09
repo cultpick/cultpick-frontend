@@ -12,12 +12,12 @@ export interface PerformanceResponse {
   /**
    * 공연 시작일
    */
-  startDate: Date;
+  startDate: string;
 
   /**
    * 공연 종료일
    */
-  endDate: Date;
+  endDate: string;
 
   /**
    * 공연 지역
@@ -45,4 +45,23 @@ export interface PerformanceListResponse {
    * 공연 목록
    */
   performanceList: PerformanceResponse[];
+}
+
+export interface PerformanceDetailResponse {
+  id: string;
+  name: string;
+  genre: string;
+  state: string;
+  area: string;
+  ticketList: {
+    name: string;
+    url: string;
+  }[];
+  startDate: string;
+  endDate: string;
+  price: string;
+  address: string;
+  host: string;
+  posterImageUrl: string;
+  introImageUrlList: string[] | string[][];
 }

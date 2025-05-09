@@ -1,6 +1,6 @@
 import axios from "axios";
 import { transformPerformanceDates } from "@/utils/dateUtils";
-import { PerformanceListResponse } from "./schema";
+import { PerformanceDetailResponse, PerformanceListResponse } from "./type";
 
 /**
  * 공연 목록 검색 조회
@@ -54,4 +54,19 @@ export const getOngoingPerformanceList = async (
   };
 
   return transformedData;
+};
+
+/**
+ * 공연 상세 조회
+ *
+ * @api [GET] /performance/:performanceId
+ */
+export const getPerformanceDetail = async (
+  performanceId: string,
+): Promise<PerformanceDetailResponse> => {
+  const { data } = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}/performance/${performanceId}`,
+  );
+
+  return data;
 };

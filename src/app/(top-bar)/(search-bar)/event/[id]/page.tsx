@@ -8,10 +8,10 @@ import IC_SHARE from "@/../public/svgs/detail/share.svg";
 import IC_STAR from "@/../public/svgs/detail/star.svg";
 import IC_ARROW from "@/../public/svgs/bottom_arrow.svg";
 
-import axios from "axios";
-
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { getPerformanceDetail } from "@/api/performance/api";
+import { PerformanceDetailResponse } from "@/api/performance/type";
 
 interface PerformanceData {
   id: string;
@@ -35,17 +35,17 @@ interface PerformanceData {
 export default function EventDetailPage() {
   const params = useParams();
   const [performanceData, setPerformanceData] =
-    useState<PerformanceData | null>(null);
+    useState<PerformanceDetailResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [showAllIntroImages, setShowAllIntroImages] = useState(false);
 
   useEffect(() => {
     const fetchPerformanceData = async () => {
       try {
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/performance/${params.id}`,
+        const performanceDetail = await getPerformanceDetail(
+          params.id as string,
         );
-        setPerformanceData(response.data);
+        setPerformanceData(performanceDetail);
       } catch (error) {
         console.error("Error fetching performance data:", error);
       } finally {

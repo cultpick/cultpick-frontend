@@ -10,7 +10,7 @@ import Next_IC from "@/../public/svgs/next_arrow.svg";
 import EventItem from "./EventItem";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getOngoingPerformanceList } from "@/api/performance/api";
-import { PerformanceListResponse } from "@/api/performance/schema";
+import { PerformanceListResponse } from "@/api/performance/type";
 
 export default function Underway() {
   const [currentPage, setCurrentPage] = useState(1);

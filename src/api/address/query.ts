@@ -1,5 +1,5 @@
 import { getAddressList } from "@/api/address/api";
-import { AddressResponse } from "@/api/address/schema";
+import { AddressResponse } from "@/api/address/type";
 import { useQuery } from "@tanstack/react-query";
 
 export const useAddress = () => {

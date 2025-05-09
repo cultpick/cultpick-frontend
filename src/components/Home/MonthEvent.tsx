@@ -9,7 +9,7 @@ import styles from "./MonthEvent.module.css";
 import EventItem from "./EventItem";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getRecommendedPerformanceList } from "@/api/performance/api";
-import { PerformanceListResponse } from "@/api/performance/schema";
+import { PerformanceListResponse } from "@/api/performance/type";
 
 export default function MonthEvent() {
   const [currentPage, setCurrentPage] = useState(1);

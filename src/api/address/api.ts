@@ -1,5 +1,5 @@
 import axios from "axios";
-import { AddressResponse } from "./schema";
+import { AddressResponse } from "./type";
 
 /**
  * 주소 목록 조회

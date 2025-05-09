@@ -7,10 +7,9 @@ import { registerFormState } from "@/store/registerState";
 import CategorySelector from "@/components/Category/CategorySelector";
 import styles from "./page.module.css";
 import Image from "next/image";
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
-import { useAddress, findAddressCode } from "@/hooks/useAddress";
+import { useAddress } from "@/api/address/query";
 import { RegisterFormData } from "@/schemas/registerSchema";
+import { useSignUpMutation } from "@/api/auth/query";
 
 export default function CategoryPage() {
   const router = useRouter();
@@ -20,35 +19,15 @@ export default function CategoryPage() {
     [],
   );
 
-  const signUpMutation = useMutation({
-    mutationFn: async (data: RegisterFormData) => {
-      const addressCode = findAddressCode(addressData, data.address);
-      const birthDate = `${data.birthYear}-${data.birthMonth.padStart(2, "0")}-${data.birthDay.padStart(2, "0")}T00:00:00.000Z`;
-
-      const requestData = {
-        email: data.email,
-        password: data.password,
-        name: data.name,
-        gender: data.gender === "남성" ? "MALE" : "FEMALE",
-        birthDate: birthDate,
-        ...(addressCode && { addressCode }),
-        favoriteCategoryCodes: selectedCategoryCodes,
-      };
-
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/sign-up`,
-        requestData,
-      );
-      return response.data;
-    },
-    onSuccess: () => {
+  const signUpMutation = useSignUpMutation(
+    () => {
       router.push("/login");
     },
-    onError: (error) => {
+    (error) => {
       console.error("회원가입 실패:", error);
       alert("회원가입에 실패했습니다. 다시 시도해주세요.");
-    },
-  });
+    }
+  );
 
   useEffect(() => {
     // 회원가입 데이터가 없으면 회원가입 페이지로 리다이렉트
@@ -71,7 +50,11 @@ export default function CategoryPage() {
       address: formData.address,
     };
 
-    signUpMutation.mutate(requestData);
+    signUpMutation.mutate({
+      formData: requestData,
+      selectedCategoryCodes: categoryCodes,
+      addressData
+    });
   };
 
   return (

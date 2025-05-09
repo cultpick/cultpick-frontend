@@ -3,7 +3,7 @@ import styles from "./AddressSelector.module.css";
 import DownArrow_IC from "@/../public/svgs/bottom_arrow.svg";
 import { useRecoilState } from "recoil";
 import { registerFormState } from "@/store/registerState";
-import { useAddress } from "@/hooks/useAddress";
+import { useAddress } from "@/api/address/query";
 
 interface Region {
   code: string;

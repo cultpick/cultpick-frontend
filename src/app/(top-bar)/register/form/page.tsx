@@ -12,7 +12,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { useAddress, findAddressCode } from "@/hooks/useAddress";
+import { useAddress, findAddressCode } from "@/api/address/query";
 import { RegisterFormData } from "@/schemas/registerSchema";
 
 export default function Register() {
@@ -40,8 +40,7 @@ export default function Register() {
             />
             <div className={styles.registerTitle}>회원가입</div>
           </div>
-          <form onSubmit={handleSubmit}
-          className={styles.formContainer}>
+          <form onSubmit={handleSubmit} className={styles.formContainer}>
             <TopBlurBox />
             <BottomBlurBox />
             <div className={styles.btnWrapper}>
