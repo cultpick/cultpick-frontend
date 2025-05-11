@@ -9,7 +9,19 @@ import {
   EmailVerificationValidateRequest,
   EmailVerificationValidateResponse,
 } from "./type";
-import { Sign } from "crypto";
+
+/**
+ * 로그인
+ *
+ * @api [POST] /auth/sign-in
+ */
+export const signIn = async (
+  requestData: SignInRequest,
+): Promise<SignInResponse> => {
+  const { data } = await axios.post("/api/auth/sign-in", requestData);
+
+  return data;
+};
 
 /**
  * 회원가입
@@ -29,19 +41,6 @@ export const signUp = async (
       },
     },
   );
-
-  return data;
-};
-
-/**
- * 로그인
- *
- * @api [POST] /auth/sign-in
- */
-export const signIn = async (
-  requestData: SignInRequest,
-): Promise<SignInResponse> => {
-  const { data } = await axios.post("/api/auth/sign-in", requestData);
 
   return data;
 };

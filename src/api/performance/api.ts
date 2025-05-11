@@ -1,11 +1,47 @@
 import axios from "axios";
 import { transformPerformanceDates } from "@/utils/dateUtils";
-import { PerformanceDetailResponse, PerformanceListResponse } from "./type";
+import {
+  PerformanceDetailResponse,
+  PerformanceListResponse,
+  SearchPerformanceListResponse,
+} from "./type";
 
 /**
  * 공연 목록 검색 조회
  *
- * @api [GET] /address
+ * @api [GET] /performance
+ */
+export const searchPerformanceList = async (
+  page: number,
+  size: number,
+  q: string,
+  genreCode: string,
+  state: string,
+  areaCode: string,
+  subAreaCode: string,
+): Promise<SearchPerformanceListResponse> => {
+  const { data } = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}/performance`,
+    {
+      params: {
+        page,
+        size,
+        q,
+        genreCode,
+        state,
+        areaCode,
+        subAreaCode,
+      },
+    },
+  );
+
+  return data;
+};
+
+/**
+ * 이달의 추천 공연 목록 조회
+ *
+ * @api [GET] /performance/recommended
  */
 export const getRecommendedPerformanceList = async (
   page: number,
@@ -21,18 +57,13 @@ export const getRecommendedPerformanceList = async (
     },
   );
 
-  const transformedData = {
-    count: data.count,
-    performanceList: data.performanceList.map(transformPerformanceDates),
-  };
-
-  return transformedData;
+  return data;
 };
 
 /**
  * 진행중 공연 목록 조회
  *
- * @api [GET] /address
+ * @api [GET] /performance/ongoing
  */
 export const getOngoingPerformanceList = async (
   page: number,
@@ -48,12 +79,7 @@ export const getOngoingPerformanceList = async (
     },
   );
 
-  const transformedData = {
-    count: data.count,
-    performanceList: data.performanceList.map(transformPerformanceDates),
-  };
-
-  return transformedData;
+  return data;
 };
 
 /**

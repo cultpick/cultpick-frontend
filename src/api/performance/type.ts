@@ -1,3 +1,10 @@
+export interface SearchPerformanceListResponse extends PerformanceListResponse {
+  /**
+   * 전체 공연 수
+   */
+  totalCount: number;
+}
+
 export interface PerformanceResponse {
   /**
    * 공연 ID
