@@ -11,6 +11,22 @@ import {
 } from "./type";
 
 /**
+ * 비밀번호 변경
+ *
+ * @api [PUT] /auth/password
+ */
+export const updatePassword = async (password: string): Promise<void> => {
+  const { data } = await axios.put(
+    `${process.env.NEXT_PUBLIC_API_URL}/auth/password`,
+    {
+      password,
+    },
+  );
+
+  return data;
+};
+
+/**
  * 로그인
  *
  * @api [POST] /auth/sign-in
