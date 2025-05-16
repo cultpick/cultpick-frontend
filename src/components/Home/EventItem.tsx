@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./EventItem.module.css";
 import { PerformanceResponse } from "@/api/performance/type";
+import { transformPerformanceDates } from "@/utils/dateUtils";
 
 interface EventItemProps {
   performance: PerformanceResponse;
@@ -11,7 +12,9 @@ export default function EventItem({ performance }: EventItemProps) {
   if (!performance) {
     return null;
   }
-  const isSameDate = performance.startDate === performance.endDate;
+  const formattedPerformance = transformPerformanceDates(performance);
+  const isSameDate =
+    formattedPerformance.startDate === formattedPerformance.endDate;
 
   return (
     <Link href={`/event/${performance.id}`} className={styles.Container}>
@@ -28,8 +31,8 @@ export default function EventItem({ performance }: EventItemProps) {
       <div className={styles.EventText}>
         <div className={styles.EventTitle}>{performance.name}</div>
         <div className={styles.EventCaption}>
-          {performance.startDate}
-          {!isSameDate && ` ~ ${performance.endDate}`}
+          {formattedPerformance.startDate}
+          {!isSameDate && ` ~ ${formattedPerformance.endDate}`}
           {` / ${performance.area}`}
           <br />
           {performance.price}
