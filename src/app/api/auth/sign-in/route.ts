@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
     const data = await response.json();
 
     // 응답 생성
-    const res = NextResponse.json(data);
+    const res = NextResponse.json(data, { status: response.status });
 
     // 토큰이 있으면 쿠키에 저장
     if (data.accessToken) {
