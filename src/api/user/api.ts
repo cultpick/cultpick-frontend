@@ -7,8 +7,14 @@ import { Update } from "next/dist/build/swc";
  *
  * @api [GET] /user
  */
-export const getUserDetail = async (): Promise<UserDetailResponse> => {
-  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/user`);
+export const getUserDetail = async (
+  accessToken: string,
+): Promise<UserDetailResponse> => {
+  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/user`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
 
   return data;
 };

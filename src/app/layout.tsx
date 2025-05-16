@@ -33,6 +33,7 @@ export default function RootLayout({
             <Footer />
           </RecoilRootProvider>
         </QueryProvider>
+        <div id="modal-portal" />
       </body>
     </html>
   );

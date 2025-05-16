@@ -1,11 +1,15 @@
 import styles from "./IdBox.module.css";
 
-export default function IdBox() {
+interface IdBoxProps {
+  email?: string;
+}
+
+export default function IdBox({ email }: IdBoxProps) {
   return (
     <div className={styles.box}>
       <div className={styles.textWrapper}>
         <div className={styles.bold}>이메일</div>
-        <div className={styles.text}>CultPick@gmail.com</div>
+        <div className={styles.text}>{email || "CultPick@gmail.com"}</div>
       </div>
       <div className={styles.textWrapper}>
         <div className={styles.bold}>비밀번호</div>

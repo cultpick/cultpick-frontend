@@ -1,13 +1,29 @@
-"use client";
 import Image from "next/image";
 import styles from "./page.module.css";
+
 import IdBox from "@/components/My/IdBox";
 import UserBox from "@/components/My/UserBox";
 import CategoryBox from "@/components/My/CategoryBox";
 import Logout from "@/components/My/Logout";
 import Delete from "@/components/My/Delete";
 
-export default function page() {
+import { getUserDetail } from "@/api/user/api";
+import { cookies } from "next/headers";
+
+export default async function Page() {
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get("accessToken")?.value;
+
+  let userData = null;
+
+  if (accessToken) {
+    try {
+      userData = await getUserDetail(accessToken);
+    } catch (error) {
+      console.error("Failed to fetch user data:", error);
+    }
+  }
+
   return (
     <div className={styles.page}>
       <div className={styles.titleWrapper}>
@@ -18,11 +34,16 @@ export default function page() {
           height={40}
           unoptimized={true}
         />
-        <div className={styles.title}>My name</div>
+        <div className={styles.title}>My Page</div>
       </div>
       <div className={styles.boxWrapper}>
-        <IdBox />
-        <UserBox />
+        <IdBox email={userData?.email} />
+        <UserBox
+          name={userData?.name}
+          gender={userData?.gender}
+          birthDate={userData?.birthDate}
+          addressCode={userData?.addressCode}
+        />
         <CategoryBox />
         <Logout />
         <Delete />
