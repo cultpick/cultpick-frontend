@@ -1,7 +1,7 @@
-"use client";
 import Image from "next/image";
 import styles from "./page.module.css";
 import BlurBox from "@/components/Login/BlurBox";
+import { Suspense } from "react";
 
 export default function Login() {
   return (
@@ -14,7 +14,9 @@ export default function Login() {
             width={318}
             height={77}
           />
-          <BlurBox />
+          <Suspense fallback={<div>Loading...</div>}>
+            <BlurBox />
+          </Suspense>
         </div>
       </div>
       <div className={styles.bgImgWrapper}>
