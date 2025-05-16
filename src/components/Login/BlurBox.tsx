@@ -3,19 +3,21 @@
 import styles from "./BlurBox.module.css";
 import InputBox from "../InputBox";
 import Button from "../Button";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { loginState } from "@/recoil/atoms";
 import { useSignInMutation } from "@/api/auth/query";
 
 export default function BlurBox() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [loginData, setLoginData] = useRecoilState(loginState);
 
   const signInMutation = useSignInMutation(
     (data) => {
-      // 토큰은 미들웨어에서 자동으로 쿠키에 저장됨
-      router.push("/");
+      // from 파라미터가 있으면 해당 페이지로, 없으면 홈으로 리다이렉션
+      const from = searchParams.get("from");
+      router.push(from || "/");
     },
     (error) => {
       console.error("로그인 실패:", error);
