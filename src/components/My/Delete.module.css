@@ -1,0 +1,16 @@
+.text {
+  margin-top: 0.8rem;
+  margin-bottom: 10.8rem;
+
+  color: #dfe0ff;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration-line: underline;
+
+  opacity: 0.8;
+  cursor: pointer;
+}

@@ -4,6 +4,8 @@ import styles from "./page.module.css";
 import IdBox from "@/components/My/IdBox";
 import UserBox from "@/components/My/UserBox";
 import CategoryBox from "@/components/My/CategoryBox";
+import Logout from "@/components/My/Logout";
+import Delete from "@/components/My/Delete";
 
 export default function page() {
   return (
@@ -22,6 +24,8 @@ export default function page() {
         <IdBox />
         <UserBox />
         <CategoryBox />
+        <Logout />
+        <Delete />
       </div>
       <div className={styles.bgImgWrapper}>
         <div className={styles.bgImg}>

@@ -1,0 +1,21 @@
+.btn {
+  width: 100%;
+  padding: 1.3rem 11.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: none;
+  border-radius: 12px;
+  background: #5d2efa;
+
+  color: #dfe0ff;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 2.2rem;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+
+  cursor: pointer;
+}
