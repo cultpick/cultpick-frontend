@@ -80,7 +80,12 @@ export default function Underway() {
           slidesPerView={4.5}
           loop={false}
           centeredSlides={false}
-          mousewheel={true}
+          mousewheel={{
+            forceToAxis: true,
+            invert: false,
+            thresholdDelta: 50,
+            thresholdTime: 200,
+          }}
           virtual
           initialSlide={currentSlideIndex}
           className={styles.SwiperContainer}

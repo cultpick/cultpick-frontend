@@ -85,7 +85,12 @@ export default function MonthEvent() {
           slidesPerView={1}
           loop={false}
           centeredSlides={false}
-          mousewheel={true}
+          mousewheel={{
+            forceToAxis: true,
+            invert: false,
+            thresholdDelta: 50,
+            thresholdTime: 200,
+          }}
           virtual
           initialSlide={currentSlideIndex}
           className={styles.SwiperContainer}
