@@ -38,6 +38,7 @@ export default function EventDetailPage() {
     useState<PerformanceDetailResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [showAllIntroImages, setShowAllIntroImages] = useState(false);
+  const [showTicketList, setShowTicketList] = useState(false);
 
   useEffect(() => {
     const fetchPerformanceData = async () => {
@@ -187,9 +188,34 @@ export default function EventDetailPage() {
             <div className={styles.area}>{performanceData.area}</div>
           </div>
 
-          <button className={styles.applyBtn}>
-            신청하러 가기 <IC_GO />
-          </button>
+          <div className={styles.ticketButtonWrapper}>
+            <button
+              className={styles.applyBtn}
+              onClick={() => setShowTicketList(!showTicketList)}
+            >
+              신청하러 가기 <IC_GO />
+            </button>
+
+            {showTicketList &&
+              performanceData.ticketList &&
+              performanceData.ticketList.length > 0 && (
+                <div className={styles.ticketList}>
+                  {performanceData.ticketList.map((ticket, index) => (
+                    <button
+                      key={index}
+                      className={styles.ticketItem}
+                      onClick={() => {
+                        window.open(ticket.url, "_blank");
+                        setShowTicketList(false);
+                      }}
+                    >
+                      <IC_GO />
+                      {ticket.name}
+                    </button>
+                  ))}
+                </div>
+              )}
+          </div>
           <div className={styles.subBtnWrapper}>
             <button className={`${styles.bottomBtn} ${styles.share}`}>
               URL 공유 <IC_SHARE />

@@ -309,3 +309,47 @@
 
   cursor: pointer;
 }
+
+.ticketButtonWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.ticketList {
+  position: absolute;
+  top: 6rem;
+  left: 1rem;
+
+  width: 34rem;
+
+  border-radius: 12px;
+  border: 2px solid #7873ff;
+  background: rgba(34, 34, 34, 0.5);
+  backdrop-filter: blur(10px);
+
+  z-index: 1000;
+}
+
+.ticketItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.4rem;
+
+  width: 100%;
+  padding: 1.2rem 1.6rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+
+  font-family: Pretendard;
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  color: #fff;
+}
+
+.ticketItem:not(:last-child) {
+  border-bottom: 1px solid #7873ff;
+}
