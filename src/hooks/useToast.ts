@@ -1,11 +1,11 @@
 import { useCallback, useState, useEffect } from "react";
 
-export type ToastType = "success" | "error" | "info" | "warning";
+export type ToastType = "success" | "error";
 
 export const useToast = () => {
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState("");
-  const [type, setType] = useState<ToastType>("info");
+  const [type, setType] = useState<ToastType>("success");
 
   useEffect(() => {
     if (show) {
@@ -17,11 +17,14 @@ export const useToast = () => {
     }
   }, [show]);
 
-  const showToast = useCallback((message: string, type: ToastType = "info") => {
-    setMessage(message);
-    setType(type);
-    setShow(true);
-  }, []);
+  const showToast = useCallback(
+    (message: string, type: ToastType = "success") => {
+      setMessage(message);
+      setType(type);
+      setShow(true);
+    },
+    [],
+  );
 
   return {
     show,
