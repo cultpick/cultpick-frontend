@@ -12,6 +12,8 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getPerformanceDetail } from "@/api/performance/api";
 import { PerformanceDetailResponse } from "@/api/performance/type";
+import { useToast } from "@/hooks/useToast";
+import Toast from "@/components/Toast";
 
 interface PerformanceData {
   id: string;
@@ -39,6 +41,7 @@ export default function EventDetailPage() {
   const [loading, setLoading] = useState(true);
   const [showAllIntroImages, setShowAllIntroImages] = useState(false);
   const [showTicketList, setShowTicketList] = useState(false);
+  const { show, message, type, showToast } = useToast();
 
   useEffect(() => {
     const fetchPerformanceData = async () => {
@@ -57,6 +60,24 @@ export default function EventDetailPage() {
     fetchPerformanceData();
   }, [params.id]);
 
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return `${date.getMonth() + 1}월 ${date.getDate()}일 (${["일", "월", "화", "수", "목", "금", "토"][date.getDay()]})`;
+  };
+
+  const handleCopyUrl = () => {
+    const currentUrl = window.location.href;
+    navigator.clipboard
+      .writeText(currentUrl)
+      .then(() => {
+        showToast("해당 페이지 URL이 복사되었습니다.", "success");
+      })
+      .catch((err) => {
+        console.error("URL 복사 실패:", err);
+        showToast("URL 복사에 실패했습니다.", "error");
+      });
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -65,13 +86,9 @@ export default function EventDetailPage() {
     return <div>Error loading performance data</div>;
   }
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return `${date.getMonth() + 1}월 ${date.getDate()}일 (${["일", "월", "화", "수", "목", "금", "토"][date.getDay()]})`;
-  };
-
   return (
     <div className={styles.detailContainer}>
+      <Toast show={show} message={message} type={type} />
       <div className={styles.topSection}>
         <div className={styles.leftSection}>
           <div className={styles.imgWrapper}>
@@ -217,7 +234,10 @@ export default function EventDetailPage() {
               )}
           </div>
           <div className={styles.subBtnWrapper}>
-            <button className={`${styles.bottomBtn} ${styles.share}`}>
+            <button
+              onClick={handleCopyUrl}
+              className={`${styles.bottomBtn} ${styles.share}`}
+            >
               URL 공유 <IC_SHARE />
             </button>
             <button className={`${styles.bottomBtn} ${styles.pick}`}>

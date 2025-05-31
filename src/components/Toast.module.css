@@ -1,0 +1,53 @@
+.toast {
+  position: fixed;
+  top: 11.7rem;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  padding: 2rem 4.4rem 2rem 5.6rem;
+  align-items: center;
+  gap: 10px;
+
+  color: #b1b2ff;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  border-radius: 12px;
+  background: rgba(34, 34, 34, 0.8);
+  box-shadow: 0px 0px 40px 0px rgba(120, 115, 255, 0.8);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  animation: slideUp 0.3s ease-in-out;
+}
+
+.success {
+  background: rgba(34, 34, 34, 0.8);
+}
+
+.error {
+  background: rgba(34, 34, 34, 0.8);
+}
+
+.info {
+  background: rgba(34, 34, 34, 0.8);
+}
+
+.warning {
+  background: rgba(34, 34, 34, 0.8);
+}
+
+@keyframes slideUp {
+  from {
+    transform: translate(-50%, 100%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
