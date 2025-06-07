@@ -14,6 +14,7 @@ import { getPerformanceDetail } from "@/api/performance/api";
 import { PerformanceDetailResponse } from "@/api/performance/type";
 import { useToast } from "@/hooks/useToast";
 import Toast from "@/components/Toast";
+import { useAddPickMutation } from "@/api/pick/query";
 
 interface PerformanceData {
   id: string;
@@ -42,6 +43,7 @@ export default function EventDetailPage() {
   const [showAllIntroImages, setShowAllIntroImages] = useState(false);
   const [showTicketList, setShowTicketList] = useState(false);
   const { show, message, type, showToast } = useToast();
+  const addPickMutation = useAddPickMutation();
 
   useEffect(() => {
     const fetchPerformanceData = async () => {
@@ -76,6 +78,16 @@ export default function EventDetailPage() {
         console.error("URL 복사 실패:", err);
         showToast("URL 복사에 실패했습니다.", "error");
       });
+  };
+  
+  const handleAddPick = async () => {
+    try {
+      await addPickMutation.mutateAsync(params.id as string);
+      showToast("픽 목록에 추가되었습니다.", "success");
+    } catch (error) {
+      console.error("픽 추가 실패:", error);
+      showToast("픽 추가에 실패했습니다.", "error");
+    }
   };
 
   if (loading) {
@@ -240,8 +252,12 @@ export default function EventDetailPage() {
             >
               URL 공유 <IC_SHARE />
             </button>
-            <button className={`${styles.bottomBtn} ${styles.pick}`}>
-              Pick <IC_STAR />
+            <button 
+              className={`${styles.bottomBtn} ${styles.pick}`}
+              onClick={handleAddPick}
+              disabled={addPickMutation.isPending}
+            >
+              {addPickMutation.isPending ? "처리 중..." : "Pick"} <IC_STAR />
             </button>
           </div>
         </div>

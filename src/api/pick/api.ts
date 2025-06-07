@@ -1,4 +1,4 @@
-import { apiRequest, createTokenApiRequest } from "@/lib/apiClient";
+import { apiRequest, createTokenApiRequest, authApiRequest } from "@/lib/apiClient";
 import { PickListResponse } from "./type";
 
 /**
@@ -7,7 +7,7 @@ import { PickListResponse } from "./type";
  * @api [POST] /pick
  */
 export const postPick = async (performanceId: string): Promise<void> => {
-  return apiRequest.post<void>("/pick", {
+  return authApiRequest.post<void>("/pick", {
     performanceId,
   });
 };
