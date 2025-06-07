@@ -1,7 +1,29 @@
-.container {
-  width: 80%;
-  margin-left: 10%;
+.pageContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+.header {
+  width: 90%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.editButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.deleteButtons {
+  width: 90%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-bottom: 3rem;
 }

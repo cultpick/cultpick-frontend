@@ -19,8 +19,16 @@ export const postPick = async (performanceId: string): Promise<void> => {
  *
  * @api [GET] /pick
  */
-export const getPickList = async (): Promise<PickListResponse> => {
-  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/pick`);
+export const getPickList = async (
+  verificationToken: string,
+): Promise<PickListResponse> => {
+  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/pick`, {
+    headers: {
+      Authorization: `Bearer ${verificationToken}`,
+    },
+  });
+
+  console.log("getPickList data", data);
 
   return data;
 };
@@ -32,10 +40,14 @@ export const getPickList = async (): Promise<PickListResponse> => {
  */
 export const deletePickList = async (
   performanceIdList: string[],
+  verificationToken: string,
 ): Promise<void> => {
   const { data } = await axios.delete(
     `${process.env.NEXT_PUBLIC_API_URL}/pick`,
     {
+      headers: {
+        Authorization: `Bearer ${verificationToken}`,
+      },
       data: {
         performanceIdList,
       },
