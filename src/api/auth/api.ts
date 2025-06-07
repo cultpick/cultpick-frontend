@@ -1,4 +1,4 @@
-import axios from "axios";
+import { apiRequest, createTokenApiRequest } from "@/lib/apiClient";
 import {
   SignInRequest,
   SignInResponse,
@@ -16,14 +16,9 @@ import {
  * @api [PUT] /auth/password
  */
 export const updatePassword = async (password: string): Promise<void> => {
-  const { data } = await axios.put(
-    `${process.env.NEXT_PUBLIC_API_URL}/auth/password`,
-    {
-      password,
-    },
-  );
-
-  return data;
+  return apiRequest.put<void>("/auth/password", {
+    password,
+  });
 };
 
 /**
@@ -34,9 +29,7 @@ export const updatePassword = async (password: string): Promise<void> => {
 export const signIn = async (
   requestData: SignInRequest,
 ): Promise<SignInResponse> => {
-  const { data } = await axios.post("/api/auth/sign-in", requestData);
-
-  return data;
+  return apiRequest.post<SignInResponse>("/api/auth/sign-in", requestData);
 };
 
 /**
@@ -48,17 +41,8 @@ export const signUp = async (
   requestData: SignUpRequest,
   verificationToken: string,
 ): Promise<SignUpResponse> => {
-  const { data } = await axios.post(
-    `${process.env.NEXT_PUBLIC_API_URL}/auth/sign-up`,
-    requestData,
-    {
-      headers: {
-        Authorization: `Bearer ${verificationToken}`,
-      },
-    },
-  );
-
-  return data;
+  const tokenApi = createTokenApiRequest(verificationToken);
+  return tokenApi.post<SignUpResponse>("/auth/sign-up", requestData);
 };
 
 /**
@@ -67,15 +51,9 @@ export const signUp = async (
  * @api [POST] /auth/logout
  */
 export const logout = async (): Promise<void> => {
-  await axios.post(
-    `${process.env.NEXT_PUBLIC_API_URL}/auth/logout`,
-    {},
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    },
-  );
+  const token = localStorage.getItem("accessToken") || "";
+  const tokenApi = createTokenApiRequest(token);
+  return tokenApi.post<void>("/auth/logout", {});
 };
 
 /**
@@ -86,12 +64,10 @@ export const logout = async (): Promise<void> => {
 export const sendVerificationEmail = async (
   requestData: EmailVerificationRequest,
 ): Promise<EmailVerificationResponse> => {
-  const { data } = await axios.post(
-    `${process.env.NEXT_PUBLIC_API_URL}/auth/verification`,
+  return apiRequest.post<EmailVerificationResponse>(
+    "/auth/verification",
     requestData,
   );
-
-  return data;
 };
 
 /**
@@ -102,10 +78,8 @@ export const sendVerificationEmail = async (
 export const validateVerificationCode = async (
   requestData: EmailVerificationValidateRequest,
 ): Promise<EmailVerificationValidateResponse> => {
-  const { data } = await axios.post(
-    `${process.env.NEXT_PUBLIC_API_URL}/auth/verification/validate`,
+  return apiRequest.post<EmailVerificationValidateResponse>(
+    "/auth/verification/validate",
     requestData,
   );
-
-  return data;
 };

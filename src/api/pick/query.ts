@@ -1,28 +1,22 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getPickList, deletePickList } from "./api";
+import { authApiRequest } from "@/lib/apiClient";
+import { PickListResponse } from "./type";
 
 export const usePickListQuery = () => {
   return useQuery({
     queryKey: ["pickList"],
-    queryFn: async () => {
-      const response = await fetch('/api/auth/token');
-      const { token } = await response.json();
-      return getPickList(token);
-    }
+    queryFn: () => authApiRequest.get<PickListResponse>("/pick"),
   });
 };
 
 export const useDeletePickListMutation = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
-    mutationFn: async (performanceIdList: string[]) => {
-      const response = await fetch('/api/auth/token');
-      const { token } = await response.json();
-      return deletePickList(performanceIdList, token);
-    },
+    mutationFn: (performanceIdList: string[]) =>
+      authApiRequest.delete<void>("/pick", { performanceIdList }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["pickList"] });
-    }
+    },
   });
 };

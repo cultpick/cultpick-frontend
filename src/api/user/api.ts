@@ -1,6 +1,5 @@
-import axios from "axios";
+import { apiRequest, createTokenApiRequest } from "@/lib/apiClient";
 import { UpdateUserDetailRequest, UserDetailResponse } from "./type";
-import { Update } from "next/dist/build/swc";
 
 /**
  * 유저 상세 조회
@@ -10,13 +9,8 @@ import { Update } from "next/dist/build/swc";
 export const getUserDetail = async (
   accessToken: string,
 ): Promise<UserDetailResponse> => {
-  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/user`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-
-  return data;
+  const tokenApi = createTokenApiRequest(accessToken);
+  return tokenApi.get<UserDetailResponse>("/user");
 };
 
 /**
@@ -27,12 +21,7 @@ export const getUserDetail = async (
 export const updateUserDetail = async (
   request: UpdateUserDetailRequest,
 ): Promise<UserDetailResponse> => {
-  const { data } = await axios.put(
-    `${process.env.NEXT_PUBLIC_API_URL}/user`,
-    request,
-  );
-
-  return data;
+  return apiRequest.put<UserDetailResponse>("/user", request);
 };
 
 /**
@@ -41,9 +30,5 @@ export const updateUserDetail = async (
  * @api [DELETE] /user
  */
 export const deleteUser = async (): Promise<void> => {
-  const { data } = await axios.delete(
-    `${process.env.NEXT_PUBLIC_API_URL}/user`,
-  );
-
-  return data;
+  return apiRequest.delete<void>("/user");
 };

@@ -1,4 +1,4 @@
-import axios from "axios";
+import { apiRequest } from "@/lib/apiClient";
 import { CategoryResponse } from "./type";
 
 /**
@@ -7,9 +7,5 @@ import { CategoryResponse } from "./type";
  * @api [GET] /category
  */
 export const getCategoryList = async (): Promise<CategoryResponse[]> => {
-  const { data } = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}/category`,
-  );
-
-  return data;
+  return apiRequest.get<CategoryResponse[]>("/category");
 };

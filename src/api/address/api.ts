@@ -1,4 +1,4 @@
-import axios from "axios";
+import { apiRequest } from "@/lib/apiClient";
 import { AddressResponse } from "./type";
 
 /**
@@ -7,9 +7,5 @@ import { AddressResponse } from "./type";
  * @api [GET] /address
  */
 export const getAddressList = async (): Promise<AddressResponse[]> => {
-  const { data } = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}/address`,
-  );
-
-  return data;
+  return apiRequest.get<AddressResponse[]>("/address");
 };

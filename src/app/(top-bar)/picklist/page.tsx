@@ -25,7 +25,7 @@ export default function PickListPage() {
   // Delete selected items
   const handleDeleteSelected = () => {
     if (selectedItems.length > 0) {
-      deleteMutation.mutate(selectedItems.map(id => id.toString()));
+      deleteMutation.mutate(selectedItems.map((id) => id.toString()));
       setSelectedItems([]);
     }
   };
@@ -34,9 +34,9 @@ export default function PickListPage() {
   const handleDeleteExpired = () => {
     const today = new Date();
     const expiredPerformances = data?.performanceList
-      .filter(performance => new Date(performance.endDate) < today)
-      .map(performance => performance.id.toString());
-    
+      .filter((performance) => new Date(performance.endDate) < today)
+      .map((performance) => performance.id.toString());
+
     if (expiredPerformances && expiredPerformances.length > 0) {
       deleteMutation.mutate(expiredPerformances);
     }
@@ -53,7 +53,7 @@ export default function PickListPage() {
             height={48}
           />
         </div>
-        <div className="pixel_text_20">My Pick List</div>
+        <div className="pixel_text_20">My Pick List 장바구니</div>
         <div className={styles.editButton}>
           <Button
             text={isEditMode ? "편집 완료" : "목록 편집"}
@@ -67,16 +67,16 @@ export default function PickListPage() {
 
       {isEditMode && (
         <div className={styles.deleteButtons}>
-          <Button 
-            text="종료 공연 전체 삭제" 
-            onClick={handleDeleteExpired} 
+          <Button
+            text="종료 공연 전체 삭제"
+            onClick={handleDeleteExpired}
             state="active"
             width="20rem"
             height="4rem"
           />
-          <Button 
-            text="선택 항목 삭제" 
-            onClick={handleDeleteSelected} 
+          <Button
+            text="선택 항목 삭제"
+            onClick={handleDeleteSelected}
             state={selectedItems.length === 0 ? "disabled" : "active"}
             width="20rem"
             height="4rem"
@@ -84,10 +84,10 @@ export default function PickListPage() {
         </div>
       )}
 
-      <PickList 
-        isEditMode={isEditMode} 
-        data={data} 
-        isLoading={isLoading} 
+      <PickList
+        isEditMode={isEditMode}
+        data={data}
+        isLoading={isLoading}
         selectedItems={selectedItems}
         setSelectedItems={setSelectedItems}
       />

@@ -1,4 +1,4 @@
-import axios from "axios";
+import { apiRequest, createTokenApiRequest } from "@/lib/apiClient";
 import { PickListResponse } from "./type";
 
 /**
@@ -7,11 +7,9 @@ import { PickListResponse } from "./type";
  * @api [POST] /pick
  */
 export const postPick = async (performanceId: string): Promise<void> => {
-  const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/pick`, {
+  return apiRequest.post<void>("/pick", {
     performanceId,
   });
-
-  return data;
 };
 
 /**
@@ -22,15 +20,8 @@ export const postPick = async (performanceId: string): Promise<void> => {
 export const getPickList = async (
   verificationToken: string,
 ): Promise<PickListResponse> => {
-  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/pick`, {
-    headers: {
-      Authorization: `Bearer ${verificationToken}`,
-    },
-  });
-
-  console.log("getPickList data", data);
-
-  return data;
+  const tokenApi = createTokenApiRequest(verificationToken);
+  return tokenApi.get<PickListResponse>("/pick");
 };
 
 /**
@@ -42,17 +33,8 @@ export const deletePickList = async (
   performanceIdList: string[],
   verificationToken: string,
 ): Promise<void> => {
-  const { data } = await axios.delete(
-    `${process.env.NEXT_PUBLIC_API_URL}/pick`,
-    {
-      headers: {
-        Authorization: `Bearer ${verificationToken}`,
-      },
-      data: {
-        performanceIdList,
-      },
-    },
-  );
-
-  return data;
+  const tokenApi = createTokenApiRequest(verificationToken);
+  return tokenApi.delete<void>("/pick", {
+    performanceIdList,
+  });
 };

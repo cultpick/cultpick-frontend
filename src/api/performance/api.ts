@@ -1,5 +1,4 @@
-import axios from "axios";
-import { transformPerformanceDates } from "@/utils/dateUtils";
+import { apiRequest } from "@/lib/apiClient";
 import {
   PerformanceDetailResponse,
   PerformanceListResponse,
@@ -20,22 +19,15 @@ export const searchPerformanceList = async (
   areaCode: string,
   subAreaCode: string,
 ): Promise<SearchPerformanceListResponse> => {
-  const { data } = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}/performance`,
-    {
-      params: {
-        page,
-        size,
-        q,
-        genreCode,
-        state,
-        areaCode,
-        subAreaCode,
-      },
-    },
-  );
-
-  return data;
+  return apiRequest.get<SearchPerformanceListResponse>("/performance", {
+    page,
+    size,
+    q,
+    genreCode,
+    state,
+    areaCode,
+    subAreaCode,
+  });
 };
 
 /**
@@ -47,17 +39,10 @@ export const getRecommendedPerformanceList = async (
   page: number,
   size: number,
 ): Promise<PerformanceListResponse> => {
-  const { data } = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}/performance/recommended`,
-    {
-      params: {
-        page,
-        size,
-      },
-    },
-  );
-
-  return data;
+  return apiRequest.get<PerformanceListResponse>("/performance/recommended", {
+    page,
+    size,
+  });
 };
 
 /**
@@ -69,17 +54,10 @@ export const getOngoingPerformanceList = async (
   page: number,
   size: number,
 ): Promise<PerformanceListResponse> => {
-  const { data } = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}/performance/ongoing`,
-    {
-      params: {
-        page,
-        size,
-      },
-    },
-  );
-
-  return data;
+  return apiRequest.get<PerformanceListResponse>("/performance/ongoing", {
+    page,
+    size,
+  });
 };
 
 /**
@@ -90,9 +68,7 @@ export const getOngoingPerformanceList = async (
 export const getPerformanceDetail = async (
   performanceId: string,
 ): Promise<PerformanceDetailResponse> => {
-  const { data } = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}/performance/${performanceId}`,
+  return apiRequest.get<PerformanceDetailResponse>(
+    `/performance/${performanceId}`,
   );
-
-  return data;
 };
