@@ -13,10 +13,6 @@ export function middleware(request: NextRequest) {
 
   // API 요청 처리
   if (pathname.startsWith("/api/")) {
-    const isProtectedApi = pathname.startsWith("/api/protected");
-    if (isProtectedApi && !hasValidToken) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
     return NextResponse.next();
   }
 
