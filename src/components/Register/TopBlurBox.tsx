@@ -6,11 +6,12 @@ import InputBox from "../InputBox";
 import Check_IC from "@/../public/svgs/check circle.svg";
 import { useRegisterForm } from "@/hooks/useRegisterForm";
 import {
-  sendVerificationEmail,
-  validateVerificationCode,
-} from "@/api/auth/api";
+  useSendEmailVerification,
+  useVerifyEmail,
+} from "@/states/server/mutations";
+import { handleApiError } from "@/utils/errorHandler";
 import { useSetRecoilState } from "recoil";
-import { verificationTokenState } from "@/store/registerState";
+import { verificationTokenState } from "@/states/client/registerAtoms";
 
 interface TopBlurBoxProps {
   onVerificationComplete?: (token: string) => void;
@@ -26,44 +27,46 @@ export default function TopBlurBox({
   const [isVerified, setIsVerified] = useState(false);
   const setVerificationToken = useSetRecoilState(verificationTokenState);
 
-  const handleSendCode = async () => {
-    try {
-      const response = await sendVerificationEmail({
-        email: formData.email,
-      });
+  const sendEmailMutation = useSendEmailVerification({
+    onSuccess: (response) => {
       if (response.success) {
         alert("인증번호가 발송되었습니다.");
         setIsResend(true);
         setIsVerified(false);
       }
-    } catch (error) {
-      alert("인증번호 발송에 실패했습니다.");
-      console.error(error);
-    }
+    },
+    onError: (error) => {
+      const errorMessage = handleApiError(error);
+      alert(errorMessage);
+    },
+  });
+
+  const handleSendCode = () => {
+    sendEmailMutation.mutate({ email: formData.email });
   };
 
-  const handleVerifyCode = async () => {
+  const verifyEmailMutation = useVerifyEmail({
+    onSuccess: (response) => {
+      alert("인증이 완료되었습니다.");
+      setIsVerified(true);
+      setVerificationToken(response.verificationToken);
+    },
+    onError: (error) => {
+      const errorMessage = handleApiError(error);
+      alert(errorMessage);
+    },
+  });
+
+  const handleVerifyCode = () => {
     if (verificationCode.length !== 4) {
       alert("인증번호 4자리를 입력해주세요.");
       return;
     }
 
-    try {
-      setIsVerifying(true);
-      const response = await validateVerificationCode({
-        email: formData.email,
-        code: verificationCode,
-      });
-
-      alert("인증이 완료되었습니다.");
-      setIsVerified(true);
-      setVerificationToken(response.verificationToken);
-    } catch (error) {
-      alert("인증번호가 일치하지 않습니다.");
-      console.error(error);
-    } finally {
-      setIsVerifying(false);
-    }
+    verifyEmailMutation.mutate({
+      email: formData.email,
+      code: verificationCode,
+    });
   };
 
   const isEmailValid = !errors.email && formData.email;

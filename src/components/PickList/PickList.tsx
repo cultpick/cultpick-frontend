@@ -1,13 +1,13 @@
 import PickListItem from "./PickListItem";
 import styles from "./PickList.module.css";
-import { PickListResponse } from "@/api/pick/type";
+import { PickList as PickListType } from "@/model/pick";
 
 interface PickListProps {
   isEditMode: boolean;
-  data?: PickListResponse;
+  data?: PickListType;
   isLoading: boolean;
-  selectedItems: number[];
-  setSelectedItems: React.Dispatch<React.SetStateAction<number[]>>;
+  selectedItems: string[];
+  setSelectedItems: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 export default function PickList({
@@ -17,7 +17,7 @@ export default function PickList({
   selectedItems,
   setSelectedItems,
 }: PickListProps) {
-  const toggleSelectItem = (id: number) => {
+  const toggleSelectItem = (id: string) => {
     setSelectedItems((prev) =>
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
     );

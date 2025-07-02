@@ -5,7 +5,7 @@ import TopBlurBox from "@/components/Register/TopBlurBox";
 import BottomBlurBox from "@/components/Register/BottomBlurBox";
 import Button from "@/components/Button";
 import { useRecoilValue } from "recoil";
-import { registerFormIsValidState } from "@/store/registerState";
+import { registerFormIsValidState } from "@/states/client/registerAtoms";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 

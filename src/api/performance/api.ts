@@ -1,63 +1,26 @@
-import { apiRequest } from "@/lib/apiClient";
-import {
-  PerformanceDetailResponse,
-  PerformanceListResponse,
-  SearchPerformanceListResponse,
-} from "./type";
+import { get } from "@/api/client";
+import { Performance, PerformanceList } from "@/model/performance";
+import { QueryClient } from "@tanstack/react-query";
 
 /**
  * 공연 목록 검색 조회
  *
  * @api [GET] /performance
  */
-export const searchPerformanceList = async (
-  page: number,
-  size: number,
-  q: string,
-  genreCode: string,
-  state: string,
-  areaCode: string,
-  subAreaCode: string,
-): Promise<SearchPerformanceListResponse> => {
-  return apiRequest.get<SearchPerformanceListResponse>("/performance", {
-    page,
-    size,
-    q,
-    genreCode,
-    state,
-    areaCode,
-    subAreaCode,
-  });
+export const searchPerformanceList = (params: Record<string, any>) => {
+  const queryString = new URLSearchParams(params).toString();
+  return get<PerformanceList>(`/performance?${queryString}`);
 };
 
 /**
- * 이달의 추천 공연 목록 조회
+ * 공연 목록 조회
  *
- * @api [GET] /performance/recommended
+ * @api [GET] /performance/list
  */
-export const getRecommendedPerformanceList = async (
-  page: number,
-  size: number,
-): Promise<PerformanceListResponse> => {
-  return apiRequest.get<PerformanceListResponse>("/performance/recommended", {
-    page,
-    size,
-  });
-};
-
-/**
- * 진행중 공연 목록 조회
- *
- * @api [GET] /performance/ongoing
- */
-export const getOngoingPerformanceList = async (
-  page: number,
-  size: number,
-): Promise<PerformanceListResponse> => {
-  return apiRequest.get<PerformanceListResponse>("/performance/ongoing", {
-    page,
-    size,
-  });
+export const getPerformanceList = (page: number, size: number) => {
+  const params = { page: page.toString(), size: size.toString() };
+  const queryString = new URLSearchParams(params).toString();
+  return get<PerformanceList>(`/performance/ongoing/?${queryString}`);
 };
 
 /**
@@ -65,10 +28,26 @@ export const getOngoingPerformanceList = async (
  *
  * @api [GET] /performance/:performanceId
  */
-export const getPerformanceDetail = async (
-  performanceId: string,
-): Promise<PerformanceDetailResponse> => {
-  return apiRequest.get<PerformanceDetailResponse>(
-    `/performance/${performanceId}`,
-  );
-};
+export const getPerformanceDetail = (performanceId: string) =>
+  get<Performance>(`/performance/${performanceId}`);
+
+/**
+ * 홈페이지 쿼리 prefetch
+ */
+export async function prefetchHomeQueries() {
+  const queryClient = new QueryClient();
+
+  // 데이터 prefetch
+  await Promise.all([
+    queryClient.prefetchQuery({
+      queryKey: ["recommendedPerformances", 1],
+      queryFn: () => getPerformanceList(1, 10),
+    }),
+    queryClient.prefetchQuery({
+      queryKey: ["ongoingPerformances", 1],
+      queryFn: () => getPerformanceList(1, 10),
+    }),
+  ]);
+
+  return queryClient;
+}

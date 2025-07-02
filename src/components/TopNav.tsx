@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import styles from "./TopNav.module.css";
 import IC_SYMBOL from "@/../public/svgs/symbol.svg";
 import { handleNavigation } from "@/utils/navigationUtils";
-import axios from "axios";
+import { isLoggedIn as checkLoginStatus } from "@/utils/auth_client";
 
 export default function TopNav() {
   const router = useRouter();
@@ -15,18 +15,7 @@ export default function TopNav() {
 
   useEffect(() => {
     // 로그인 상태 확인
-    const checkLoginStatus = async () => {
-      try {
-        const { data } = await axios.get("/api/auth/check");
-        console.log("로그인 상태 확인:", data);
-        setIsLoggedIn(data.isLoggedIn);
-      } catch (error) {
-        console.error("로그인 상태 확인 실패:", error);
-        setIsLoggedIn(false);
-      }
-    };
-
-    checkLoginStatus();
+    setIsLoggedIn(checkLoginStatus());
 
     if (pathname.startsWith("/picklist")) {
       setActiveButton("picklist");

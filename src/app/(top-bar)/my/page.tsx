@@ -7,7 +7,7 @@ import CategoryBox from "@/components/My/CategoryBox";
 import Logout from "@/components/My/Logout";
 import Delete from "@/components/My/Delete";
 
-import { getUserDetail } from "@/api/user/api";
+import { getUser } from "@/api/user/api";
 import { cookies } from "next/headers";
 
 export default async function Page() {
@@ -18,7 +18,16 @@ export default async function Page() {
 
   if (accessToken) {
     try {
-      userData = await getUserDetail(accessToken);
+      // 서버에서 직접 백엔드 API 호출
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      if (response.ok) {
+        userData = await response.json();
+      }
     } catch (error) {
       console.error("Failed to fetch user data:", error);
     }

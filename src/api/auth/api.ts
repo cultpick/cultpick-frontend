@@ -1,85 +1,70 @@
-import { apiRequest, createTokenApiRequest } from "@/lib/apiClient";
+import { get, post, put, getSsr } from "@/api/client";
 import {
   SignInRequest,
-  SignInResponse,
   SignUpRequest,
-  SignUpResponse,
   EmailVerificationRequest,
   EmailVerificationResponse,
   EmailVerificationValidateRequest,
   EmailVerificationValidateResponse,
-} from "./type";
+} from "@/model/auth";
+import { SignInResponse, SignUpResponse } from "@/model/user";
 
 /**
- * 비밀번호 변경
- *
- * @api [PUT] /auth/password
+ * 로그인 (Next.js API 라우트 사용)
  */
-export const updatePassword = async (password: string): Promise<void> => {
-  return apiRequest.put<void>("/auth/password", {
-    password,
+export const signIn = (data: SignInRequest) =>
+  post<SignInResponse>("/api/auth/sign-in", { body: data });
+
+/**
+ * 로그아웃 (Next.js API 라우트 사용)
+ */
+export const logout = () => post("/api/auth/logout");
+
+/**
+ * 토큰 확인 (백엔드 API 직접 호출)
+ */
+export const checkAuth = () => get<{ isLoggedIn: boolean }>("/auth/check");
+
+/**
+ * 토큰 가져오기 (Next.js API 라우트 사용)
+ */
+export const getToken = () => get<{ token: string }>("/api/auth/token");
+
+/**
+ * 회원가입 (백엔드 API 직접 호출)
+ */
+export const signUp = (data: SignUpRequest, verificationToken: string) =>
+  post<SignUpResponse>("/auth/sign-up", {
+    body: data,
+    headers: { Authorization: `Bearer ${verificationToken}` },
   });
-};
 
 /**
- * 로그인
- *
- * @api [POST] /auth/sign-in
+ * 비밀번호 변경 (백엔드 API 직접 호출)
  */
-export const signIn = async (
-  requestData: SignInRequest,
-): Promise<SignInResponse> => {
-  return apiRequest.post<SignInResponse>("/api/auth/sign-in", requestData);
-};
+export const updatePassword = (password: string) =>
+  put("/auth/password", { body: { password } });
 
 /**
- * 회원가입
- *
- * @api [POST] /auth/sign-up
+ * 인증번호 이메일 발송 (백엔드 API 직접 호출)
  */
-export const signUp = async (
-  requestData: SignUpRequest,
-  verificationToken: string,
-): Promise<SignUpResponse> => {
-  const tokenApi = createTokenApiRequest(verificationToken);
-  return tokenApi.post<SignUpResponse>("/auth/sign-up", requestData);
-};
+export const sendEmailVerification = (data: EmailVerificationRequest) =>
+  post<EmailVerificationResponse>("/auth/verification", { body: data });
 
 /**
- * 로그아웃
- *
- * @api [POST] /auth/logout
+ * 인증번호 검증 (백엔드 API 직접 호출)
  */
-export const logout = async (): Promise<void> => {
-  const token = localStorage.getItem("accessToken") || "";
-  const tokenApi = createTokenApiRequest(token);
-  return tokenApi.post<void>("/auth/logout", {});
-};
+export const verifyEmail = (data: EmailVerificationValidateRequest) =>
+  post<EmailVerificationValidateResponse>("/auth/verification/validate", {
+    body: data,
+  });
 
 /**
- * 인증번호 이메일 발송
- *
- * @api [POST] /auth/verification
+ * SSR용 API 함수들
  */
-export const sendVerificationEmail = async (
-  requestData: EmailVerificationRequest,
-): Promise<EmailVerificationResponse> => {
-  return apiRequest.post<EmailVerificationResponse>(
-    "/auth/verification",
-    requestData,
-  );
-};
+export const signUpSsr = (data: SignUpRequest, verificationToken: string) =>
+  getSsr<SignUpResponse>("/auth/sign-up", {
+    headers: { Authorization: `Bearer ${verificationToken}` },
+  });
 
-/**
- * 인증번호 검증
- *
- * @api [POST] /auth/verification/validate
- */
-export const validateVerificationCode = async (
-  requestData: EmailVerificationValidateRequest,
-): Promise<EmailVerificationValidateResponse> => {
-  return apiRequest.post<EmailVerificationValidateResponse>(
-    "/auth/verification/validate",
-    requestData,
-  );
-};
+export const getPerformanceListSsr = () => getSsr("/performances");

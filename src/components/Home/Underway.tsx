@@ -9,8 +9,8 @@ import styles from "./Underway.module.css";
 import Next_IC from "@/../public/svgs/next_arrow.svg";
 import EventItem from "./EventItem";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { getOngoingPerformanceList } from "@/api/performance/api";
-import { PerformanceListResponse } from "@/api/performance/type";
+import { getPerformanceList } from "@/api/performance/api";
+import { PerformanceList } from "@/model/performance";
 
 export default function Underway() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,9 +21,9 @@ export default function Underway() {
   const queryClient = useQueryClient();
   const swiperRef = useRef<any>(null);
 
-  const { data, isLoading, error } = useQuery<PerformanceListResponse>({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["ongoingPerformances", currentPage],
-    queryFn: () => getOngoingPerformanceList(currentPage, pageSize),
+    queryFn: () => getPerformanceList(currentPage, pageSize),
   });
 
   // 모든 페이지의 데이터를 누적
@@ -31,11 +31,11 @@ export default function Underway() {
     if (!data) return [];
     return Array.from({ length: currentPage }, (_, i) => i + 1)
       .map((page) => {
-        const cachedData = queryClient.getQueryData<PerformanceListResponse>([
+        const cachedData = queryClient.getQueryData([
           "ongoingPerformances",
           page,
         ]);
-        return cachedData?.performanceList || [];
+        return (cachedData as PerformanceList)?.performanceList || [];
       })
       .flat();
   }, [data, currentPage, queryClient]);
@@ -46,7 +46,7 @@ export default function Underway() {
     setIsLoadingMore(true);
     try {
       const nextPage = currentPage + 1;
-      const nextPageData = await getOngoingPerformanceList(nextPage, pageSize);
+      const nextPageData = await getPerformanceList(nextPage, pageSize);
 
       // 다음 페이지의 데이터가 없으면 hasMore를 false로 설정
       if (nextPageData.performanceList.length === 0) {

@@ -1,13 +1,12 @@
 import { useState } from "react";
-import { CategoryResponse } from "@/api/category/type";
-import { MAX_CATEGORIES } from "@/store/categoryState";
+import { Category } from "@/model/category";
+
+const MAX_CATEGORIES = 3;
 
 export const useCategorySelection = () => {
-  const [selectedCategories, setSelectedCategories] = useState<
-    CategoryResponse[]
-  >([]);
+  const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
 
-  const toggleCategory = (category: CategoryResponse) => {
+  const toggleCategory = (category: Category) => {
     setSelectedCategories((prev) => {
       const isSelected = prev.some((c) => c.code === category.code);
       if (isSelected) {
@@ -19,7 +18,7 @@ export const useCategorySelection = () => {
     });
   };
 
-  const isSelected = (category: CategoryResponse) => {
+  const isSelected = (category: Category) => {
     return selectedCategories.some((c) => c.code === category.code);
   };
 

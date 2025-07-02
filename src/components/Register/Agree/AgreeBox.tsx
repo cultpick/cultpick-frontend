@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import styles from "./AgreeBox.module.css";
 import Button from "../../Button";
 import CheckSection from "./CheckSection";
-import { isAllCheckedState } from "@/recoil/registerAtoms";
+import { isAllCheckedState } from "@/states/client/registerAtoms";
 import { useRouter } from "next/navigation";
 
 export default function AgreeBox() {

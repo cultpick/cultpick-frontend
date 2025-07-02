@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { deleteUser } from "@/api/user/api";
+import { useDeleteUser } from "@/states/server/mutations";
+import { handleApiError } from "@/utils/errorHandler";
 import styles from "./DeleteForm.module.css";
 
 interface DeleteFormProps {
@@ -18,17 +19,19 @@ export default function DeleteForm({ accessToken }: DeleteFormProps) {
     router.push("/my");
   };
 
-  const handleDelete = async () => {
-    if (!agree || loading) return;
-    try {
-      setLoading(true);
-      await deleteUser(accessToken!);
+  const deleteUserMutation = useDeleteUser({
+    onSuccess: () => {
       router.push("/");
-    } catch (error: any) {
-      alert("계정 탈퇴 중 오류가 발생했습니다.");
-    } finally {
-      setLoading(false);
-    }
+    },
+    onError: (error) => {
+      const errorMessage = handleApiError(error);
+      alert(errorMessage);
+    },
+  });
+
+  const handleDelete = () => {
+    if (!agree) return;
+    deleteUserMutation.mutate();
   };
 
   return (

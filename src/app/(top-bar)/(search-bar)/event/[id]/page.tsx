@@ -11,47 +11,27 @@ import IC_ARROW from "@/../public/svgs/bottom_arrow.svg";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getPerformanceDetail } from "@/api/performance/api";
-import { PerformanceDetailResponse } from "@/api/performance/type";
 import { useToast } from "@/hooks/useToast";
 import Toast from "@/components/Toast";
-import { useAddPickMutation } from "@/api/pick/query";
-
-interface PerformanceData {
-  id: string;
-  name: string;
-  genre: string;
-  state: string;
-  area: string;
-  ticketList: {
-    name: string;
-    url: string;
-  }[];
-  startDate: string;
-  endDate: string;
-  price: string;
-  address: string;
-  host: string;
-  posterImageUrl: string;
-  introImageUrlList: string[] | string[][];
-}
+import { usePostPick } from "@/states/server/mutations";
+import { Performance } from "@/model/performance";
 
 export default function EventDetailPage() {
   const params = useParams();
-  const [performanceData, setPerformanceData] =
-    useState<PerformanceDetailResponse | null>(null);
+  const [performanceData, setPerformanceData] = useState<Performance | null>(
+    null,
+  );
   const [loading, setLoading] = useState(true);
   const [showAllIntroImages, setShowAllIntroImages] = useState(false);
   const [showTicketList, setShowTicketList] = useState(false);
   const { show, message, type, showToast } = useToast();
-  const addPickMutation = useAddPickMutation();
+  const addPickMutation = usePostPick();
 
   useEffect(() => {
     const fetchPerformanceData = async () => {
       try {
-        const performanceDetail = await getPerformanceDetail(
-          params.id as string,
-        );
-        setPerformanceData(performanceDetail);
+        const response = await getPerformanceDetail(params.id as string);
+        setPerformanceData(response);
       } catch (error) {
         console.error("Error fetching performance data:", error);
       } finally {
@@ -79,7 +59,7 @@ export default function EventDetailPage() {
         showToast("URL 복사에 실패했습니다.", "error");
       });
   };
-  
+
   const handleAddPick = async () => {
     try {
       await addPickMutation.mutateAsync(params.id as string);
@@ -252,7 +232,7 @@ export default function EventDetailPage() {
             >
               URL 공유 <IC_SHARE />
             </button>
-            <button 
+            <button
               className={`${styles.bottomBtn} ${styles.pick}`}
               onClick={handleAddPick}
               disabled={addPickMutation.isPending}

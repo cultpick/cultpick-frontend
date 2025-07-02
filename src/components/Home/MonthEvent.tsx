@@ -8,8 +8,8 @@ import "swiper/css";
 import styles from "./MonthEvent.module.css";
 import EventItem from "./EventItem";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { getRecommendedPerformanceList } from "@/api/performance/api";
-import { PerformanceListResponse } from "@/api/performance/type";
+import { getPerformanceList } from "@/api/performance/api";
+import { PerformanceList } from "@/model/performance";
 
 export default function MonthEvent() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -20,9 +20,9 @@ export default function MonthEvent() {
   const queryClient = useQueryClient();
   const swiperRef = useRef<any>(null);
 
-  const { data, isLoading, error } = useQuery<PerformanceListResponse>({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["recommendedPerformances", currentPage],
-    queryFn: () => getRecommendedPerformanceList(currentPage, pageSize),
+    queryFn: () => getPerformanceList(currentPage, pageSize),
   });
 
   // 모든 페이지의 데이터를 누적
@@ -30,11 +30,11 @@ export default function MonthEvent() {
     if (!data) return [];
     return Array.from({ length: currentPage }, (_, i) => i + 1)
       .map((page) => {
-        const cachedData = queryClient.getQueryData<PerformanceListResponse>([
+        const cachedData = queryClient.getQueryData([
           "recommendedPerformances",
           page,
         ]);
-        return cachedData?.performanceList || [];
+        return (cachedData as PerformanceList)?.performanceList || [];
       })
       .flat();
   }, [data, currentPage, queryClient]);
@@ -45,10 +45,7 @@ export default function MonthEvent() {
     setIsLoadingMore(true);
     try {
       const nextPage = currentPage + 1;
-      const nextPageData = await getRecommendedPerformanceList(
-        nextPage,
-        pageSize,
-      );
+      const nextPageData = await getPerformanceList(nextPage, pageSize);
 
       // 다음 페이지의 데이터가 없으면 hasMore를 false로 설정
       if (nextPageData.performanceList.length === 0) {

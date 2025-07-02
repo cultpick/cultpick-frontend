@@ -6,13 +6,14 @@ import { useRecoilValue } from "recoil";
 import {
   registerFormState,
   verificationTokenState,
-} from "@/store/registerState";
+} from "@/states/client/registerAtoms";
 import CategorySelector from "@/components/Category/CategorySelector";
 import styles from "./page.module.css";
 import Image from "next/image";
-import { useAddress } from "@/api/address/query";
+import { useAddress } from "@/states/server/queries";
 import { RegisterFormData } from "@/schemas/registerSchema";
-import { useSignUpMutation } from "@/api/auth/query";
+import { useSignUp } from "@/states/server/mutations";
+import { SignUpRequest } from "@/model/auth";
 
 export default function CategoryPage() {
   const router = useRouter();
@@ -23,15 +24,15 @@ export default function CategoryPage() {
     [],
   );
 
-  const signUpMutation = useSignUpMutation(
-    () => {
+  const signUpMutation = useSignUp({
+    onSuccess: () => {
       router.push("/login");
     },
-    (error) => {
+    onError: (error) => {
       console.error("회원가입 실패:", error);
       alert("회원가입에 실패했습니다. 다시 시도해주세요.");
     },
-  );
+  });
 
   useEffect(() => {
     // 회원가입 데이터가 없으면 회원가입 페이지로 리다이렉트
@@ -42,22 +43,18 @@ export default function CategoryPage() {
 
   const handleComplete = (categoryCodes: string[]) => {
     setSelectedCategoryCodes(categoryCodes);
-    const requestData: RegisterFormData = {
-      email: formData.email,
-      password: formData.password,
-      confirmPassword: formData.confirmPassword,
-      name: formData.name,
-      gender: formData.gender as "남성" | "여성",
-      birthYear: formData.birthYear,
-      birthMonth: formData.birthMonth,
-      birthDay: formData.birthDay,
-      address: formData.address,
+    const requestData: SignUpRequest = {
+      email: formData.email ?? "",
+      password: formData.password ?? "",
+      name: formData.name ?? "",
+      gender: formData.gender === "남성" ? "MALE" : "FEMALE",
+      birthDate: `${formData.birthYear ?? ""}-${(formData.birthMonth ?? "").padStart(2, "0")}-${(formData.birthDay ?? "").padStart(2, "0")}`,
+      addressCode: formData.address ?? "",
+      favoriteCategoryCodes: categoryCodes,
     };
 
     signUpMutation.mutate({
-      formData: requestData,
-      selectedCategoryCodes: categoryCodes,
-      addressData,
+      data: requestData,
       verificationToken,
     });
   };

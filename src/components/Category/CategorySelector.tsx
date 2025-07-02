@@ -5,7 +5,7 @@ import styles from "./CategorySelector.module.css";
 import { CategoryIcon } from "./CategoryIcon";
 import { useRouter } from "next/navigation";
 import Next_IC from "@/../public/svgs/next_arrow.svg";
-import { useCategories } from "@/api/category/query";
+import { useCategory } from "@/states/server/queries";
 
 interface CategorySelectorProps {
   onComplete?: (selectedCategoryCodes: string[]) => void;
@@ -18,7 +18,7 @@ export default function CategorySelector({
   const { selectedCategories, toggleCategory, isSelected, canSelectMore } =
     useCategorySelection();
 
-  const { data: categories = [], isLoading } = useCategories();
+  const { data: categories = [], isLoading } = useCategory();
 
   const handleComplete = () => {
     const selectedCategoryCodes = selectedCategories.map(

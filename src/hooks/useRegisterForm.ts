@@ -11,7 +11,7 @@ import {
   registerFormState,
   registerFormErrorsState,
   registerFormIsValidState,
-} from "@/store/registerState";
+} from "@/states/client/registerAtoms";
 
 export const useRegisterForm = () => {
   const [formData, setFormData] = useRecoilState(registerFormState);

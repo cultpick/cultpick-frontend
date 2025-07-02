@@ -1,26 +1,26 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./PickListItem.module.css";
-import { PerformanceResponse } from "@/api/performance/type";
+import { Performance } from "@/model/performance";
 import { transformPerformanceDates } from "@/utils/dateUtils";
 
 interface PickListItemProps {
-  performance: PerformanceResponse;
+  performance: Performance;
   isEditMode: boolean;
   isSelected: boolean;
-  onSelect: (id: number) => void;
+  onSelect: (id: string) => void;
 }
 
-export default function PickListItem({ 
-  performance, 
-  isEditMode, 
-  isSelected, 
-  onSelect 
+export default function PickListItem({
+  performance,
+  isEditMode,
+  isSelected,
+  onSelect,
 }: PickListItemProps) {
   if (!performance) {
     return null;
   }
-  
+
   const formattedPerformance = transformPerformanceDates(performance);
   const isSameDate =
     formattedPerformance.startDate === formattedPerformance.endDate;
@@ -34,7 +34,9 @@ export default function PickListItem({
   return (
     <div className={styles.Container} onClick={handleClick}>
       {isEditMode && (
-        <div className={`${styles.checkbox} ${isSelected ? styles.checked : ''}`}>
+        <div
+          className={`${styles.checkbox} ${isSelected ? styles.checked : ""}`}
+        >
           {isSelected && (
             <Image
               src="/svgs/check_icon.svg"
@@ -45,9 +47,9 @@ export default function PickListItem({
           )}
         </div>
       )}
-      
-      <Link 
-        href={isEditMode ? "#" : `/event/${performance.id}`} 
+
+      <Link
+        href={isEditMode ? "#" : `/event/${performance.id}`}
         className={styles.content}
         onClick={(e) => isEditMode && e.preventDefault()}
       >

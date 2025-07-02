@@ -5,17 +5,18 @@ import Image from "next/image";
 import PickList from "@/components/PickList/PickList";
 import { useState } from "react";
 import Button from "@/components/Button";
-import { usePickListQuery, useDeletePickListMutation } from "@/api/pick/query";
+import { usePickList } from "@/states/server/queries";
+import { useDeletePickList } from "@/states/server/mutations";
 
 export default function PickListPage() {
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
-  const [selectedItems, setSelectedItems] = useState<number[]>([]);
+  const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
   // Fetch pick list data
-  const { data, isLoading } = usePickListQuery();
+  const { data, isLoading } = usePickList();
 
   // Delete mutation
-  const deleteMutation = useDeletePickListMutation();
+  const deleteMutation = useDeletePickList();
 
   const toggleEditMode = () => {
     setIsEditMode(!isEditMode);
@@ -25,7 +26,7 @@ export default function PickListPage() {
   // Delete selected items
   const handleDeleteSelected = () => {
     if (selectedItems.length > 0) {
-      deleteMutation.mutate(selectedItems.map((id) => id.toString()));
+      deleteMutation.mutate(selectedItems);
       setSelectedItems([]);
     }
   };

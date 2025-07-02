@@ -1,11 +1,9 @@
-import { apiRequest } from "@/lib/apiClient";
-import { AddressResponse } from "./type";
+import { get } from "@/api/client";
+import { Address } from "@/model/address";
 
 /**
  * 주소 목록 조회
  *
  * @api [GET] /address
  */
-export const getAddressList = async (): Promise<AddressResponse[]> => {
-  return apiRequest.get<AddressResponse[]>("/address");
-};
+export const getAddressList = () => get<Address[]>("/address");

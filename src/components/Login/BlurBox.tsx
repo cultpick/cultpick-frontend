@@ -5,25 +5,26 @@ import InputBox from "../InputBox";
 import Button from "../Button";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useRecoilState } from "recoil";
-import { loginState } from "@/recoil/atoms";
-import { useSignInMutation } from "@/api/auth/query";
+import { loginState } from "@/states/client/atoms";
+import { useSignIn } from "@/states/server/mutations";
+import { handleApiError } from "@/utils/errorHandler";
 
 export default function BlurBox() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [loginData, setLoginData] = useRecoilState(loginState);
 
-  const signInMutation = useSignInMutation(
-    (data) => {
+  const signInMutation = useSignIn({
+    onSuccess: (data) => {
       // from 파라미터가 있으면 해당 페이지로, 없으면 홈으로 리다이렉션
       const from = searchParams.get("from");
-      router.push(from || "/");
+      window.location.href = from || "/";
     },
-    (error) => {
-      console.error("로그인 실패:", error);
-      alert("로그인에 실패했습니다. 이메일과 비밀번호를 다시 확인해주세요.");
+    onError: (error) => {
+      const errorMessage = handleApiError(error);
+      alert(errorMessage);
     },
-  );
+  });
 
   const onClickRegister = () => {
     router.push("/register/agree");

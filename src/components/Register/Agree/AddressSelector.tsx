@@ -2,17 +2,12 @@ import { useState, useRef, useEffect } from "react";
 import styles from "./AddressSelector.module.css";
 import DownArrow_IC from "@/../public/svgs/bottom_arrow.svg";
 import { useRecoilState } from "recoil";
-import { registerFormState } from "@/store/registerState";
-import { useAddress } from "@/api/address/query";
+import { registerFormState } from "@/states/client/registerAtoms";
+import { useAddress } from "@/states/server/queries";
 
-interface Region {
-  code: string;
-  name: string;
-  subregions: {
-    code: string;
-    name: string;
-  }[];
-}
+import { Address } from "@/model/address";
+
+interface Region extends Address {}
 
 export default function AddressSelector() {
   const [formData, setFormData] = useRecoilState(registerFormState);

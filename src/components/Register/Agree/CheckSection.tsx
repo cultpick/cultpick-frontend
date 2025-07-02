@@ -9,7 +9,7 @@ import {
   isAllCheckedState,
   isTermsCheckedState,
   isPrivacyCheckedState,
-} from "@/recoil/registerAtoms";
+} from "@/states/client/registerAtoms";
 
 export default function CheckSection() {
   const [isTermsChecked, setIsTermsChecked] =
