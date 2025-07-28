@@ -1,20 +1,17 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 
 import Check_IC from "@/../public/svgs/check_icon.svg";
 import Next_IC from "@/../public/svgs/next_arrow.svg";
 import Dash_IC from "@/../public/svgs/welcome/dash.svg";
 
+import { useToggle } from "@/hooks/useToggle";
+
 import styles from "./Footer.module.css";
 
 export default function Footer() {
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
-  };
+  const { isOn: isChecked, toggle: handleCheckboxChange } = useToggle();
 
   return (
     <footer className={styles.footer}>
