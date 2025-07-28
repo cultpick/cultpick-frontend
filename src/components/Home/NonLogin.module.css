@@ -42,6 +42,8 @@
 
 .loginContainer {
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 3.2rem;
 }
 
@@ -73,4 +75,15 @@
   width: 2.9rem;
   height: 3rem;
   fill: #fff;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconWrapper svg {
+  width: 6rem;
+  height: 8rem;
 }

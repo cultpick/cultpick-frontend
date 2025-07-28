@@ -1,0 +1,108 @@
+.footer {
+  margin-top: 2.4rem;
+  margin-bottom: 12rem;
+}
+
+.topSection {
+  margin-bottom: 2rem;
+  padding: 0 11.4rem;
+}
+
+.checkboxContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: var(--Gray1, #f5f5f5);
+  font-family: Pretendard;
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  gap: 1.2rem;
+}
+
+.checkBtn {
+  display: none;
+}
+
+.checkboxText {
+  flex: 1;
+}
+
+.checkboxIcon {
+  display: flex;
+  width: 2.2rem;
+  height: 2.2rem;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  background-color: transparent;
+  border: 2px solid var(--g2);
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.checkboxIcon svg {
+  color: var(--g4);
+}
+
+.checkbox:has(.checkBtn:checked) .checkboxIcon {
+  background-color: #7873ff;
+  border: none;
+}
+
+.checkbox:has(.checkBtn:checked) .checkboxIcon svg {
+  color: var(--color-dark-primary);
+}
+
+.bottomSection {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  padding-right: 11.4rem;
+}
+
+.dashLine {
+  flex: 1;
+  height: 8px;
+  background: linear-gradient(90deg, #ffffff 0%, #7873ff 100%);
+  border-radius: 4px;
+  opacity: 0.8;
+}
+
+.startButton {
+  min-width: 22.8rem;
+  padding: 1.3rem 1.5rem 1.2rem 2.9rem;
+  background: linear-gradient(90deg, #7873ff 0%, #5300ec 100%);
+  filter: drop-shadow(0 0 40px rgba(83, 0, 236, 0.6));
+  border: none;
+  border-radius: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+
+  color: #fff;
+  font-family: Pretendard;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.startButton svg {
+  width: 2.9rem;
+  height: 3rem;
+  fill: var(--g1);
+}
+
+.startButton:hover {
+  opacity: 0.9;
+}

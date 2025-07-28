@@ -22,7 +22,9 @@ export default function NonLogin() {
         </div>
       </div>
       <div className={styles.loginContainer}>
-        <Pick_IC />
+        <div className={styles.iconWrapper}>
+          <Pick_IC />
+        </div>
         <button className={styles.loginBtn} onClick={onClick}>
           로그인하러 가기
           <Next_IC />

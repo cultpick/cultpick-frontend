@@ -1,0 +1,94 @@
+.homeSection {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  gap: 4rem;
+}
+
+.sectionContainer {
+  position: relative;
+  padding-left: 6.3rem;
+}
+
+.sectionContent {
+  display: flex;
+  gap: 5.8rem;
+  align-items: center;
+}
+
+.sectionImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.sectionText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2.4rem;
+}
+
+.sectionTitle {
+  position: relative;
+  color: var(--color-light-primary);
+  font-family: Pretendard;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.sectionDescription {
+  max-width: 50rem;
+  color: var(--g1);
+  font-family: Pretendard;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2.8rem;
+}
+
+.bold {
+  color: var(--Sub_Brighter);
+  font-family: Pretendard;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.background {
+  width: 100vw;
+  height: 20rem;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    90deg,
+    rgba(120, 115, 255, 0.1) 50.5%,
+    rgba(95, 95, 95, 0) 100%
+  );
+  z-index: -1;
+}
+
+.iconWrapper {
+  transform: rotate(90deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconWrapper svg {
+  width: 3.6rem;
+  height: 4.8rem;
+}
+
+.imgWrapper {
+  position: absolute;
+  left: -5%;
+  top: -20%;
+  z-index: -1;
+}
