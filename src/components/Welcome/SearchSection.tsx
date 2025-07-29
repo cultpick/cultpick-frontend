@@ -1,10 +1,18 @@
+"use client";
+
 import Image from "next/image";
 import styles from "./SearchSection.module.css";
 import Pick_IC from "@/../public/svgs/home/pick_primary.svg";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 export default function SearchSection() {
+  const { elementRef, isVisible } = useIntersectionObserver();
+
   return (
-    <section className={styles.searchSection}>
+    <section
+      ref={elementRef}
+      className={`${styles.searchSection} ${isVisible ? styles.animate : ""}`}
+    >
       <div className={styles.sectionContainer}>
         <div className={styles.sectionContent}>
           <div className={styles.sectionText}>

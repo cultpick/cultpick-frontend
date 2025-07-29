@@ -1,9 +1,17 @@
+"use client";
+
 import Image from "next/image";
 import styles from "./PickListSection.module.css";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 export default function PickListSection() {
+  const { elementRef, isVisible } = useIntersectionObserver();
+
   return (
-    <section className={styles.pickListSection}>
+    <section
+      ref={elementRef}
+      className={`${styles.pickListSection} ${isVisible ? styles.animate : ""}`}
+    >
       <div className={styles.sectionContainer}>
         <div className={styles.sectionContent}>
           <div className={styles.sectionImg}>

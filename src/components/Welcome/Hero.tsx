@@ -1,10 +1,18 @@
+"use client";
+
 import Image from "next/image";
 import styles from "./Hero.module.css";
 import Pick_IC from "@/../public/svgs/home/pick_primary.svg";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 export default function Hero() {
+  const { elementRef, isVisible } = useIntersectionObserver();
+
   return (
-    <section className={styles.hero}>
+    <section
+      ref={elementRef}
+      className={`${styles.hero} ${isVisible ? styles.animate : ""}`}
+    >
       <h1 className={styles.title}>
         <Image
           src={"/img/typography_logo.png"}

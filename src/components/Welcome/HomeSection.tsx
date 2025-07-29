@@ -1,10 +1,18 @@
+"use client";
+
 import Image from "next/image";
 import styles from "./HomeSection.module.css";
 import Pick_IC from "@/../public/svgs/home/pick_primary.svg";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 export default function HomeSection() {
+  const { elementRef, isVisible } = useIntersectionObserver();
+
   return (
-    <section className={styles.homeSection}>
+    <section
+      ref={elementRef}
+      className={`${styles.homeSection} ${isVisible ? styles.animate : ""}`}
+    >
       <div className={styles.sectionContainer}>
         <div className={styles.sectionContent}>
           <div className={styles.sectionImg}>
