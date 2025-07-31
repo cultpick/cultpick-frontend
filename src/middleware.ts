@@ -16,6 +16,37 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // 웰컴 페이지 리다이렉트 로직
+  if (pathname === "/") {
+    const welcomeHiddenUntil = request.cookies.get("welcomeHiddenUntil");
+
+    if (!welcomeHiddenUntil) {
+      // 체크하지 않은 사용자는 웰컴 페이지로 이동
+      return NextResponse.redirect(new URL("/welcome", request.url));
+    }
+
+    try {
+      const hiddenDate = new Date(welcomeHiddenUntil.value);
+      const currentDate = new Date();
+
+      if (currentDate >= hiddenDate) {
+        // 숨김 기간이 지났으므로 쿠키 제거하고 웰컴 페이지로 이동
+        const response = NextResponse.redirect(
+          new URL("/welcome", request.url),
+        );
+        response.cookies.delete("welcomeHiddenUntil");
+        return response;
+      }
+
+      // 숨김 기간이 남아있으면 홈페이지에 머무름
+    } catch (error) {
+      // 쿠키 파싱 오류 시 웰컴 페이지로 이동
+      const response = NextResponse.redirect(new URL("/welcome", request.url));
+      response.cookies.delete("welcomeHiddenUntil");
+      return response;
+    }
+  }
+
   // 페이지 요청 처리
   const isProtectedPage = protectedPages.some((page) =>
     pathname.startsWith(page),

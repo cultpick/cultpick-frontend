@@ -83,6 +83,7 @@
   filter: drop-shadow(0 0 40px rgba(83, 0, 236, 0.6));
   border: none;
   border-radius: 30px;
+  cursor: pointer;
 
   display: flex;
   align-items: center;

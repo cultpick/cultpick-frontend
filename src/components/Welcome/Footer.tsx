@@ -1,17 +1,26 @@
 "use client";
 
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useToggle } from "@/hooks/useToggle";
 
 import Check_IC from "@/../public/svgs/check_icon.svg";
 import Next_IC from "@/../public/svgs/next_arrow.svg";
 import Dash_IC from "@/../public/svgs/welcome/dash.svg";
 
-import { useToggle } from "@/hooks/useToggle";
-
 import styles from "./Footer.module.css";
 
 export default function Footer() {
   const { isOn: isChecked, toggle: handleCheckboxChange } = useToggle();
+  const router = useRouter();
+
+  const handleStartClick = () => {
+    if (isChecked) {
+      const nextMonth = new Date();
+      nextMonth.setMonth(nextMonth.getMonth() + 1);
+      document.cookie = `welcomeHiddenUntil=${nextMonth.toISOString()}; expires=${nextMonth.toUTCString()}; path=/`;
+    }
+    router.push("/");
+  };
 
   return (
     <footer className={styles.footer}>
@@ -35,10 +44,10 @@ export default function Footer() {
       </div>
       <div className={styles.bottomSection}>
         <Dash_IC />
-        <Link href="/" className={styles.startButton}>
+        <button onClick={handleStartClick} className={styles.startButton}>
           CultPick 시작하기
           <Next_IC />
-        </Link>
+        </button>
       </div>
     </footer>
   );
