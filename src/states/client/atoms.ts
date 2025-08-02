@@ -12,3 +12,8 @@ export const loginState = atom<LoginState>({
     password: "",
   },
 });
+
+export const searchModalState = atom<boolean>({
+  key: "searchModalState",
+  default: false,
+});
